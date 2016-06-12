@@ -9,3 +9,6 @@
 /msvs/*.db
 /msvs/tests/Debug
 /msvs/tests/GeneratedFiles
+/msvs/composer/Debug
+/msvs/composer/GeneratedFiles
+/msvs/composer/*.user

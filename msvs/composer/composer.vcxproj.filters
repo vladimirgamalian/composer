@@ -68,34 +68,34 @@
     <ClCompile Include="GeneratedFiles\qrc_composer.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\DialogAbout.cpp">
+    <ClCompile Include="..\..\src\DialogAbout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Frame.cpp">
+    <ClCompile Include="..\..\src\Frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\main.cpp">
+    <ClCompile Include="..\..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\MainWindow.cpp">
+    <ClCompile Include="..\..\src\MainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\OptionsDialog.cpp">
+    <ClCompile Include="..\..\src\OptionsDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Picture.cpp">
+    <ClCompile Include="..\..\src\Picture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Project.cpp">
+    <ClCompile Include="..\..\src\Project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\QMainWindowEx.cpp">
+    <ClCompile Include="..\..\src\QMainWindowEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\SpinBox.cpp">
+    <ClCompile Include="..\..\src\SpinBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\stdafx.cpp">
+    <ClCompile Include="..\..\src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
@@ -116,7 +116,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_GraphicsScene.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Scene\GraphicsView.cpp">
+    <ClCompile Include="..\..\src\Scene\GraphicsView.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_GraphicsView.cpp">
@@ -125,7 +125,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_GraphicsView.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Scene\WidgetRuler.cpp">
+    <ClCompile Include="..\..\src\Scene\WidgetRuler.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_WidgetRuler.cpp">
@@ -134,16 +134,16 @@
     <ClCompile Include="GeneratedFiles\Release\moc_WidgetRuler.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Scene\GraphicsItemPic.cpp">
+    <ClCompile Include="..\..\src\Scene\GraphicsItemPic.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Scene\GraphicsScene.cpp">
+    <ClCompile Include="..\..\src\Scene\GraphicsScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Sprite\Sprite.cpp">
+    <ClCompile Include="..\..\src\Sprite\Sprite.cpp">
       <Filter>Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Sprite\SpriteFolder.cpp">
+    <ClCompile Include="..\..\src\Sprite\SpriteFolder.cpp">
       <Filter>Sprite</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TreeItemModel.cpp">
@@ -152,13 +152,13 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TreeItemModel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\TreeModel\TreeNode.cpp">
+    <ClCompile Include="..\..\src\TreeModel\TreeNode.cpp">
       <Filter>TreeModel</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\TreeModel\TreeItemModel.cpp">
+    <ClCompile Include="..\..\src\TreeModel\TreeItemModel.cpp">
       <Filter>TreeModel</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Animation\AnimationView.cpp">
+    <ClCompile Include="..\..\src\Animation\AnimationView.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_AnimationView.cpp">
@@ -167,10 +167,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_AnimationView.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Animation\AnimationViewDelegate.cpp">
+    <ClCompile Include="..\..\src\Animation\AnimationViewDelegate.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Composition\CompositionView.cpp">
+    <ClCompile Include="..\..\src\Composition\CompositionView.cpp">
       <Filter>Composition</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CompositionView.cpp">
@@ -179,10 +179,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CompositionView.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Composition\CompositionViewDelegate.cpp">
+    <ClCompile Include="..\..\src\Composition\CompositionViewDelegate.cpp">
       <Filter>Composition</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Sprite\SpriteView.cpp">
+    <ClCompile Include="..\..\src\Sprite\SpriteView.cpp">
       <Filter>Sprite</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_SpriteView.cpp">
@@ -191,10 +191,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SpriteView.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Scene\PicturePool.cpp">
+    <ClCompile Include="..\..\src\Scene\PicturePool.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ProjectData.cpp">
+    <ClCompile Include="..\..\src\ProjectData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_Project.cpp">
@@ -203,10 +203,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_Project.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\History\HistoryModel.cpp.off">
+    <ClCompile Include="..\..\src\History\HistoryModel.cpp.off">
       <Filter>History</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Animation\AnimationModel.cpp">
+    <ClCompile Include="..\..\src\Animation\AnimationModel.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_AnimationModel.cpp">
@@ -221,7 +221,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CompositionModel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Composition\CompositionModel.cpp">
+    <ClCompile Include="..\..\src\Composition\CompositionModel.cpp">
       <Filter>Composition</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_SpriteModel.cpp">
@@ -230,16 +230,16 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SpriteModel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Sprite\SpriteModel.cpp">
+    <ClCompile Include="..\..\src\Sprite\SpriteModel.cpp">
       <Filter>Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\SpriteMoveDialog.cpp">
+    <ClCompile Include="..\..\src\SpriteMoveDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\IntervalSorter.cpp">
+    <ClCompile Include="..\..\src\IntervalSorter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\CommandCreator.cpp">
+    <ClCompile Include="..\..\src\CommandCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CommandCreator.cpp">
@@ -248,156 +248,156 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CommandCreator.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Animation\AnimationDelFramesCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationDelFramesCommand.cpp">
       <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Animation\AnimationDragDropCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationDragDropCommand.cpp">
       <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Animation\AnimationInsertFrameCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationInsertFrameCommand.cpp">
       <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Animation\AnimationMoveAllCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationMoveAllCommand.cpp">
       <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Animation\AnimationReverseCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationReverseCommand.cpp">
       <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Animation\AnimationBaseCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationBaseCommand.cpp">
       <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Animation\AnimationCompressCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationCompressCommand.cpp">
       <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Composition\CompositionDragDropCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Composition\CompositionDragDropCommand.cpp">
       <Filter>Commands\Composition</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Composition\CompositionDropPicturesCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Composition\CompositionDropPicturesCommand.cpp">
       <Filter>Commands\Composition</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Composition\CompositionBaseCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Composition\CompositionBaseCommand.cpp">
       <Filter>Commands\Composition</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Composition\CompositionDeletePicturesCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Composition\CompositionDeletePicturesCommand.cpp">
       <Filter>Commands\Composition</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Sprite\SpriteDragDropCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Sprite\SpriteDragDropCommand.cpp">
       <Filter>Commands\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Sprite\SpriteRenameCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Sprite\SpriteRenameCommand.cpp">
       <Filter>Commands\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Sprite\SpritesDeleteNodeCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Sprite\SpritesDeleteNodeCommand.cpp">
       <Filter>Commands\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Sprite\SpriteAddNodeCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Sprite\SpriteAddNodeCommand.cpp">
       <Filter>Commands\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\Sprite\SpriteBaseExCommand.cpp">
+    <ClCompile Include="..\..\src\Commands\Sprite\SpriteBaseExCommand.cpp">
       <Filter>Commands\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\src\FormFiles\DialogAbout.ui">
+    <CustomBuild Include="..\..\src\FormFiles\DialogAbout.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\FormFiles\options.ui">
+    <CustomBuild Include="..\..\src\FormFiles\options.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\FormFiles\composer.ui">
+    <CustomBuild Include="..\..\src\FormFiles\composer.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\FormFiles\composer.qrc">
+    <CustomBuild Include="..\..\src\FormFiles\composer.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\MainWindow.h">
+    <CustomBuild Include="..\..\src\MainWindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\QMainWindowEx.h">
+    <CustomBuild Include="..\..\src\QMainWindowEx.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Scene\GraphicsScene.h">
+    <CustomBuild Include="..\..\src\Scene\GraphicsScene.h">
       <Filter>Scene</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Scene\GraphicsView.h">
+    <CustomBuild Include="..\..\src\Scene\GraphicsView.h">
       <Filter>Scene</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Scene\WidgetRuler.h">
+    <CustomBuild Include="..\..\src\Scene\WidgetRuler.h">
       <Filter>Scene</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\TreeModel\TreeItemModel.h">
+    <CustomBuild Include="..\..\src\TreeModel\TreeItemModel.h">
       <Filter>TreeModel</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Animation\AnimationView.h">
+    <CustomBuild Include="..\..\src\Animation\AnimationView.h">
       <Filter>Animation</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Composition\CompositionView.h">
+    <CustomBuild Include="..\..\src\Composition\CompositionView.h">
       <Filter>Composition</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Sprite\SpriteView.h">
+    <CustomBuild Include="..\..\src\Sprite\SpriteView.h">
       <Filter>Sprite</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Project.h">
+    <CustomBuild Include="..\..\src\Project.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Animation\AnimationModel.h">
+    <CustomBuild Include="..\..\src\Animation\AnimationModel.h">
       <Filter>Animation</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Composition\CompositionModel.h">
+    <CustomBuild Include="..\..\src\Composition\CompositionModel.h">
       <Filter>Composition</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Sprite\SpriteModel.h">
+    <CustomBuild Include="..\..\src\Sprite\SpriteModel.h">
       <Filter>Sprite</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\FormFiles\SpriteMoveDialog.ui">
+    <CustomBuild Include="..\..\src\FormFiles\SpriteMoveDialog.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\SpriteMoveDialog.h">
+    <CustomBuild Include="..\..\src\SpriteMoveDialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\DialogAbout.h">
+    <CustomBuild Include="..\..\src\DialogAbout.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Frame.h">
+    <CustomBuild Include="..\..\src\Frame.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\OptionsDialog.h">
+    <CustomBuild Include="..\..\src\OptionsDialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Picture.h">
+    <CustomBuild Include="..\..\src\Picture.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\ProjectData.h">
+    <CustomBuild Include="..\..\src\ProjectData.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\SpinBox.h">
+    <CustomBuild Include="..\..\src\SpinBox.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\stdafx.h">
+    <CustomBuild Include="..\..\src\stdafx.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\History\HistoryModel.h.off">
+    <CustomBuild Include="..\..\src\History\HistoryModel.h.off">
       <Filter>History</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\TreeModel\TreeNode.h">
+    <CustomBuild Include="..\..\src\TreeModel\TreeNode.h">
       <Filter>TreeModel</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Sprite\Sprite.h">
+    <CustomBuild Include="..\..\src\Sprite\Sprite.h">
       <Filter>Sprite</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Animation\AnimationViewDelegate.h">
+    <CustomBuild Include="..\..\src\Animation\AnimationViewDelegate.h">
       <Filter>Animation</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Composition\CompositionViewDelegate.h">
+    <CustomBuild Include="..\..\src\Composition\CompositionViewDelegate.h">
       <Filter>Composition</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Sprite\SpriteFolder.h">
+    <CustomBuild Include="..\..\src\Sprite\SpriteFolder.h">
       <Filter>Sprite</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Scene\GraphicsItemPic.h">
+    <CustomBuild Include="..\..\src\Scene\GraphicsItemPic.h">
       <Filter>Scene</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Scene\PicturePool.h">
+    <CustomBuild Include="..\..\src\Scene\PicturePool.h">
       <Filter>Scene</Filter>
     </CustomBuild>
     <CustomBuild Include="GeneratedFiles\ui_composer.h">
@@ -412,10 +412,10 @@
     <CustomBuild Include="GeneratedFiles\ui_SpriteMoveDialog.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\CommandCreator.h">
+    <CustomBuild Include="..\..\src\CommandCreator.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\CommandEnvFabric.h">
+    <CustomBuild Include="..\..\src\CommandEnvFabric.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -423,61 +423,61 @@
     <ResourceCompile Include="composer.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\IntervalSorter.h">
+    <ClInclude Include="..\..\src\IntervalSorter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\CommandEnv.h">
+    <ClInclude Include="..\..\src\CommandEnv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\BaseCommand.h">
+    <ClInclude Include="..\..\src\Commands\BaseCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Animation\AnimationCompressCommand.h">
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationCompressCommand.h">
       <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Animation\AnimationDelFramesCommand.h">
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationDelFramesCommand.h">
       <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Animation\AnimationDragDropCommand.h">
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationDragDropCommand.h">
       <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Animation\AnimationInsertFrameCommand.h">
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationInsertFrameCommand.h">
       <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Animation\AnimationMoveAllCommand.h">
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationMoveAllCommand.h">
       <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Animation\AnimationReverseCommand.h">
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationReverseCommand.h">
       <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Animation\AnimationBaseCommand.h">
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationBaseCommand.h">
       <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Composition\CompositionDragDropCommand.h">
+    <ClInclude Include="..\..\src\Commands\Composition\CompositionDragDropCommand.h">
       <Filter>Commands\Composition</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Composition\CompositionDropPicturesCommand.h">
+    <ClInclude Include="..\..\src\Commands\Composition\CompositionDropPicturesCommand.h">
       <Filter>Commands\Composition</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Composition\CompositionBaseCommand.h">
+    <ClInclude Include="..\..\src\Commands\Composition\CompositionBaseCommand.h">
       <Filter>Commands\Composition</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Composition\CompositionDeletePicturesCommand.h">
+    <ClInclude Include="..\..\src\Commands\Composition\CompositionDeletePicturesCommand.h">
       <Filter>Commands\Composition</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Sprite\SpriteBaseExCommand.h">
+    <ClInclude Include="..\..\src\Commands\Sprite\SpriteBaseExCommand.h">
       <Filter>Commands\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Sprite\SpriteDragDropCommand.h">
+    <ClInclude Include="..\..\src\Commands\Sprite\SpriteDragDropCommand.h">
       <Filter>Commands\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Sprite\SpriteRenameCommand.h">
+    <ClInclude Include="..\..\src\Commands\Sprite\SpriteRenameCommand.h">
       <Filter>Commands\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Sprite\SpritesDeleteNodeCommand.h">
+    <ClInclude Include="..\..\src\Commands\Sprite\SpritesDeleteNodeCommand.h">
       <Filter>Commands\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\Sprite\SpriteAddNodeCommand.h">
+    <ClInclude Include="..\..\src\Commands\Sprite\SpriteAddNodeCommand.h">
       <Filter>Commands\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
