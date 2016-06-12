@@ -31,28 +31,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestTreeNode.cpp">
+    <ClCompile Include="..\..\src\tests\TestMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\TreeModel\TreeNode.cpp">
+    <ClCompile Include="..\..\src\tests\TestTreeNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestIntervalSolver.cpp">
+    <ClCompile Include="..\..\src\tests\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\IntervalSorter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TestMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TestTreeNode.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TestTreeNode.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="..\..\src\tests\TestIntervalSolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_TestIntervalSolver.cpp">
@@ -61,17 +49,29 @@
     <ClCompile Include="GeneratedFiles\Release\moc_TestIntervalSolver.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TestTreeNode.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TestTreeNode.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\IntervalSorter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TreeModel\TreeNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="TestTreeNode.h">
+    <CustomBuild Include="..\..\src\tests\TestIntervalSolver.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="TestIntervalSolver.h">
+    <CustomBuild Include="..\..\src\tests\TestTreeNode.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="..\..\src\tests\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
