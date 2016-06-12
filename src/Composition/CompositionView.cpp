@@ -20,16 +20,16 @@ CompositionView::CompositionView(QWidget *parent /*= 0 */)
 	setSelectionMode( ExtendedSelection );
 }
 
-//void CompositionView::selectionChanged( const QItemSelection& selected, const QItemSelection& deselected )
-//{
-//	QListView::selectionChanged( selected, deselected );
-//
-//	QList< int > l;
-//	foreach ( auto index, selectedIndexes() )
-//		l.append( index.row() );
-//
-//	project->compositionSelect( l );
-//}
+void CompositionView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
+{
+	QListView::selectionChanged(selected, deselected);
+
+	QList< int > selectedList;
+	for(auto index: selectedIndexes())
+		selectedList.append(index.row());
+
+	emit selectChanged(selectedList);
+}
 
 void CompositionView::keyPressEvent( QKeyEvent* event )
 {

@@ -23,8 +23,6 @@ GraphicsItemPic::GraphicsItemPic( Picture* picture, int index )
 	this->index = index;
 	//setCursor( Qt::OpenHandCursor );
 
-	
-
 	//setCacheMode( DeviceCoordinateCache );
 }
 
@@ -129,9 +127,6 @@ void GraphicsItemPic::mouseMoveEvent( QGraphicsSceneMouseEvent *event )
 	setPos( p );
 
 	graphicsScene->setPicturePos( index, pos().toPoint() );
-
-// 	if ( picture )
-// 		picture->setPos( pos().toPoint() );
 }
 
 int GraphicsItemPic::getIndex() const
@@ -141,14 +136,8 @@ int GraphicsItemPic::getIndex() const
 
 void GraphicsItemPic::mouseReleaseEvent( QGraphicsSceneMouseEvent *event )
 {
+	//qDebug() << "mouseReleaseEvent";
 	QGraphicsItem::mouseReleaseEvent( event );
-
-// 	if ( picture )
-// 		picture->setPos( pos().toPoint() );
-
 	GraphicsScene* graphicsScene = static_cast< GraphicsScene* >( scene() );
 	graphicsScene->setPicturePos( index, pos().toPoint() );
 }
-
-
-

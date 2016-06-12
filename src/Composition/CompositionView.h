@@ -13,9 +13,10 @@ public:
 
 signals:
 	void deleteSelectedItem();
+	void selectChanged(const QList< int >& selectedIndexes);
 
 protected:
-	//virtual void selectionChanged( const QItemSelection& selected, const QItemSelection& deselected );
+	virtual void selectionChanged( const QItemSelection& selected, const QItemSelection& deselected );
 	virtual void keyPressEvent( QKeyEvent* event );
 	virtual void dragEnterEvent( QDragEnterEvent *event );
 	virtual void dragMoveEvent( QDragMoveEvent* event );

@@ -186,7 +186,7 @@ QList< int > GraphicsScene::getSelectedItemsIndexes() const
 	return indexes;
 }
 
-void GraphicsScene::setSelectedIndexes( const QList< int >& selectedIndexes )
+void GraphicsScene::setSelectedIndexes( const QList<int>& selectedIndexes )
 {
 	clearSelection();
 

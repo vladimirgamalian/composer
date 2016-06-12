@@ -8,7 +8,6 @@ void CompositionViewDelegate::paint( QPainter* painter, const QStyleOptionViewIt
 	QBrush highlightBrush( option.palette.highlight() );
 	QBrush darkBrush( option.palette.dark() );
 
-
 	int l = option.rect.left();
 	int r = option.rect.right();
 	int t = option.rect.top();
@@ -123,4 +122,3 @@ bool CompositionViewDelegate::editorEvent( QEvent* event, QAbstractItemModel* mo
 
 	return false;
 }
-

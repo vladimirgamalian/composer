@@ -364,8 +364,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 	connect( &project, SIGNAL( sceneSetSelect( const QList< int >& ) ), graphicsScene, SLOT( setSelectedIndexes( const QList< int >& ) ) );
 
-	connect( graphicsScene, SIGNAL( selectionChanged() ), this, SLOT( graphicsSceneSelectionChanged() ) );
-
 	
 	connect( &project, SIGNAL( compositionSetSelect( const QList< int >& ) ), compositionView, SLOT( setSelect( const QList< int >& ) ) );
 
@@ -710,7 +708,23 @@ void MainWindow::actionRedo()
 
 void MainWindow::graphicsSceneSelectionChanged()
 {
-	//project.sceneSelect( graphicsScene->getSelectedItemsIndexes() );
+	if (graphicsScenePreventUpdateSelection)
+		return;
+
+	QList<int> selectedItemsIndexes = graphicsScene->getSelectedItemsIndexes();
+	graphicsScenePreventUpdateSelection = true;
+	compositionView->setSelected(selectedItemsIndexes);
+	graphicsScenePreventUpdateSelection = false;
+}
+
+void MainWindow::compositionViewSelectionChanged(const QList< int >& selectedIndexes)
+{
+	if (graphicsScenePreventUpdateSelection)
+		return;
+
+	graphicsScenePreventUpdateSelection = true;
+	graphicsScene->setSelectedIndexes(selectedIndexes);
+	graphicsScenePreventUpdateSelection = false;
 }
 
 void MainWindow::actionAnimationReverseFrames()
@@ -743,6 +757,10 @@ void MainWindow::setConnections()
 	connect(graphicsView, &GraphicsView::delPressed, this, &MainWindow::compositionDeleteSelectedItem);
 
 	connect(compositionModel, &CompositionModel::dragDrop, this, &MainWindow::compositionDragDrop);
+
+
+	connect(graphicsScene, &GraphicsScene::selectionChanged, this, &MainWindow::graphicsSceneSelectionChanged);
+	connect(compositionView, &CompositionView::selectChanged, this, &MainWindow::compositionViewSelectionChanged);
 }
 
 void MainWindow::onResetCurrentSprite()

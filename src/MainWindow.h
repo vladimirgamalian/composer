@@ -47,6 +47,7 @@ public slots:
 	void modified( QString description );
 
 	void graphicsSceneSelectionChanged();
+	void compositionViewSelectionChanged(const QList< int >& selectedIndexes);
 
 	void moveSpriteDialogAccepted();
 
@@ -90,6 +91,7 @@ private:
 	QAction *undoAction = nullptr;
 	QAction *redoAction = nullptr;
 	CommandEnvFabric* commandEnvFabric = nullptr;
+	bool graphicsScenePreventUpdateSelection = false;
 
 	void loadSettings();
 	void saveSettings();
