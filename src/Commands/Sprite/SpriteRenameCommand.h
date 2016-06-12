@@ -1,6 +1,6 @@
 #pragma once
 #include "Sprite/SpriteModel.h"
-#include "BaseCommand.h"
+#include "Commands/BaseCommand.h"
 
 class SpriteRenameCommand : public BaseCommand
 {

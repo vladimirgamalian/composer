@@ -93,22 +93,22 @@
     <ClCompile Include="..\src\Animation\AnimationView.cpp" />
     <ClCompile Include="..\src\Animation\AnimationViewDelegate.cpp" />
     <ClCompile Include="..\src\CommandCreator.cpp" />
-    <ClCompile Include="..\src\Commands\AnimationBaseCommand.cpp" />
-    <ClCompile Include="..\src\Commands\AnimationCompressCommand.cpp" />
-    <ClCompile Include="..\src\Commands\AnimationDelFramesCommand.cpp" />
-    <ClCompile Include="..\src\Commands\AnimationDragDropCommand.cpp" />
-    <ClCompile Include="..\src\Commands\AnimationInsertFrameCommand.cpp" />
-    <ClCompile Include="..\src\Commands\AnimationReverseCommand.cpp" />
-    <ClCompile Include="..\src\Commands\CompositionBaseCommand.cpp" />
-    <ClCompile Include="..\src\Commands\CompositionDeletePicturesCommand.cpp" />
-    <ClCompile Include="..\src\Commands\CompositionDragDropCommand.cpp" />
-    <ClCompile Include="..\src\Commands\CompositionDropPicturesCommand.cpp" />
-    <ClCompile Include="..\src\Commands\SpriteBaseExCommand.cpp" />
-    <ClCompile Include="..\src\Commands\SpriteDragDropCommand.cpp" />
-    <ClCompile Include="..\src\Commands\SpriteAddNodeCommand.cpp" />
-    <ClCompile Include="..\src\Commands\SpriteRenameCommand.cpp" />
-    <ClCompile Include="..\src\Commands\SpritesDeleteNodeCommand.cpp" />
-    <ClCompile Include="..\src\Commands\AnimationMoveAllCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Animation\AnimationBaseCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Animation\AnimationCompressCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Animation\AnimationDelFramesCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Animation\AnimationDragDropCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Animation\AnimationInsertFrameCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Animation\AnimationMoveAllCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Animation\AnimationReverseCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Composition\CompositionBaseCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Composition\CompositionDeletePicturesCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Composition\CompositionDragDropCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Composition\CompositionDropPicturesCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Sprite\SpriteAddNodeCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Sprite\SpriteBaseExCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Sprite\SpriteDragDropCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Sprite\SpriteRenameCommand.cpp" />
+    <ClCompile Include="..\src\Commands\Sprite\SpritesDeleteNodeCommand.cpp" />
     <ClCompile Include="..\src\Composition\CompositionModel.cpp" />
     <ClCompile Include="..\src\Composition\CompositionView.cpp" />
     <ClCompile Include="..\src\Composition\CompositionViewDelegate.cpp" />
@@ -289,22 +289,6 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing AnimationModel.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_XML_LIB  "-I.\..\src" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtXml" "-fStdAfx.h" "-f../../../src/Animation/AnimationModel.h"</Command>
-    </CustomBuild>
-    <CustomBuild Include="..\src\Commands\AnimationMoveAllCommand.h">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Performing Custom Build Tools</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="..\src\Animation\AnimationView.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -796,22 +780,23 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp" "-fStdAfx.h" "-f../../../src/CommandCreator.h"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DQT_XML_LIB "-I.\..\src" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtXml"</Command>
     </CustomBuild>
-    <ClInclude Include="..\src\Commands\AnimationBaseCommand.h" />
-    <ClInclude Include="..\src\Commands\AnimationCompressCommand.h" />
-    <ClInclude Include="..\src\Commands\AnimationDelFramesCommand.h" />
-    <ClInclude Include="..\src\Commands\AnimationDragDropCommand.h" />
-    <ClInclude Include="..\src\Commands\AnimationInsertFrameCommand.h" />
-    <ClInclude Include="..\src\Commands\AnimationReverseCommand.h" />
+    <ClInclude Include="..\src\Commands\Animation\AnimationBaseCommand.h" />
+    <ClInclude Include="..\src\Commands\Animation\AnimationCompressCommand.h" />
+    <ClInclude Include="..\src\Commands\Animation\AnimationDelFramesCommand.h" />
+    <ClInclude Include="..\src\Commands\Animation\AnimationDragDropCommand.h" />
+    <ClInclude Include="..\src\Commands\Animation\AnimationInsertFrameCommand.h" />
+    <ClInclude Include="..\src\Commands\Animation\AnimationMoveAllCommand.h" />
+    <ClInclude Include="..\src\Commands\Animation\AnimationReverseCommand.h" />
     <ClInclude Include="..\src\Commands\BaseCommand.h" />
-    <ClInclude Include="..\src\Commands\CompositionBaseCommand.h" />
-    <ClInclude Include="..\src\Commands\CompositionDeletePicturesCommand.h" />
-    <ClInclude Include="..\src\Commands\CompositionDragDropCommand.h" />
-    <ClInclude Include="..\src\Commands\CompositionDropPicturesCommand.h" />
-    <ClInclude Include="..\src\Commands\SpriteBaseExCommand.h" />
-    <ClInclude Include="..\src\Commands\SpriteDragDropCommand.h" />
-    <ClInclude Include="..\src\Commands\SpriteAddNodeCommand.h" />
-    <ClInclude Include="..\src\Commands\SpriteRenameCommand.h" />
-    <ClInclude Include="..\src\Commands\SpritesDeleteNodeCommand.h" />
+    <ClInclude Include="..\src\Commands\Composition\CompositionBaseCommand.h" />
+    <ClInclude Include="..\src\Commands\Composition\CompositionDeletePicturesCommand.h" />
+    <ClInclude Include="..\src\Commands\Composition\CompositionDragDropCommand.h" />
+    <ClInclude Include="..\src\Commands\Composition\CompositionDropPicturesCommand.h" />
+    <ClInclude Include="..\src\Commands\Sprite\SpriteAddNodeCommand.h" />
+    <ClInclude Include="..\src\Commands\Sprite\SpriteBaseExCommand.h" />
+    <ClInclude Include="..\src\Commands\Sprite\SpriteDragDropCommand.h" />
+    <ClInclude Include="..\src\Commands\Sprite\SpriteRenameCommand.h" />
+    <ClInclude Include="..\src\Commands\Sprite\SpritesDeleteNodeCommand.h" />
     <ClInclude Include="..\src\IntervalSorter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

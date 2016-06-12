@@ -54,6 +54,15 @@
     <Filter Include="History">
       <UniqueIdentifier>{94a05eeb-f2c7-40cc-a182-1e542cc2771f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands\Animation">
+      <UniqueIdentifier>{2ad42ef4-915a-440a-8c6e-669154b450cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\Composition">
+      <UniqueIdentifier>{e775544a-176d-4072-b723-b58841a5bef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\Sprite">
+      <UniqueIdentifier>{f672ff1b-7359-4050-9792-8b5af8168409}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_composer.cpp">
@@ -227,21 +236,6 @@
     <ClCompile Include="..\src\SpriteMoveDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\SpritesDeleteNodeCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Commands\SpriteRenameCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Commands\SpriteDragDropCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Commands\AnimationInsertFrameCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Commands\AnimationBaseCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\IntervalSorter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -254,38 +248,53 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CommandCreator.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\CompositionBaseCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Animation\AnimationDelFramesCommand.cpp">
+      <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\CompositionDropPicturesCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Animation\AnimationDragDropCommand.cpp">
+      <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\SpriteAddNodeCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Animation\AnimationInsertFrameCommand.cpp">
+      <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\SpriteBaseExCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Animation\AnimationMoveAllCommand.cpp">
+      <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\AnimationCompressCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Animation\AnimationReverseCommand.cpp">
+      <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\AnimationMoveAllCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Animation\AnimationBaseCommand.cpp">
+      <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\AnimationDragDropCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Animation\AnimationCompressCommand.cpp">
+      <Filter>Commands\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\AnimationReverseCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Composition\CompositionDragDropCommand.cpp">
+      <Filter>Commands\Composition</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\AnimationDelFramesCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Composition\CompositionDropPicturesCommand.cpp">
+      <Filter>Commands\Composition</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\CompositionDeletePicturesCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Composition\CompositionBaseCommand.cpp">
+      <Filter>Commands\Composition</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Commands\CompositionDragDropCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="..\src\Commands\Composition\CompositionDeletePicturesCommand.cpp">
+      <Filter>Commands\Composition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Commands\Sprite\SpriteDragDropCommand.cpp">
+      <Filter>Commands\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Commands\Sprite\SpriteRenameCommand.cpp">
+      <Filter>Commands\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Commands\Sprite\SpritesDeleteNodeCommand.cpp">
+      <Filter>Commands\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Commands\Sprite\SpriteAddNodeCommand.cpp">
+      <Filter>Commands\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Commands\Sprite\SpriteBaseExCommand.cpp">
+      <Filter>Commands\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -409,67 +418,67 @@
     <CustomBuild Include="..\src\CommandEnvFabric.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\src\Commands\AnimationMoveAllCommand.h">
-      <Filter>Commands</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="composer.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\Commands\SpritesDeleteNodeCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Commands\SpriteRenameCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Commands\SpriteDragDropCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Commands\AnimationInsertFrameCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Commands\AnimationBaseCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\IntervalSorter.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Commands\CompositionBaseCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Commands\CompositionDropPicturesCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Commands\SpriteAddNodeCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Commands\BaseCommand.h">
-      <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="..\src\CommandEnv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\AnimationCompressCommand.h">
+    <ClInclude Include="..\src\Commands\BaseCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\SpriteBaseExCommand.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="..\src\Commands\Animation\AnimationCompressCommand.h">
+      <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\AnimationDragDropCommand.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="..\src\Commands\Animation\AnimationDelFramesCommand.h">
+      <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\AnimationReverseCommand.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="..\src\Commands\Animation\AnimationDragDropCommand.h">
+      <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\AnimationDelFramesCommand.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="..\src\Commands\Animation\AnimationInsertFrameCommand.h">
+      <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\CompositionDeletePicturesCommand.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="..\src\Commands\Animation\AnimationMoveAllCommand.h">
+      <Filter>Commands\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Commands\CompositionDragDropCommand.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="..\src\Commands\Animation\AnimationReverseCommand.h">
+      <Filter>Commands\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Animation\AnimationBaseCommand.h">
+      <Filter>Commands\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Composition\CompositionDragDropCommand.h">
+      <Filter>Commands\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Composition\CompositionDropPicturesCommand.h">
+      <Filter>Commands\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Composition\CompositionBaseCommand.h">
+      <Filter>Commands\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Composition\CompositionDeletePicturesCommand.h">
+      <Filter>Commands\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Sprite\SpriteBaseExCommand.h">
+      <Filter>Commands\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Sprite\SpriteDragDropCommand.h">
+      <Filter>Commands\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Sprite\SpriteRenameCommand.h">
+      <Filter>Commands\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Sprite\SpritesDeleteNodeCommand.h">
+      <Filter>Commands\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Commands\Sprite\SpriteAddNodeCommand.h">
+      <Filter>Commands\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

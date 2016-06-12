@@ -1,6 +1,6 @@
 #pragma once
 #include "Project.h"
-#include "BaseCommand.h"
+#include "Commands/BaseCommand.h"
 
 class SpriteAddNodeCommand : public BaseCommand
 {

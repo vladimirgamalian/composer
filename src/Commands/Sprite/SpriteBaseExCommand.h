@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseCommand.h"
+#include "Commands/BaseCommand.h"
 
 class SpriteBaseExCommand : public BaseCommand
 {
