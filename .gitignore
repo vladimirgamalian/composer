@@ -2,3 +2,10 @@
 /tmp
 /msvs/*.user
 /msvs/tests/*.user
+/msvs/Debug
+/msvs/GeneratedFiles
+/msvs/Win32
+/msvs/*.opendb
+/msvs/*.db
+/msvs/tests/Debug
+/msvs/tests/GeneratedFiles
