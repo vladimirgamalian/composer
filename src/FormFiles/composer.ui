@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>composerClass</class>
+ <widget class="QMainWindow" name="composerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1186</width>
+    <height>844</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Composer</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1186</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionNewProject"/>
+    <addaction name="actionOpenProject"/>
+    <addaction name="separator"/>
+    <addaction name="actionSaveProject"/>
+    <addaction name="actionSaveProjectAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionOptions"/>
+    <addaction name="separator"/>
+    <addaction name="actionRecently1"/>
+    <addaction name="actionRecently2"/>
+    <addaction name="actionRecently3"/>
+    <addaction name="actionRecently4"/>
+    <addaction name="actionRecently5"/>
+    <addaction name="actionRecently6"/>
+    <addaction name="actionRecently7"/>
+    <addaction name="actionRecently8"/>
+    <addaction name="actionRecently9"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menu_Sprites">
+    <property name="title">
+     <string>&amp;Sprites</string>
+    </property>
+    <addaction name="actionSpritesNewFolder"/>
+    <addaction name="actionSpritesNewSprite"/>
+    <addaction name="actionSpritesMoveSprite"/>
+    <addaction name="actionSpritesCompress"/>
+    <addaction name="actionSpritesRemoveItem"/>
+   </widget>
+   <widget class="QMenu" name="menu_Animations">
+    <property name="title">
+     <string>&amp;Animations</string>
+    </property>
+    <addaction name="actionAnimationInsertBefore"/>
+    <addaction name="actionAnimationCopyFrameBefore"/>
+    <addaction name="actionAnimationCopyFrameAfter"/>
+    <addaction name="actionAnimationInsertAfter"/>
+    <addaction name="actionAnimationDeleteFrame"/>
+    <addaction name="actionAnimationReverseFrames"/>
+   </widget>
+   <widget class="QMenu" name="menu_Composition">
+    <property name="title">
+     <string>&amp;Composition</string>
+    </property>
+    <addaction name="actionCompositionOpenPicture"/>
+   </widget>
+   <widget class="QMenu" name="menuS_nap">
+    <property name="title">
+     <string>S&amp;nap</string>
+    </property>
+    <addaction name="actionSnapToBorder"/>
+    <addaction name="actionSnapToGuides"/>
+    <addaction name="actionSnapToPictures"/>
+   </widget>
+   <widget class="QMenu" name="menu_Edit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="actionRemoveRulers"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menu_Edit"/>
+   <addaction name="menu_Sprites"/>
+   <addaction name="menu_Animations"/>
+   <addaction name="menu_Composition"/>
+   <addaction name="menuS_nap"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNewProject"/>
+   <addaction name="actionOpenProject"/>
+   <addaction name="actionSaveProject"/>
+   <addaction name="separator"/>
+   <addaction name="actionUndo"/>
+   <addaction name="actionRedo"/>
+   <addaction name="separator"/>
+   <addaction name="actionSnapToBorder"/>
+   <addaction name="actionSnapToGuides"/>
+   <addaction name="actionSnapToPictures"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QDockWidget" name="dockWidgetSprites">
+   <property name="windowTitle">
+    <string>Sprites</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout_2"/>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetComposition">
+   <property name="windowTitle">
+    <string>Composition</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout"/>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetAnimation">
+   <property name="allowedAreas">
+    <set>Qt::BottomDockWidgetArea|Qt::TopDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Animation</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>4</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_3">
+    <layout class="QHBoxLayout" name="horizontalLayout"/>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetHistory">
+   <property name="windowTitle">
+    <string>History</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_4"/>
+  </widget>
+  <action name="actionNewProject">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/new.png</normaloff>:/composer/Resources/icons/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New project</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpenProject">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/open.png</normaloff>:/composer/Resources/icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open project...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSaveProject">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/save.png</normaloff>:/composer/Resources/icons/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save project</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSaveProjectAs">
+   <property name="text">
+    <string>Save project &amp;As...</string>
+   </property>
+  </action>
+  <action name="actionRecently1">
+   <property name="text">
+    <string>recently 1</string>
+   </property>
+  </action>
+  <action name="actionRecently2">
+   <property name="text">
+    <string>recently 2</string>
+   </property>
+  </action>
+  <action name="actionRecently3">
+   <property name="text">
+    <string>recently 3</string>
+   </property>
+  </action>
+  <action name="actionRecently4">
+   <property name="text">
+    <string>recently 4</string>
+   </property>
+  </action>
+  <action name="actionRecently5">
+   <property name="text">
+    <string>recently 5</string>
+   </property>
+  </action>
+  <action name="actionRecently6">
+   <property name="text">
+    <string>recently 6</string>
+   </property>
+  </action>
+  <action name="actionRecently7">
+   <property name="text">
+    <string>recently 7</string>
+   </property>
+  </action>
+  <action name="actionRecently8">
+   <property name="text">
+    <string>recently 8</string>
+   </property>
+  </action>
+  <action name="actionRecently9">
+   <property name="text">
+    <string>recently 9</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="actionSpritesNewFolder">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/newFolder.png</normaloff>:/composer/Resources/icons/newFolder.png</iconset>
+   </property>
+   <property name="text">
+    <string>New &amp;Folder</string>
+   </property>
+   <property name="toolTip">
+    <string>New Folder</string>
+   </property>
+  </action>
+  <action name="actionSpritesRemoveItem">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/delete.png</normaloff>:/composer/Resources/icons/delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Remove Item</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Item</string>
+   </property>
+  </action>
+  <action name="actionSpritesNewSprite">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/new.png</normaloff>:/composer/Resources/icons/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>New &amp;Sprite</string>
+   </property>
+   <property name="toolTip">
+    <string>New Sprite</string>
+   </property>
+  </action>
+  <action name="actionOptions">
+   <property name="text">
+    <string>&amp;Options...</string>
+   </property>
+   <property name="toolTip">
+    <string>Options</string>
+   </property>
+  </action>
+  <action name="actionAnimationInsertBefore">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/animateInsertBefore.png</normaloff>:/composer/Resources/icons/animateInsertBefore.png</iconset>
+   </property>
+   <property name="text">
+    <string>Insert Frame &amp;before</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Frame before</string>
+   </property>
+  </action>
+  <action name="actionAnimationInsertAfter">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/animateInsertAfter.png</normaloff>:/composer/Resources/icons/animateInsertAfter.png</iconset>
+   </property>
+   <property name="text">
+    <string>Insert Frame &amp;after</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Frame after</string>
+   </property>
+  </action>
+  <action name="actionAnimationDeleteFrame">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/animateDelete.png</normaloff>:/composer/Resources/icons/animateDelete.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Delete Frame</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete Frame</string>
+   </property>
+  </action>
+  <action name="actionCompositionOpenPicture">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/open.png</normaloff>:/composer/Resources/icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open &amp;Picture...</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Picture...</string>
+   </property>
+  </action>
+  <action name="actionAnimationCopyFrameBefore">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/animateCopyBefore .png</normaloff>:/composer/Resources/icons/animateCopyBefore .png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Copy Frame before</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy Frame before</string>
+   </property>
+  </action>
+  <action name="actionAnimationCopyFrameAfter">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/animateCopyAfter.png</normaloff>:/composer/Resources/icons/animateCopyAfter.png</iconset>
+   </property>
+   <property name="text">
+    <string>C&amp;opy Frame after</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy Frame after</string>
+   </property>
+  </action>
+  <action name="actionSnapToBorder">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/snapToBorder.png</normaloff>:/composer/Resources/icons/snapToBorder.png</iconset>
+   </property>
+   <property name="text">
+    <string>Snap to &amp;Border</string>
+   </property>
+   <property name="toolTip">
+    <string>Snap to Border</string>
+   </property>
+  </action>
+  <action name="actionSnapToGuides">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/snapToGuides.png</normaloff>:/composer/Resources/icons/snapToGuides.png</iconset>
+   </property>
+   <property name="text">
+    <string>Snap to &amp;Guides</string>
+   </property>
+   <property name="toolTip">
+    <string>Snap to Guides</string>
+   </property>
+  </action>
+  <action name="actionSnapToPictures">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/snapToPictures.png</normaloff>:/composer/Resources/icons/snapToPictures.png</iconset>
+   </property>
+   <property name="text">
+    <string>Snap to &amp;Pictures</string>
+   </property>
+   <property name="toolTip">
+    <string>Snap to Pictures</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/undo.png</normaloff>:/composer/Resources/icons/undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/redo.png</normaloff>:/composer/Resources/icons/redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Z</string>
+   </property>
+  </action>
+  <action name="actionAnimationReverseFrames">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/reverse.png</normaloff>:/composer/Resources/icons/reverse.png</iconset>
+   </property>
+   <property name="text">
+    <string>Reverse Selected Frames</string>
+   </property>
+   <property name="toolTip">
+    <string>Reverse Selected Frames</string>
+   </property>
+  </action>
+  <action name="actionRemoveRulers">
+   <property name="text">
+    <string>R&amp;emove Rulers</string>
+   </property>
+  </action>
+  <action name="actionSpritesMoveSprite">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/move.png</normaloff>:/composer/Resources/icons/move.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Move Sprite</string>
+   </property>
+  </action>
+  <action name="actionSpritesCompress">
+   <property name="icon">
+    <iconset resource="composer.qrc">
+     <normaloff>:/composer/Resources/icons/compress.png</normaloff>:/composer/Resources/icons/compress.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Compress Sprites </string>
+   </property>
+   <property name="toolTip">
+    <string>Split Identical Frames</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="composer.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>composerClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>608</x>
+     <y>421</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

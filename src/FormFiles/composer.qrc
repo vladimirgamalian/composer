@@ -1,0 +1,31 @@
+<RCC>
+  <qresource prefix="composer">
+    <file>Resources/icons/compress.png</file>
+    <file>Resources/icons/move.png</file>
+    <file>Resources/icons/snapToBorder.png</file>
+    <file>Resources/icons/snapToGuides.png</file>
+    <file>Resources/icons/snapToPictures.png</file>
+    <file>Resources/icons/animateCopyAfter.png</file>
+    <file>Resources/icons/animateCopyBefore .png</file>
+    <file>Resources/icons/animateDelete.png</file>
+    <file>Resources/icons/animateInsertAfter.png</file>
+    <file>Resources/icons/animateInsertBefore.png</file>
+    <file>Resources/icons/Sprite.png</file>
+    <file>Resources/icons/folderClose.png</file>
+    <file>Resources/icons/folderOpen.png</file>
+    <file>Resources/icons/delete.png</file>
+    <file>Resources/icons/newFolder.png</file>
+    <file>Resources/icons/new.png</file>
+    <file>Resources/icons/open.png</file>
+    <file>Resources/icons/save.png</file>
+    <file>Resources/icons/redo.png</file>
+    <file>Resources/icons/undo.png</file>
+    <file>Resources/icons/reverse.png</file>
+  </qresource>
+  <qresource prefix="misc">
+    <file>Resources/misc/strawberry.png</file>
+    <file>Resources/misc/aniframe.png</file>
+    <file>Resources/misc/eye.png</file>
+    <file>Resources/misc/chessboard.png</file>
+  </qresource>
+</RCC>

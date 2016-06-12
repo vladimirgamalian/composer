@@ -1,0 +1,70 @@
+#pragma once
+
+#include "Project.h"
+//#include "Sprite/SpriteModel.h"
+#include "Sprite/SpriteView.h"
+//#include "Animation/AnimationModel.h"
+#include "Animation/AnimationView.h"
+#include "Composition/CompositionView.h"
+//#include "Composition/CompositionModel.h"
+
+class HistoryModel : public QAbstractListModel
+{
+public:
+
+	HistoryModel( Project* srcProject, QAction* aUndo, QAction* aRedo, QObject *parent );
+	virtual ~HistoryModel();
+
+	void setup( SpriteModel* spriteModel, SpriteView* spriteView, 
+		AnimationModel* animationModel, AnimationView* animationView,
+		CompositionModel* compositionModel, CompositionView* compositionView );
+
+	void reset();
+	void checkpoint( QString description );
+	void undo();
+	void redo();
+
+protected:
+
+	virtual int rowCount( const QModelIndex &parent = QModelIndex() ) const;
+	virtual QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const;
+
+private:
+
+	struct HistoryPoint
+	{
+		~HistoryPoint()
+		{
+			delete projectData;
+		}
+		QString description;
+		ProjectData *projectData;
+		QStringList expandedSprites;
+		QStringList selectedSprites;
+		QList<int> selectedFrames;
+		QList<int> selectedPictures;
+	};
+
+	Project* project;
+	QAction* actionUndo;
+	QAction* actionRedo;
+
+
+//	SpriteModel* spriteModel;
+	SpriteView* spriteView;
+//	AnimationModel* animationModel;
+	AnimationView* animationView;
+	CompositionView* compositionView;
+//	CompositionModel* compositionModel;
+
+	QVector< HistoryPoint* > history;
+	HistoryPoint* currentState;
+
+	int cursor;
+
+	void updateActionsEnabledState();
+	void clearHistory();
+	void setProjectToHistoryPoint( const HistoryPoint* historyPoint );
+	void historyResize( int size );
+	HistoryPoint* createHistoryPoint( QString description );
+};

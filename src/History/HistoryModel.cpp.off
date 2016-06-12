@@ -1,0 +1,203 @@
+#include "stdafx.h"
+#include "HistoryModel.h"
+
+HistoryModel::HistoryModel( Project* srcProject, QAction* aUndo, QAction* aRedo, QObject *parent ) : QAbstractListModel( parent ),
+	project( srcProject ),
+	actionUndo( aUndo ),
+	actionRedo( aRedo )
+{
+	updateActionsEnabledState();
+	cursor = 0;
+
+	spriteModel = 0;
+	spriteView = 0;
+	cursor = 0;
+	currentState = 0;
+}
+
+HistoryModel::~HistoryModel()
+{
+	if ( currentState )
+		delete currentState;
+}
+
+int HistoryModel::rowCount( const QModelIndex &parent /*= QModelIndex() */ ) const
+{
+	int ret = history.size();
+	return ret;
+}
+
+QVariant HistoryModel::data( const QModelIndex &index, int role /*= Qt::DisplayRole */ ) const
+{
+	int r = index.row();
+	int count = history.size();
+
+	if ( !index.isValid() || ( role != Qt::DisplayRole ) || ( r < 0 ) || ( r >= count ) )
+		return QVariant();
+
+	return history.at( r )->description;
+}
+
+void HistoryModel::historyResize( int size )
+{
+	while ( history.size() > size )
+	{
+		HistoryPoint* historyPoint = history.last();
+		history.pop_back();
+		delete historyPoint->projectData;
+	}
+}
+
+HistoryModel::HistoryPoint* HistoryModel::createHistoryPoint( QString description )
+{
+QModelIndexList indexList = spriteModel->getPersistentIndexList();
+	QModelIndexList expandedSprites = spriteView->getExpandedList( indexList );
+	QStringList expandedSpritesPathList = spriteModel->pathListFromIndexes( expandedSprites );
+
+	QModelIndexList selectedSprites = spriteView->selectionModel()->selectedIndexes();
+	QStringList selectedSpritesPathList = spriteModel->pathListFromIndexes( selectedSprites );
+
+	HistoryPoint* historyPoint = new HistoryPoint;
+	historyPoint->description = description;
+	historyPoint->projectData = new ProjectData( project->projectData );
+	historyPoint->expandedSprites = expandedSpritesPathList;
+	historyPoint->selectedSprites = selectedSpritesPathList;
+	historyPoint->selectedFrames = animationView->getSelectedFrames();
+	historyPoint->selectedPictures = compositionView->getSelectedFrames();
+
+	return historyPoint;
+}
+
+void HistoryModel::checkpoint( QString description )
+{
+	QElapsedTimer timer;
+	timer.start();
+
+	historyResize( cursor );
+
+
+	HistoryPoint* historyPoint = createHistoryPoint( description );
+	history.push_back( historyPoint );
+
+	cursor = history.size();
+
+	qDebug() << "save history point time: " << timer.elapsed() << "ms";
+
+
+	updateActionsEnabledState();
+}
+
+void HistoryModel::undo()
+{
+	//if ( history.size() < 1 )
+	//	return;
+
+	if ( cursor < 1 )
+		return;
+
+	if ( history.size() == cursor )
+	{
+		if ( currentState )
+			delete currentState;
+		currentState = createHistoryPoint( "current state" );
+	}
+
+	
+
+	const HistoryPoint* historyPoint = history.at( cursor - 1 );
+	setProjectToHistoryPoint( historyPoint );
+
+
+	cursor--;
+
+	updateActionsEnabledState();
+}
+
+void HistoryModel::redo()
+{
+
+	if ( history.size() <= cursor )
+		return;
+
+
+	const HistoryPoint* historyPoint = currentState;
+	if ( ( cursor + 1 ) < history.size() )
+		historyPoint = history.at( cursor + 1 );
+	
+	setProjectToHistoryPoint( historyPoint );
+
+	cursor++;
+
+	updateActionsEnabledState();
+}
+
+void HistoryModel::updateActionsEnabledState()
+{
+	bool undoEnabled = false;
+	bool redoEnabled = false;
+
+	if ( history.size() > 0 )
+	{
+		if ( cursor > 0 )
+			undoEnabled = true;
+
+		if ( cursor < history.size() )
+			redoEnabled = true;
+	}
+	
+	actionUndo->setEnabled( undoEnabled );
+	actionRedo->setEnabled( redoEnabled );
+}
+
+
+
+void HistoryModel::reset()
+{
+	clearHistory();
+}
+
+void HistoryModel::clearHistory()
+{
+	historyResize( 0 );
+}
+
+void HistoryModel::setup( SpriteModel* spriteModel, SpriteView* spriteView, 
+	AnimationModel* animationModel, AnimationView* animationView,
+	CompositionModel* compositionModel, CompositionView* compositionView )
+{
+	this->spriteModel = spriteModel;
+	this->spriteView = spriteView;
+	this->animationModel = animationModel;
+	this->animationView = animationView;
+	this->compositionModel = compositionModel;
+	this->compositionView = compositionView;
+}
+
+void HistoryModel::setProjectToHistoryPoint( const HistoryPoint* historyPoint )
+{
+	project->projectData = *historyPoint->projectData;
+
+	spriteModel->reload();
+	QModelIndexList expandedSprites = spriteModel->indexesFromPathList( historyPoint->expandedSprites );
+	spriteView->applyExpandState( expandedSprites );
+
+	QItemSelection spriteSelection;
+	foreach( QString path, historyPoint->selectedSprites )
+	{
+		QModelIndex i = spriteModel->indexFromPath( path );
+		spriteSelection.select( i, i );
+	}
+	spriteView->selectionModel()->select( spriteSelection, QItemSelectionModel::ClearAndSelect );
+
+	animationModel->reload();
+
+	QModelIndexList selectedFrames = animationModel->indexesFromRowList( historyPoint->selectedFrames );
+	animationView->setSelectedFrames( selectedFrames );
+
+	compositionModel->reload();
+	QModelIndexList selectedPictures = compositionModel->indexesFromRowList( historyPoint->selectedPictures );
+	compositionView->setSelectedFrames( selectedPictures );
+}
+
+
+

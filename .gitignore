@@ -1,0 +1,4 @@
+/msvs/.vs
+/tmp
+/msvs/*.user
+/msvs/tests/*.user
