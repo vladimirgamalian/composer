@@ -119,4 +119,5 @@ private:
 	void createUndoView();
 	void setConnections();
 	void onResetCurrentSprite();
+	void uiSetupUndoRedoAction();
 };

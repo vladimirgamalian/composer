@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>1186</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -92,8 +92,6 @@
     <property name="title">
      <string>&amp;Edit</string>
     </property>
-    <addaction name="actionUndo"/>
-    <addaction name="actionRedo"/>
     <addaction name="actionRemoveRulers"/>
    </widget>
    <addaction name="menu_File"/>
@@ -114,9 +112,6 @@
    <addaction name="actionNewProject"/>
    <addaction name="actionOpenProject"/>
    <addaction name="actionSaveProject"/>
-   <addaction name="separator"/>
-   <addaction name="actionUndo"/>
-   <addaction name="actionRedo"/>
    <addaction name="separator"/>
    <addaction name="actionSnapToBorder"/>
    <addaction name="actionSnapToGuides"/>
@@ -427,30 +422,6 @@
    </property>
    <property name="toolTip">
     <string>Snap to Pictures</string>
-   </property>
-  </action>
-  <action name="actionUndo">
-   <property name="icon">
-    <iconset resource="composer.qrc">
-     <normaloff>:/composer/Resources/icons/undo.png</normaloff>:/composer/Resources/icons/undo.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Undo</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Z</string>
-   </property>
-  </action>
-  <action name="actionRedo">
-   <property name="icon">
-    <iconset resource="composer.qrc">
-     <normaloff>:/composer/Resources/icons/redo.png</normaloff>:/composer/Resources/icons/redo.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Redo</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionAnimationReverseFrames">

@@ -237,6 +237,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 	ui.setupUi(this);
 
+	
+
 	connect( ui.actionSaveProject, SIGNAL( triggered() ), this, SLOT( actionProjectSave() ) );
 	connect( ui.actionSaveProjectAs, SIGNAL( triggered() ), this, SLOT( actionProjectSaveAs() ) );
 	connect( ui.actionOpenProject, SIGNAL( triggered() ), this, SLOT( actionProjectOpen() ) );
@@ -251,6 +253,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	undoAction->setShortcuts(QKeySequence::Undo);
 	redoAction = undoStack->createRedoAction(this, tr("&Redo"));
 	redoAction->setShortcuts(QKeySequence::Redo);
+	uiSetupUndoRedoAction();
 
 
 	createHistoryWidget();
@@ -334,8 +337,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 
 	
-	connect( ui.actionUndo, SIGNAL( triggered() ), this, SLOT( actionUndo() ) );
-	connect( ui.actionRedo, SIGNAL( triggered() ), this, SLOT( actionRedo() ) );
+	//connect( ui.actionUndo, SIGNAL( triggered() ), this, SLOT( actionUndo() ) );
+	//connect( ui.actionRedo, SIGNAL( triggered() ), this, SLOT( actionRedo() ) );
 
 	//connect(&project, &Project::setActiveNode, this, &MainWindow::setActiveNode);
 
@@ -705,12 +708,14 @@ void MainWindow::modified( QString description )
 
 void MainWindow::actionUndo()
 {
+	qDebug() << "actionUndo";
 //	historyModel->undo();
 //	undoAction();
 }
 
 void MainWindow::actionRedo()
 {
+	qDebug() << "actionRedo";
 //	historyModel->redo();
 }
 
@@ -779,4 +784,17 @@ void MainWindow::onResetCurrentSprite()
 	animationModel->resetModel();
 	animationView->setCurrentFrame(0);
 	updateSpriteAction();
+}
+
+void MainWindow::uiSetupUndoRedoAction()
+{
+	undoAction->setIcon(QIcon(":/composer/Resources/icons/undo.png"));
+	redoAction->setIcon(QIcon(":/composer/Resources/icons/redo.png"));
+
+	ui.mainToolBar->addAction(undoAction);
+	ui.mainToolBar->addAction(redoAction);
+
+	ui.menu_Edit->addSeparator();
+	ui.menu_Edit->addAction(undoAction);
+	ui.menu_Edit->addAction(redoAction);
 }
