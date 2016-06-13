@@ -15,6 +15,7 @@
 #include "Commands/Composition/CompositionDropPicturesCommand.h"
 #include "Commands/Composition/CompositionDeletePicturesCommand.h"
 #include "Commands/Composition/CompositionDragDropCommand.h"
+#include "Commands/Composition/CompositionMovePictures.h"
 
 void MainWindow::createCompositionView(CompositionModel* compositionModel)
 {
@@ -600,6 +601,15 @@ void MainWindow::compositionDragDrop(const QList<int>& indexes, int row, bool co
 	undoStack->push(undoCommand);
 }
 
+void MainWindow::sceneMovePictures(QList<Project::MovePicData> moveData)
+{
+	int index = animationView->getCurrent();
+	QString path = spriteView->getCurrentNode();
+	CompositionMovePictures *undoCommand = new CompositionMovePictures(commandEnvFabric->getCommandEnv(),
+		path, index, moveData);
+	undoStack->push(undoCommand);
+}
+
 void MainWindow::actionOptions()
 {
 	optionsDialog->show();
@@ -761,6 +771,9 @@ void MainWindow::setConnections()
 
 	connect(graphicsScene, &GraphicsScene::selectionChanged, this, &MainWindow::graphicsSceneSelectionChanged);
 	connect(compositionView, &CompositionView::selectChanged, this, &MainWindow::compositionViewSelectionChanged);
+
+	connect(graphicsScene, &GraphicsScene::movePictures, this, &MainWindow::sceneMovePictures);
+	
 }
 
 void MainWindow::onResetCurrentSprite()

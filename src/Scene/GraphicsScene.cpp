@@ -9,6 +9,11 @@ GraphicsScene::GraphicsScene( Project* project, SpriteView* spriteView, Animatio
 	setItemIndexMethod( QGraphicsScene::NoIndex );	// NoIndex BspTreeIndex
 }
 
+GraphicsScene::~GraphicsScene()
+{
+	delete frameBackup;
+}
+
 void GraphicsScene::resetModel()
 {
 	QString spritePath = spriteView->getCurrentNode();
@@ -281,7 +286,6 @@ bool GraphicsScene::getPictureVisible( int index )
 
 void GraphicsScene::setPicturePos( int index, const QPoint& pos )
 {
-	//qDebug() << "setPicturePos" << index << pos;
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrent();
 	project->scenePictureMove(spritePath, frameIndex, index, pos );
@@ -303,4 +307,39 @@ void GraphicsScene::picturesToggleVisible()
 	QList<int> pics = getSelectedItemsIndexes();
 
 	project->compositionPicturesToggleVisible(spritePath, frameIndex, pics);
+}
+
+void GraphicsScene::onPressLeftMouse()
+{
+	delete frameBackup;
+	QString spritePath = spriteView->getCurrentNode();
+	int frameIndex = animationView->getCurrent();
+	frameBackup = project->cloneFrame(spritePath, frameIndex);
+}
+
+void GraphicsScene::onReleaseLeftMouse()
+{
+	QString spritePath = spriteView->getCurrentNode();
+	int frameIndex = animationView->getCurrent();
+	Frame* newFrame = project->getFrame(spritePath, frameIndex);
+	Q_ASSERT(frameBackup->pictures.size() == newFrame->pictures.size());
+	QList<Project::MovePicData> moveData;
+	for (int i = 0; i < frameBackup->pictures.size(); ++i)
+	{
+		QPoint oldPos = frameBackup->pictures.at(i)->getPos();
+		QPoint newPos = newFrame->pictures.at(i)->getPos();
+		if (oldPos != newPos)
+		{
+			QPoint shift = newPos - oldPos;
+			moveData << Project::MovePicData{i, shift};
+			newFrame->pictures.at(i)->setPos(oldPos);
+		}
+	}
+	Q_ASSERT(newFrame->isEqual(frameBackup));
+	if (moveData.isEmpty())
+		return;
+
+	project->replaceFrame(spritePath, frameIndex, frameBackup);
+	frameBackup = nullptr;
+	emit movePictures(moveData);
 }

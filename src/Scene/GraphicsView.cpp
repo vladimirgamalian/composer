@@ -329,6 +329,12 @@ void GraphicsView::mousePressEvent( QMouseEvent *event )
 
 	if ( ( rulerState != RulerState::DragHor ) && ( rulerState != RulerState::DragVer ) )
 	{
+		if (event->button() == Qt::LeftButton)
+		{
+			GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
+			s->onPressLeftMouse();
+		}
+
 		QGraphicsView::mousePressEvent( event );
 		return;
 	}
@@ -457,6 +463,12 @@ void GraphicsView::mouseReleaseEvent( QMouseEvent* event )
 	QGraphicsView::mouseReleaseEvent( event );
 	rulerState = RulerState::Still;
 	repaint();
+
+	if (event->button() == Qt::LeftButton)
+	{
+		GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
+		s->onReleaseLeftMouse();
+	}
 }
 
 void GraphicsView::dragHorizontalRuler( int coord )
@@ -623,7 +635,7 @@ int GraphicsView::getCurZoom() const
 	return zoomPreset.at( curZoomIndex );
 }
 
-void GraphicsView::keyPressEvent( QKeyEvent* event )
+void GraphicsView::keyPressEvent(QKeyEvent* event)
 {
 	GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
 

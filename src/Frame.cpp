@@ -48,4 +48,3 @@ bool Frame::isEqual( const Frame* frame ) const
 
 	return true;
 }
-

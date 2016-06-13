@@ -13,7 +13,8 @@ public:
 
 	void setPos( QPoint p );
 	QPoint getPos() const;
-	void shiftPos( int x, int y );
+	void shiftPos(int x, int y);
+	void shiftPos(QPoint shift);
 
 	bool getVisible() const;
 	void setVisible( bool value );

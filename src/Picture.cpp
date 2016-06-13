@@ -46,7 +46,12 @@ void Picture::shiftPos( int x, int y )
 	 pos += QPoint( x, y );
 }
 
-bool Picture::isEqual( Picture* picture ) const
+void Picture::shiftPos(QPoint shift)
+{
+	pos += shift;
+}
+
+bool Picture::isEqual(Picture* picture) const
 {
 	if ( pos != picture->pos )
 		return false;

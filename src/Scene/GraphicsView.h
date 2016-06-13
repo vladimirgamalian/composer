@@ -35,11 +35,9 @@ public slots:
 	void redrawAll();
 
 private slots:
-
 	void zoomIndexChanged( int index );
 
 protected:
-	
 	virtual void paintEvent( QPaintEvent *event );
 	//virtual void drawBackground(QPainter *painter, const QRectF &rect);
 	virtual void drawForeground( QPainter* painter, const QRectF& rect );
@@ -91,4 +89,3 @@ private:
 
 	int getCurZoom() const;
 };
-

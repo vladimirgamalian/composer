@@ -107,6 +107,7 @@
     <ClCompile Include="..\..\src\Commands\Composition\CompositionDeletePicturesCommand.cpp" />
     <ClCompile Include="..\..\src\Commands\Composition\CompositionDragDropCommand.cpp" />
     <ClCompile Include="..\..\src\Commands\Composition\CompositionDropPicturesCommand.cpp" />
+    <ClCompile Include="..\..\src\Commands\Composition\CompositionMovePictures.cpp" />
     <ClCompile Include="..\..\src\Commands\Sprite\SpriteAddNodeCommand.cpp" />
     <ClCompile Include="..\..\src\Commands\Sprite\SpriteBaseExCommand.cpp" />
     <ClCompile Include="..\..\src\Commands\Sprite\SpriteDragDropCommand.cpp" />
@@ -795,6 +796,7 @@
     <ClInclude Include="..\..\src\Commands\Composition\CompositionDeletePicturesCommand.h" />
     <ClInclude Include="..\..\src\Commands\Composition\CompositionDragDropCommand.h" />
     <ClInclude Include="..\..\src\Commands\Composition\CompositionDropPicturesCommand.h" />
+    <ClInclude Include="..\..\src\Commands\Composition\CompositionMovePictures.h" />
     <ClInclude Include="..\..\src\Commands\Sprite\SpriteAddNodeCommand.h" />
     <ClInclude Include="..\..\src\Commands\Sprite\SpriteBaseExCommand.h" />
     <ClInclude Include="..\..\src\Commands\Sprite\SpriteDragDropCommand.h" />

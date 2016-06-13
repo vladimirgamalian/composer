@@ -919,8 +919,8 @@ void Project::replaceFrame(QString spritePath, int frameIndex, Frame* frame)
 	delete sprite->frames[frameIndex];
 	sprite->frames[frameIndex] = frame;
 
-	emit sceneModelReset();
-	emit compositionModelReset();
+	//emit sceneModelReset();
+	//emit compositionModelReset();
 }
 
 void Project::replaceSprite(QString spritePath, Sprite* sprite)
@@ -983,7 +983,15 @@ void Project::scenePictureMove(QString spritePath, int frameIndex, int index, QP
 	compostionGetPicture(spritePath, frameIndex, index)->setPos(pos);
 }
 
-void Project::lineEditFrameTagTextChanged( const QString& value )
+void Project::scenePicturesMove(QString spritePath, int frameIndex, const QList<MovePicData>& moveData)
+{
+	Q_ASSERT(!moveData.isEmpty());
+
+	for (auto i: moveData)
+		compostionGetPicture(spritePath, frameIndex, i.index)->shiftPos(i.shift);
+}
+
+void Project::lineEditFrameTagTextChanged(const QString& value)
 {
 	//TODO: restore functional
 // 	if ( frameTagChangeInProgress )

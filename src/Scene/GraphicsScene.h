@@ -9,6 +9,7 @@ class GraphicsScene : public QGraphicsScene
 	Q_OBJECT
 public:
 	GraphicsScene( Project* project, SpriteView* spriteView, AnimationView* animationView, qreal x, qreal y, qreal width, qreal height, QObject *parent = 0 );
+	virtual ~GraphicsScene();
 	void setGraphicsView( GraphicsView* graphicsView );
 	QPoint stickItem( const QRect& rect, QGraphicsItem* item );
 	//TODO: probably need to move to View
@@ -17,9 +18,12 @@ public:
 	void  setPicturePos( int index, const QPoint& pos );
 	void picturesShift(int shiftX, int shiftY);
 	void picturesToggleVisible();
+	void onPressLeftMouse();
+	void onReleaseLeftMouse();
 
 signals:
 	void dropPictures(int compositionIndex, QPoint pos, QStringList fileList);
+	void movePictures(QList<Project::MovePicData> moveData);
 
 public slots:
 	void resetModel();
@@ -51,4 +55,5 @@ private:
 	bool snapToPictures = false;
 	bool snapToGuides = false;
 	GraphicsView* graphicsView = nullptr;
+	Frame* frameBackup = nullptr;
 };

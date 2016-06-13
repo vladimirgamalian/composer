@@ -9,6 +9,13 @@ Q_OBJECT
 	friend class HistoryModel;
 
 public:
+
+	struct MovePicData
+	{
+		int index;
+		QPoint shift;
+	};
+
 	Project();
 	~Project();
 
@@ -63,6 +70,7 @@ public:
 	void replaceSprite(QString spritePath, Sprite* sprite);
 
 	Frame* cloneFrame(QString spritePath, int frameIndex);
+	Frame* getFrame(QString spritePath, int frameIndex);
 	void replaceFrame(QString spritePath, int frameIndex, Frame* frame);
 
 	bool spritesCompress(QString spritePath);
@@ -89,6 +97,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 
 	void scenePictureMove(QString spritePath, int frameIndex, int index, QPoint pos);
+	void scenePicturesMove(QString spritePath, int frameIndex, const QList<Project::MovePicData>& moveData);
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -131,13 +140,10 @@ private:
 QString rootPath;
 	void loadSpriteNodeRecursive( QDomElement& baseXmlNode, TreeNode* node );
 	void saveSpriteNodeRecursive( QDomElement& xmlNode, TreeNode* spriteNode );
-	//void saveSelection( QDomElement& xmlNode );
-	//void loadSelection( QDomElement& xmlNode );
 	void saveSprite( QDomElement& node, Sprite* sprite );
 	void saveFrame( QDomElement& node, Frame* frame );
 	void loadSprite( QDomElement& node, Sprite* sprite );
 	void loadFrame( QDomElement& node, Frame* sprite );
-	Frame* getFrame(QString spritePath, int frameIndex);
 	QString getRelativePath( QString path );
 	QString getAbsolutePath( QString path );
 	void updateFrameParams();

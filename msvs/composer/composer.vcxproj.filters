@@ -296,6 +296,9 @@
     <ClCompile Include="..\..\src\Commands\Sprite\SpriteBaseExCommand.cpp">
       <Filter>Commands\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Commands\Composition\CompositionMovePictures.cpp">
+      <Filter>Commands\Composition</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\src\FormFiles\DialogAbout.ui">
@@ -479,6 +482,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Commands\Sprite\SpriteAddNodeCommand.h">
       <Filter>Commands\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Commands\Composition\CompositionMovePictures.h">
+      <Filter>Commands\Composition</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
