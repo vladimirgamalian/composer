@@ -13,13 +13,15 @@ public:
 	void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget /* = 0 */ );
 	QRectF outlineRect() const;
 
+	
 	int getIndex() const;
 
 protected:
 
-	virtual int	type () const { return Type; }
-	virtual void mouseMoveEvent( QGraphicsSceneMouseEvent *event );
-	virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent *event );
+	virtual int	type () const override  { return Type; }
+	virtual QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+	virtual void mouseMoveEvent( QGraphicsSceneMouseEvent *event ) override;
+	virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent *event ) override;
 
 private:
 

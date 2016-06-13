@@ -281,6 +281,7 @@ bool GraphicsScene::getPictureVisible( int index )
 
 void GraphicsScene::setPicturePos( int index, const QPoint& pos )
 {
+	//qDebug() << "setPicturePos" << index << pos;
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrent();
 	project->scenePictureMove(spritePath, frameIndex, index, pos );
