@@ -66,7 +66,7 @@ public slots:
 
 	void compositionDragDrop(const QList<int>& indexes, int row, bool copyAction);
 
-	void sceneMovePictures(QList<Project::MovePicData> moveData);
+	void sceneMovePictures(QString spritePath, int frameIndex, QList<Project::MovePicData> moveData);
 
 private:
 	Ui::composerClass ui;

@@ -319,6 +319,7 @@ void GraphicsScene::onPressLeftMouse()
 
 void GraphicsScene::onReleaseLeftMouse()
 {
+	Q_ASSERT(frameBackup);
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrent();
 	Frame* newFrame = project->getFrame(spritePath, frameIndex);
@@ -330,16 +331,16 @@ void GraphicsScene::onReleaseLeftMouse()
 		QPoint newPos = newFrame->pictures.at(i)->getPos();
 		if (oldPos != newPos)
 		{
-			QPoint shift = newPos - oldPos;
-			moveData << Project::MovePicData{i, shift};
+			moveData << Project::MovePicData{i, oldPos, newPos};
 			newFrame->pictures.at(i)->setPos(oldPos);
 		}
 	}
 	Q_ASSERT(newFrame->isEqual(frameBackup));
+	delete frameBackup;
+	frameBackup = nullptr;
+
 	if (moveData.isEmpty())
 		return;
 
-	project->replaceFrame(spritePath, frameIndex, frameBackup);
-	frameBackup = nullptr;
-	emit movePictures(moveData);
+	emit movePictures(spritePath, frameIndex, moveData);
 }

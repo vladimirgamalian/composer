@@ -13,7 +13,8 @@ public:
 	struct MovePicData
 	{
 		int index;
-		QPoint shift;
+		QPoint oldPos;
+		QPoint newPos;
 	};
 
 	Project();
@@ -97,7 +98,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 
 	void scenePictureMove(QString spritePath, int frameIndex, int index, QPoint pos);
-	void scenePicturesMove(QString spritePath, int frameIndex, const QList<Project::MovePicData>& moveData);
+	void scenePicturesMove(QString spritePath, int frameIndex, const QList<Project::MovePicData>& moveData, bool newPos);
 
 	//////////////////////////////////////////////////////////////////////////
 

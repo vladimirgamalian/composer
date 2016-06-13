@@ -23,7 +23,7 @@ public:
 
 signals:
 	void dropPictures(int compositionIndex, QPoint pos, QStringList fileList);
-	void movePictures(QList<Project::MovePicData> moveData);
+	void movePictures(QString spritePath, int frameIndex, QList<Project::MovePicData> moveData);
 
 public slots:
 	void resetModel();

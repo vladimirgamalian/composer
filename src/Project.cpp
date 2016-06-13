@@ -983,12 +983,12 @@ void Project::scenePictureMove(QString spritePath, int frameIndex, int index, QP
 	compostionGetPicture(spritePath, frameIndex, index)->setPos(pos);
 }
 
-void Project::scenePicturesMove(QString spritePath, int frameIndex, const QList<MovePicData>& moveData)
+void Project::scenePicturesMove(QString spritePath, int frameIndex, const QList<MovePicData>& moveData, bool newPos)
 {
 	Q_ASSERT(!moveData.isEmpty());
 
 	for (auto i: moveData)
-		compostionGetPicture(spritePath, frameIndex, i.index)->shiftPos(i.shift);
+		compostionGetPicture(spritePath, frameIndex, i.index)->setPos(newPos ? i.newPos : i.oldPos);
 }
 
 void Project::lineEditFrameTagTextChanged(const QString& value)

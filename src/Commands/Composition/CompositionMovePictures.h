@@ -1,15 +1,17 @@
 #pragma once
-#include "CompositionBaseCommand.h"
+#include "Commands/BaseCommand.h"
 
-class CompositionMovePictures : public CompositionBaseCommand
+class CompositionMovePictures : public BaseCommand
 {
 public:
 	CompositionMovePictures(CommandEnv* commandEnv, QString spritePath, int frameIndex,
 		const QList<Project::MovePicData>& moveData);
 
-protected:
-	virtual void action();
+	void redo() override;
+	void undo() override;
 
 private:
+	QString spritePath;
+	int frameIndex;
 	QList<Project::MovePicData> moveData;
 };

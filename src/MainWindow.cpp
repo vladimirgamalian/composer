@@ -601,12 +601,10 @@ void MainWindow::compositionDragDrop(const QList<int>& indexes, int row, bool co
 	undoStack->push(undoCommand);
 }
 
-void MainWindow::sceneMovePictures(QList<Project::MovePicData> moveData)
+void MainWindow::sceneMovePictures(QString spritePath, int frameIndex, QList<Project::MovePicData> moveData)
 {
-	int index = animationView->getCurrent();
-	QString path = spriteView->getCurrentNode();
 	CompositionMovePictures *undoCommand = new CompositionMovePictures(commandEnvFabric->getCommandEnv(),
-		path, index, moveData);
+		spritePath, frameIndex, moveData);
 	undoStack->push(undoCommand);
 }
 
