@@ -58,6 +58,7 @@ void MainWindow::createAnimationView(AnimationModel* animationModel)
 	spinBoxFrameDuration->setMinimum( 0 );
 	spinBoxFrameDuration->setMaximum( 9999 );
 	spinBoxFrameDuration->setAccelerated( true );
+	spinBoxFrameDuration->setKeyboardTracking(false);
 	bar->addSeparator();
 	bar->addWidget( spinBoxFrameDurationLabel );
 	bar->addWidget( spinBoxFrameDuration );
@@ -785,12 +786,15 @@ void MainWindow::setConnections()
 
 	connect(graphicsScene, &GraphicsScene::movePictures, this, &MainWindow::sceneMovePictures);
 	connect(graphicsScene, &GraphicsScene::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
+
+	connect(animationView, &AnimationView::frameDuration, this, &MainWindow::frameDuration);
 }
 
 void MainWindow::onResetCurrentSprite()
 {
 	animationModel->resetModel();
 	animationView->setCurrentFrame(0);
+	animationView->updateDurations();
 	updateSpriteAction();
 }
 
@@ -805,4 +809,18 @@ void MainWindow::uiSetupUndoRedoAction()
 	ui.menu_Edit->addSeparator();
 	ui.menu_Edit->addAction(undoAction);
 	ui.menu_Edit->addAction(redoAction);
+}
+
+void MainWindow::frameDuration(bool enabled, bool different, int v)
+{
+	if (enabled)
+	{
+		spinBoxFrameDuration->setValue(different ? 0 : v);
+		spinBoxFrameDuration->setEnabled(true);
+	}
+	else
+	{
+		spinBoxFrameDuration->setValue(0);
+		spinBoxFrameDuration->setEnabled(false);
+	}
 }

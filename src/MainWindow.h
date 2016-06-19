@@ -69,6 +69,8 @@ public slots:
 	void sceneMovePictures(QString spritePath, int frameIndex, QList<Project::MovePicData> moveData);
 	void sceneTogglePicsVisible(QString spritePath, int frameIndex, const QList<int>& pics);
 
+	void frameDuration(bool enabled, bool different, int v);
+
 private:
 	Ui::composerClass ui;
 	Project project;

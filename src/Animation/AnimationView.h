@@ -11,17 +11,18 @@ public:
 	void setCurrentFrame(int i);
 	void setSelected(const QList< int >& selected);
 	void setCurrent(int row);
+	void updateDurations();
 
 signals:
-	void frameDuration( int v );
+	void frameDuration( bool enabled, bool different, int v );
 	void deleteSelectedItem();
 	void resetCurrentFrame();
 
 protected:
-	virtual void keyPressEvent( QKeyEvent* event );
+	virtual void keyPressEvent(QKeyEvent* event) override;
+	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected) override;
+	virtual void currentChanged(const QModelIndex& current, const QModelIndex& previous) override;
 
 private:
-	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
-	virtual void currentChanged(const QModelIndex& current, const QModelIndex& previous);
 	Project* project;
 };

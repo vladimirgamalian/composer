@@ -18,41 +18,42 @@ AnimationView::AnimationView( Project* project, QWidget *parent /*= 0 */ ) :
 	setDragDropMode( QAbstractItemView::DragDrop );
 	setDefaultDropAction( Qt::MoveAction );
 
-
 	setSelectionMode( ExtendedSelection );
 }
 
 void AnimationView::selectionChanged( const QItemSelection& selected, const QItemSelection& deselected )
 {
-	QListView::selectionChanged( selected, deselected );
-
-	bool durationFound = false;
-	bool differentDurationFound = false;
-	int duration = 0;
-	QModelIndexList indexes = selectionModel()->selectedIndexes();
-	foreach( QModelIndex index, indexes )
-	{
-		int d = model()->data( index, Qt::UserRole + 3 ).toInt();
-		if ( ( durationFound ) && ( duration != d ) )
-		{
-			differentDurationFound = true;
-			break;
-		}
-		
-		duration = d;
-		durationFound = true;
-	}
-
-	if ( ( !durationFound ) || ( differentDurationFound ) )
-		duration = 0;
-
-
-	emit frameDuration( duration );
+	QListView::selectionChanged(selected, deselected);
+	updateDurations();
 }
 
 void AnimationView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
 	emit resetCurrentFrame();
+	updateDurations();
+}
+
+void AnimationView::updateDurations()
+{
+	bool durationFound = false;
+	bool differentDurationFound = false;
+	int duration = 0;
+
+	QModelIndexList indexes = selectionModel()->selectedIndexes();
+	foreach(QModelIndex index, indexes)
+	{
+		int d = model()->data(index, Qt::UserRole + 3).toInt();
+		if ((durationFound) && (duration != d))
+		{
+			differentDurationFound = true;
+			break;
+		}
+
+		duration = d;
+		durationFound = true;
+	}
+
+	emit frameDuration(durationFound, differentDurationFound, duration);
 }
 
 void AnimationView::keyPressEvent(QKeyEvent* event)
