@@ -301,11 +301,16 @@ void GraphicsScene::picturesShift(int shiftX, int shiftY)
 
 void GraphicsScene::picturesToggleVisible()
 {
+	QList<int> pics = getSelectedItemsIndexes();
+	if (pics.isEmpty())
+		return;
+
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrent();
-	QList<int> pics = getSelectedItemsIndexes();
 
-	project->compositionPicturesToggleVisible(spritePath, frameIndex, pics);
+	emit togglePicsVisible(spritePath, frameIndex, pics);
+
+	graphicsView->redrawAll();
 }
 
 void GraphicsScene::startMoving()
@@ -318,7 +323,10 @@ void GraphicsScene::startMoving()
 
 void GraphicsScene::finishMoving()
 {
-	Q_ASSERT(frameBackup);
+	//Q_ASSERT(frameBackup);
+	if (!frameBackup)
+		return;
+
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrent();
 	Frame* newFrame = project->getFrame(spritePath, frameIndex);

@@ -16,6 +16,7 @@
 #include "Commands/Composition/CompositionDeletePicturesCommand.h"
 #include "Commands/Composition/CompositionDragDropCommand.h"
 #include "Commands/Composition/CompositionMovePictures.h"
+#include "Commands/Composition/CompositionTriggerPicsVisible.h"
 
 void MainWindow::createCompositionView(CompositionModel* compositionModel)
 {
@@ -611,6 +612,13 @@ void MainWindow::sceneMovePictures(QString spritePath, int frameIndex, QList<Pro
 	undoStack->push(undoCommand);
 }
 
+void MainWindow::sceneTogglePicsVisible(QString spritePath, int frameIndex, const QList<int>& pics)
+{
+	CompositionTriggerPicsVisible *undoCommand = new CompositionTriggerPicsVisible(commandEnvFabric->getCommandEnv(),
+		spritePath, frameIndex, pics);
+	undoStack->push(undoCommand);
+}
+
 void MainWindow::actionOptions()
 {
 	optionsDialog->show();
@@ -776,7 +784,7 @@ void MainWindow::setConnections()
 	connect(compositionView, &CompositionView::selectChanged, this, &MainWindow::compositionViewSelectionChanged);
 
 	connect(graphicsScene, &GraphicsScene::movePictures, this, &MainWindow::sceneMovePictures);
-	
+	connect(graphicsScene, &GraphicsScene::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
 }
 
 void MainWindow::onResetCurrentSprite()

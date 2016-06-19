@@ -561,19 +561,19 @@ void GraphicsView::keyPressEvent(QKeyEvent* event)
 		break;
 	}
 
-	if ((!shift.isNull()) && (lastMovingKey == -1))
+	if (!shift.isNull())
 	{
-		lastMovingKey = event->key();
-		qDebug() << "keyPressEvent " << (event->key() & 0xff);
+		if (lastMovingKey == -1)
+		{
+			lastMovingKey = event->key();
+			s->startMoving();
+		}
 
-		GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
-		s->startMoving();
-	}
-
-	if ((!shift.isNull()) && (lastMovingKey == event->key()))
-	{
-		s->picturesShift(shift.x(), shift.y());
-		return;
+		if (lastMovingKey == event->key())
+		{
+			s->picturesShift(shift.x(), shift.y());
+			return;
+		}
 	}
 
 	if ( event->key() == Qt::Key_Space )
@@ -591,11 +591,8 @@ void GraphicsView::keyReleaseEvent(QKeyEvent *event)
 	{
 		if (event->key() == lastMovingKey)
 		{
-			qDebug() << "keyReleaseEvent " << (event->key() & 0xff);
 			lastMovingKey = -1;
-
-			GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
-			s->finishMoving();
+			reinterpret_cast<GraphicsScene*>(scene())->finishMoving();
 		}
 	}
 }

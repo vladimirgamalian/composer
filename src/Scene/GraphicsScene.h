@@ -24,6 +24,7 @@ public:
 signals:
 	void dropPictures(int compositionIndex, QPoint pos, QStringList fileList);
 	void movePictures(QString spritePath, int frameIndex, QList<Project::MovePicData> moveData);
+	void togglePicsVisible(QString spritePath, int frameIndex, const QList<int>& pics);
 
 public slots:
 	void resetModel();
