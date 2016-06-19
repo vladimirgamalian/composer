@@ -2,9 +2,9 @@
 #include "WidgetRuler.h"
 
 WidgetRuler::WidgetRuler( QWidget *parent, QGraphicsView* gv, bool vertRuler )
-	: QWidget( parent ), graphicsView( gv ), isVertRuler( vertRuler )
+	: QWidget( parent ), graphicsView( gv ), drag(false), isVertRuler( vertRuler )
 {
-	drag = false;
+
 }
 
 void WidgetRuler::paintEvent( QPaintEvent * event )
@@ -45,9 +45,6 @@ void WidgetRuler::paintEvent( QPaintEvent * event )
 		drawRulerStrokesHor( &painter, pixelPerSmallStroke, delta, -1 );
 		painter.drawLine( 0, 19, width(), 19 );
 	}
-	
-
-	//painter.fillRect( rect(), Qt::red );
 }
 
 void WidgetRuler::repaintRulers()
@@ -68,7 +65,6 @@ int WidgetRuler::next125( int v )
 	v *= pow( 10.0, magnitude );
 	return v;
 }
-
 
 void WidgetRuler::drawRulerStrokesHor( QPainter* painter, int pixelPerSmallStroke,
 	int delta, int dir )
@@ -179,10 +175,8 @@ void WidgetRuler::drawRulerStrokesVer( QPainter* painter, int pixelPerSmallStrok
 
 void WidgetRuler::mouseMoveEvent( QMouseEvent* event )
 {
-	//qDebug() << "WidgetRuler mouse move event " + QString::number( qrand() );
 	if ( !drag )
 		return;
-	//qDebug() << "emit dragRuler";
 
 	int pos = 0;
 	if ( isVertRuler )
@@ -195,7 +189,6 @@ void WidgetRuler::mouseMoveEvent( QMouseEvent* event )
 void WidgetRuler::mousePressEvent( QMouseEvent* event )
 {
 	drag = true;
-	//qDebug() << "WidgetRuler mousePressEvent";
 }
 
 void WidgetRuler::mouseReleaseEvent( QMouseEvent* event )
@@ -210,6 +203,4 @@ void WidgetRuler::mouseReleaseEvent( QMouseEvent* event )
 		
 
 	dropRuler( pos );
-	//qDebug() << "WidgetRuler mouseReleaseEvent";
 }
-

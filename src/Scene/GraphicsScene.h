@@ -18,8 +18,8 @@ public:
 	void  setPicturePos( int index, const QPoint& pos );
 	void picturesShift(int shiftX, int shiftY);
 	void picturesToggleVisible();
-	void onPressLeftMouse();
-	void onReleaseLeftMouse();
+	void startMoving();
+	void finishMoving();
 
 signals:
 	void dropPictures(int compositionIndex, QPoint pos, QStringList fileList);

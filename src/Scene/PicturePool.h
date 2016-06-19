@@ -3,11 +3,9 @@
 class PicturePool
 {
 public:
-
 	QPixmap* get( QString fileName );
 
 private:
-
 	struct MapItem
 	{
 		MapItem() {}
@@ -17,7 +15,6 @@ private:
 	};
 
 	QMap< QString, MapItem > pictures;
-	//QMap< QString, QPixmap* > pictures;
 };
 
 extern PicturePool globalPicturePool;

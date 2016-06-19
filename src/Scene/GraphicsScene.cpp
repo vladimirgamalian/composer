@@ -124,11 +124,8 @@ QPoint GraphicsScene::stickItem( const QRect& rect, QGraphicsItem* item )
 				xStickList.push_back( guideX );
 				xStickList.push_back( guideX - w );
 			}
-
 		}
 	}
-
-
 
 	int minDistance = MagnetThresold;
 	foreach( int xStick, xStickList )
@@ -298,6 +295,8 @@ void GraphicsScene::picturesShift(int shiftX, int shiftY)
 	QList<int> pics = getSelectedItemsIndexes();
 
 	project->compositionPicturesShift(spritePath, frameIndex, pics, shiftX, shiftY);
+
+	graphicsView->redrawAll();
 }
 
 void GraphicsScene::picturesToggleVisible()
@@ -309,15 +308,15 @@ void GraphicsScene::picturesToggleVisible()
 	project->compositionPicturesToggleVisible(spritePath, frameIndex, pics);
 }
 
-void GraphicsScene::onPressLeftMouse()
+void GraphicsScene::startMoving()
 {
-	delete frameBackup;
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrent();
+	delete frameBackup;
 	frameBackup = project->cloneFrame(spritePath, frameIndex);
 }
 
-void GraphicsScene::onReleaseLeftMouse()
+void GraphicsScene::finishMoving()
 {
 	Q_ASSERT(frameBackup);
 	QString spritePath = spriteView->getCurrentNode();

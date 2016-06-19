@@ -7,10 +7,10 @@ public:
 	GraphicsItemPic( Picture* picture, int index );
 	virtual ~GraphicsItemPic();
 
-	QRectF boundingRect() const;
-	void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget /* = 0 */ );
+	virtual QRectF boundingRect() const override;
+	virtual void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget /* = 0 */ ) override;
+
 	QRectF outlineRect() const;
-	
 	int getIndex() const;
 
 protected:

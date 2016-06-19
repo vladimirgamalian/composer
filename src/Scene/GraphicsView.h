@@ -33,13 +33,14 @@ private slots:
 	void zoomIndexChanged( int index );
 
 protected:
-	virtual void paintEvent( QPaintEvent *event );
-	virtual void drawForeground( QPainter* painter, const QRectF& rect );
-	virtual void wheelEvent( QWheelEvent* event );
-	virtual void mousePressEvent( QMouseEvent *event );
-	virtual void mouseMoveEvent( QMouseEvent * event );
-	virtual void mouseReleaseEvent( QMouseEvent* event );
-	virtual void keyPressEvent( QKeyEvent* event );
+	virtual void paintEvent( QPaintEvent *event ) override;
+	virtual void drawForeground( QPainter* painter, const QRectF& rect ) override;
+	virtual void wheelEvent( QWheelEvent* event ) override;
+	virtual void mousePressEvent( QMouseEvent *event ) override;
+	virtual void mouseMoveEvent( QMouseEvent * event ) override;
+	virtual void mouseReleaseEvent( QMouseEvent* event ) override;
+	virtual void keyPressEvent( QKeyEvent* event ) override;
+	virtual void keyReleaseEvent(QKeyEvent *event) override;
 
 private:
 

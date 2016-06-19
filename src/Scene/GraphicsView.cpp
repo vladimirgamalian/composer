@@ -236,7 +236,7 @@ void GraphicsView::mousePressEvent( QMouseEvent *event )
 		if (event->button() == Qt::LeftButton)
 		{
 			GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
-			s->onPressLeftMouse();
+			s->startMoving();
 		}
 
 		QGraphicsView::mousePressEvent( event );
@@ -371,7 +371,7 @@ void GraphicsView::mouseReleaseEvent( QMouseEvent* event )
 	if (event->button() == Qt::LeftButton)
 	{
 		GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
-		s->onReleaseLeftMouse();
+		s->finishMoving();
 	}
 }
 
@@ -536,6 +536,8 @@ int GraphicsView::getCurZoom() const
 
 void GraphicsView::keyPressEvent(QKeyEvent* event)
 {
+	qDebug() << "keyPressEvent " << (event->key() & 0xff);
+
 	GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
 
 	if ( event->key() == Qt::Key_Delete )
@@ -575,6 +577,13 @@ void GraphicsView::keyPressEvent(QKeyEvent* event)
 	}
 
 	QGraphicsView::keyPressEvent( event );
+}
+
+void GraphicsView::keyReleaseEvent(QKeyEvent *event)
+{
+	qDebug() << "keyReleaseEvent " << (event->key() & 0xff);
+	//GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
+	//s->finishMoving();
 }
 
 void GraphicsView::redrawAll()
