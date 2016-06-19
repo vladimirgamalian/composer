@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Project.h"
 
 class GraphicsView : public QGraphicsView
@@ -23,15 +22,11 @@ signals:
 	void delPressed();
 
 public slots:
-
 	void dragHorizontalRuler( int coord );
 	void dragVerticalRuler( int coord );
 	void dropHorizontalRuler( int coord );
 	void dropVerticalRuler( int coord );
 	void removeRulers();
-
-//	void timerShot();
-
 	void redrawAll();
 
 private slots:
@@ -39,7 +34,6 @@ private slots:
 
 protected:
 	virtual void paintEvent( QPaintEvent *event );
-	//virtual void drawBackground(QPainter *painter, const QRectF &rect);
 	virtual void drawForeground( QPainter* painter, const QRectF& rect );
 	virtual void wheelEvent( QWheelEvent* event );
 	virtual void mousePressEvent( QMouseEvent *event );

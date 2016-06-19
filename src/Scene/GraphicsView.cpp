@@ -11,8 +11,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene, QWidget* parent /*= 0 */ ) : Q
 
 	//setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	//setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	
-	//debugPrint125();
+
 	setViewportUpdateMode( QGraphicsView::MinimalViewportUpdate );
 	//setViewportUpdateMode( QGraphicsView::FullViewportUpdate );
 	
@@ -30,26 +29,11 @@ GraphicsView::GraphicsView(QGraphicsScene *scene, QWidget* parent /*= 0 */ ) : Q
 	//setCacheMode(QGraphicsView::CacheBackground);
 
 	comboBoxZoom = 0;
-
-	//zoomPreset.append( 50 );
-	//zoomPreset.append( 75 );
-	zoomPreset.append( 100 );
-	zoomPreset.append( 200 );
-	zoomPreset.append( 300 );
-	zoomPreset.append( 400 );
-	zoomPreset.append( 500 );
-	zoomPreset.append( 600 );
-	zoomPreset.append( 800 );
-	zoomPreset.append( 1000 );
-	zoomPreset.append( 1200 );
-	zoomPreset.append( 1600 );
-	zoomPreset.append( 3200 );
-
+	zoomPreset = {100, 200, 300, 400, 500, 600, 800, 1000, 1200, 1600, 3200};
 
 	rulerState = RulerState::Still;
 	handScrolling = false;
 	dragGuideIndexIsHor = false;
-
 
 	chessboardPixmap.load( ":/misc/Resources/misc/chessboard.png" );
 }
@@ -92,7 +76,6 @@ void GraphicsView::wheelEvent( QWheelEvent* event )
 
 void GraphicsView::drawForeground( QPainter* painter, const QRectF& rect )
 {
-	//QPainter painter( viewport() );
 	QPen redPen( Qt::red );
 	redPen.setStyle( Qt::DashLine );
 	QPen whitePen( Qt::white );
@@ -158,9 +141,6 @@ void GraphicsView::drawForeground( QPainter* painter, const QRectF& rect )
 	}
 
 
-
-	//return;
-
 	QList< QGraphicsItem* > selectedItems = scene()->selectedItems();
 	
 	foreach( QGraphicsItem* item, selectedItems )
@@ -182,7 +162,6 @@ void GraphicsView::drawForeground( QPainter* painter, const QRectF& rect )
 			QRectF mappedRect = painter->transform().mapRect( objectRect );
 			qreal widthRatio = objectRect.width() / mappedRect.width();
 			QRectF r( x, y, ( double ) w - widthRatio, ( double ) h - widthRatio );
-			//QRectF r( x + widthRatio, y + widthRatio, ( double ) w - widthRatio, ( double ) h - widthRatio );
 
 			painter->setPen( whitePen );
 			painter->drawRect( r );
@@ -211,81 +190,8 @@ void GraphicsView::paintEvent( QPaintEvent *event )
 
 		delete backPainter;
 	}
-	
-
-
 
 	QGraphicsView::paintEvent( event );
-
-
-	//QPainter painter( viewport() );
-	//QPen redPen( Qt::red );
-	//redPen.setStyle( Qt::DashLine );
-	//QPen whitePen( Qt::white );
-	//QPen bluePen( Qt::blue );
-	//bluePen.setStyle( Qt::DashLine );
-
-	//QPen gridPen( QColor( 128, 128, 128, 128 ) );
-	//gridPen.setStyle( Qt::DotLine );
-
-
-	//foreach( auto i, horGuides )
-	//{
-	//	int y = mapFromScene( 0, i ).y();
-	//	painter.setPen( whitePen );
-	//	painter.drawLine( 0, y, width(), y );
-	//	painter.setPen( bluePen );
-	//	painter.drawLine( 0, y, width(), y );
-	//}
-
-	//foreach( auto i, verGuides )
-	//{
-	//	int x = mapFromScene( i, 0 ).x();
-	//	painter.setPen( whitePen );
-	//	painter.drawLine( x, 0, x, height() );
-	//	painter.setPen( bluePen );
-	//	painter.drawLine( x, 0, x, height() );
-	//}
-
-
-	//
-	//if ( rulerState == RulerState::IntroduceHor )
-	//{
-	//	painter.setPen( whitePen );
-	//	painter.drawLine( 0, introduceGuideCoord, width(), introduceGuideCoord );
-	//	painter.setPen( redPen );
-	//	painter.drawLine( 0, introduceGuideCoord, width(), introduceGuideCoord );
-	//}
-
-	//if ( rulerState == RulerState::IntroduceVer )
-	//{
-	//	painter.setPen( whitePen );
-	//	painter.drawLine( introduceGuideCoord, 0, introduceGuideCoord, height() );
-	//	painter.setPen( redPen );
-	//	painter.drawLine( introduceGuideCoord, 0, introduceGuideCoord, height() );
-	//}
-
-	//if ( getCurZoom() >= 1000 )
-	//{
-	//	QPoint startPoint = mapToScene( -1, -1 ).toPoint();
-
-	//	for ( int x = 0; x < width(); ++x )
-	//	{
-	//		int lineX = mapFromScene( startPoint.x() + x, 0 ).x();
-	//		painter.setPen( gridPen );
-	//		painter.drawLine( lineX, 0, lineX, height() );
-	//	}
-
-	//	for ( int y = 0; y < height(); ++y )
-	//	{
-	//		int lineY = mapFromScene( 0, startPoint.y() + y ).y();
-	//		painter.setPen( gridPen );
-	//		painter.drawLine( 0, lineY, width(), lineY );
-	//	}
-	//}
-
-
-
 
 	emit repaintRulers();
 }
@@ -298,11 +204,9 @@ void GraphicsView::mousePressEvent( QMouseEvent *event )
 	{
 		event->accept();
 		handScrolling = true;
-		//viewport()->setCursor( Qt::ClosedHandCursor );
 		return;
 	}
-
-
+	
 	QPointF p = mapToScene( event->pos() );
 	int x = qRound( p.x() );
 	int y = qRound( p.y() );
@@ -514,11 +418,6 @@ void GraphicsView::dropVerticalRuler( int coord )
 	rulerState = RulerState::Still;
 	repaint();
 }
-//
-//void GraphicsView::timerShot()
-//{
-//	changeCursor( mapFromGlobal( QCursor::pos() ) );
-//}
 
 void GraphicsView::load( QDomElement& node )
 {
