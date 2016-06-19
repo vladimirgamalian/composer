@@ -7,14 +7,11 @@ class GraphicsView : public QGraphicsView
 public:
 	GraphicsView(QGraphicsScene *scene, QWidget* parent = 0 );
 	virtual ~GraphicsView();
-
 	void getHorGuides( QList< int >& list );
 	void getVerGuides( QList< int >& list );
-
 	void load( QDomElement& node );
 	void save( QDomElement& node );
 	void newProject();
-
 	void setComboBoxZoom( QComboBox* comboBox );
 	 
 signals:
@@ -43,7 +40,6 @@ protected:
 	virtual void keyReleaseEvent(QKeyEvent *event) override;
 
 private:
-
 	struct RulerState 
 	{
 		enum Enum
@@ -56,31 +52,25 @@ private:
 		};
 	};
 
+	void changeCursor( const QPoint& p );
+	int getHorGuideIndex( int y );
+	int getVerGuideIndex( int x );
+	void updateDragGuidePos( QPoint p );
+	void removeOutsidedGuide( QPoint p );
+	void zoom( int zoomIndex );
+	int getCurZoom() const;
+
+	int lastMovingKey = -1;
 	int curZoomIndex;
 	QList<int> zoomPreset;
 	QComboBox* comboBoxZoom;
-
 	QPixmap chessboardPixmap;
-
 	bool handScrolling;
 	QPoint lastMouseEventPos;
-
 	RulerState::Enum rulerState;
 	int introduceGuideCoord;
 	int dragGuideIndex;
 	bool dragGuideIndexIsHor;
-
-	QList< int > horGuides;
-	QList< int > verGuides;
-
-	void changeCursor( const QPoint& p );
-	int getHorGuideIndex( int y );
-	int getVerGuideIndex( int x );
-
-	void updateDragGuidePos( QPoint p );
-	void removeOutsidedGuide( QPoint p );
-
-	void zoom( int zoomIndex );
-
-	int getCurZoom() const;
+	QList<int> horGuides;
+	QList<int> verGuides;
 };

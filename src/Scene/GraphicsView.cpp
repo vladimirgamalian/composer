@@ -536,8 +536,6 @@ int GraphicsView::getCurZoom() const
 
 void GraphicsView::keyPressEvent(QKeyEvent* event)
 {
-	qDebug() << "keyPressEvent " << (event->key() & 0xff);
-
 	GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
 
 	if ( event->key() == Qt::Key_Delete )
@@ -546,27 +544,35 @@ void GraphicsView::keyPressEvent(QKeyEvent* event)
 		return;
 	}
 
-	if ( event->key() == Qt::Key_Up )
+	QPoint shift;
+	switch (event->key())
 	{
-		s->picturesShift( 0, -1 );
-		return;
+	case Qt::Key_Up:
+		shift = { 0, -1 };
+		break;
+	case Qt::Key_Down:
+		shift = { 0, 1 };
+		break;
+	case Qt::Key_Left:
+		shift = { -1, 0 };
+		break;
+	case Qt::Key_Right:
+		shift = { 1, 0 };
+		break;
 	}
 
-	if ( event->key() == Qt::Key_Down )
+	if ((!shift.isNull()) && (lastMovingKey == -1))
 	{
-		s->picturesShift( 0, 1 );
-		return;
+		lastMovingKey = event->key();
+		qDebug() << "keyPressEvent " << (event->key() & 0xff);
+
+		GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
+		s->startMoving();
 	}
 
-	if ( event->key() == Qt::Key_Left )
+	if ((!shift.isNull()) && (lastMovingKey == event->key()))
 	{
-		s->picturesShift( -1, 0 );
-		return;
-	}
-
-	if ( event->key() == Qt::Key_Right )
-	{
-		s->picturesShift( 1, 0 );
+		s->picturesShift(shift.x(), shift.y());
 		return;
 	}
 
@@ -581,9 +587,17 @@ void GraphicsView::keyPressEvent(QKeyEvent* event)
 
 void GraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
-	qDebug() << "keyReleaseEvent " << (event->key() & 0xff);
-	//GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
-	//s->finishMoving();
+	if (!event->isAutoRepeat())
+	{
+		if (event->key() == lastMovingKey)
+		{
+			qDebug() << "keyReleaseEvent " << (event->key() & 0xff);
+			lastMovingKey = -1;
+
+			GraphicsScene* s = reinterpret_cast<GraphicsScene*>(scene());
+			s->finishMoving();
+		}
+	}
 }
 
 void GraphicsView::redrawAll()
