@@ -112,8 +112,7 @@ bool CompositionViewDelegate::editorEvent( QEvent* event, QAbstractItemModel* mo
 		{
 			if ( ( mouseEvent->button() == Qt::LeftButton ) && ( event->type() == QEvent::MouseButtonRelease ) )
 			{
-				bool checked = index.model()->data( index, CompositionModel::RoleVisible ).toBool();
-				model->setData( index, !checked, CompositionModel::RoleVisible );
+				reinterpret_cast<CompositionModel*>(model)->toggleVisible(index);
 			}
 
 			return true;

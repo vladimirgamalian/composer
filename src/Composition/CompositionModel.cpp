@@ -231,5 +231,12 @@ void CompositionModel::toggleVisible(const QList<int>& pics)
 {
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrent();
-	project->compositionPicturesToggleVisible(spritePath, frameIndex, pics);
+	emit togglePicsVisible(spritePath, frameIndex, pics);
+}
+
+void CompositionModel::toggleVisible(const QModelIndex& index)
+{
+	int row = index.row();
+	Q_ASSERT((row >= 0) && (row < rowCount()));
+	toggleVisible(QList<int>({row}));
 }

@@ -778,7 +778,7 @@ void MainWindow::setConnections()
 	connect(graphicsView, &GraphicsView::delPressed, this, &MainWindow::compositionDeleteSelectedItem);
 
 	connect(compositionModel, &CompositionModel::dragDrop, this, &MainWindow::compositionDragDrop);
-
+	connect(compositionModel, &CompositionModel::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
 
 	connect(graphicsScene, &GraphicsScene::selectionChanged, this, &MainWindow::graphicsSceneSelectionChanged);
 	connect(compositionView, &CompositionView::selectChanged, this, &MainWindow::compositionViewSelectionChanged);

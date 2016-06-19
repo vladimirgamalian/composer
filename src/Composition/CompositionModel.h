@@ -16,18 +16,15 @@ public:
 
 	CompositionModel( Project* project, SpriteView* spriteView, AnimationView* animationView, QObject *parent = 0 );
 
-	//bool addPicture( const QString& fileName );
-	//void delItems( QModelIndexList& indexes );
-
 	bool isInternalData( const QMimeData* mimeData );
 	bool checkDragEventForImage(const QMimeData *mimeData);
-
-
 	void toggleVisible(const QList<int>& pics);
+	void toggleVisible(const QModelIndex& index);
 
 signals:
 	void dropPictures(int compositionIndex, QPoint pos, QStringList fileList);
 	void dragDrop(const QList<int>& indexes, int row, bool copyAction);
+	void togglePicsVisible(QString spritePath, int frameIndex, const QList<int>& pics);
 
 protected:
 	virtual int rowCount( const QModelIndex &parent = QModelIndex() ) const;
