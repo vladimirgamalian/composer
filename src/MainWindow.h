@@ -36,8 +36,8 @@ public slots:
 	void actionAnimationCopyFrameBefore();
 	void actionAnimationCopyFrameAfter();
 	void actionAnimationDeleteFrame();
-	void actionSpritesCompress();
 	void actionAnimationReverseFrames();
+	void actionSpritesCompress();
 	void actionAbout();
 	void actionCompositionOpenPicture();
 	void actionUndo();
@@ -97,7 +97,7 @@ private:
 	void setConnections();
 	void onResetCurrentSprite();
 	void uiSetupUndoRedoAction();
-
+	void updateFrameTotalDuration();
 
 	Ui::composerClass ui;
 	Project project;

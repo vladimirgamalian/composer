@@ -584,6 +584,8 @@ void MainWindow::animDragDrop(QString spritePath, const QList<int>& indexes, int
 	QString path = spriteView->getCurrentNode();
 	AnimationDragDropCommand *undoCommand = new AnimationDragDropCommand(commandEnvFabric->getCommandEnv(), path, indexes, row, copyAction);
 	undoStack->push(undoCommand);
+
+	updateFrameTotalDuration();
 }
 
 void MainWindow::compositionDeleteSelectedItem()
@@ -646,7 +648,8 @@ void MainWindow::actionAnimationInsertFrameBefore()
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, true, false);
 	undoStack->push(undoCommand);
-//	animationView->setSelected(undoCommand->getNewIndex());
+
+	updateFrameTotalDuration();
 }
 
 void MainWindow::actionAnimationInsertFrameAfter()
@@ -655,7 +658,8 @@ void MainWindow::actionAnimationInsertFrameAfter()
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, false, false);
 	undoStack->push(undoCommand);
-//	animationView->setSelected(undoCommand->getNewIndex());
+
+	updateFrameTotalDuration();
 }
 
 void MainWindow::actionAnimationDeleteFrame()
@@ -664,13 +668,19 @@ void MainWindow::actionAnimationDeleteFrame()
 	QList<int> frames = animationView->getSelected();
 	AnimationDelFramesCommand *undoCommand = new AnimationDelFramesCommand(commandEnvFabric->getCommandEnv(), spritePath, frames);
 	undoStack->push(undoCommand);
+
+	updateFrameTotalDuration();
 }
 
 void MainWindow::actionSpritesCompress()
 {
+	//TODO: test if nothing will be changed, do not create undo history point
+
 	QString spritePath = spriteView->getCurrentNode();
 	AnimationCompressCommand *undoCommand = new AnimationCompressCommand(commandEnvFabric->getCommandEnv(), spritePath);
 	undoStack->push(undoCommand);
+
+	updateFrameTotalDuration();
 }
 
 void MainWindow::actionAbout()
@@ -693,6 +703,8 @@ void MainWindow::actionAnimationCopyFrameBefore()
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, true, true);
 	undoStack->push(undoCommand);
+
+	updateFrameTotalDuration();
 } 
 
 void MainWindow::actionAnimationCopyFrameAfter()
@@ -701,6 +713,8 @@ void MainWindow::actionAnimationCopyFrameAfter()
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, false, true);
 	undoStack->push(undoCommand);
+
+	updateFrameTotalDuration();
 }
 
 void MainWindow::modified( QString description )
@@ -792,6 +806,7 @@ void MainWindow::onResetCurrentSprite()
 	
 	updateSpriteAction();
 	frameSelectChanged();
+	updateFrameTotalDuration();
 }
 
 void MainWindow::uiSetupUndoRedoAction()
@@ -822,6 +837,8 @@ void MainWindow::frameDurationSpinnerChanged(int value)
 
 	//TODO: remove hack
 	frameSelectChanged();
+
+	updateFrameTotalDuration();
 }
 
 void MainWindow::frameSelectChanged()
@@ -888,4 +905,11 @@ void MainWindow::labelTagChanged()
 
 	//TODO: remove hack
 	frameSelectChanged();
+}
+
+void MainWindow::updateFrameTotalDuration()
+{
+	QString path = spriteView->getCurrentNode();
+	int v = project.animGetTotalDuration(path);
+	labelTotalDurationValue->setNum(v);
 }

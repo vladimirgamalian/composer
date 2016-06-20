@@ -11,6 +11,7 @@ public:
 public slots:
 	void resetModel();
 
+	//TODO: remove with parents methods
 	void animBeginRemoveRows( int beg, int end );
 	void animEndRemoveRows();
 	void animBeginInsertRows( int beg, int end );
