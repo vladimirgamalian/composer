@@ -392,11 +392,6 @@ void Project::animSetTag(QString spritePath, const QList<int>& frames, QString v
 	}
 }
 
-// void Project::animSetFrameTag(QString spritePath, int frameIndex, const QString& value)
-// {
-// 	getFrame(spritePath, frameIndex )->setTag(value);
-// }
-
 Sprite* Project::getSprite(QString spritePath)
 {
 	Q_ASSERT(!spritePath.isEmpty());

@@ -51,9 +51,6 @@
     <Filter Include="Commands">
       <UniqueIdentifier>{ef517e2f-7612-49cc-a156-e312d9a0c6f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="History">
-      <UniqueIdentifier>{94a05eeb-f2c7-40cc-a182-1e542cc2771f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Commands\Animation">
       <UniqueIdentifier>{2ad42ef4-915a-440a-8c6e-669154b450cd}</UniqueIdentifier>
     </Filter>
@@ -202,9 +199,6 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_Project.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\History\HistoryModel.cpp.off">
-      <Filter>History</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Animation\AnimationModel.cpp">
       <Filter>Animation</Filter>
@@ -378,9 +372,6 @@
     </CustomBuild>
     <CustomBuild Include="..\..\src\stdafx.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\..\src\History\HistoryModel.h.off">
-      <Filter>History</Filter>
     </CustomBuild>
     <CustomBuild Include="..\..\src\TreeModel\TreeNode.h">
       <Filter>TreeModel</Filter>

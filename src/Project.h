@@ -6,10 +6,7 @@
 class Project : public QObject
 {
 Q_OBJECT
-	friend class HistoryModel;
-
 public:
-
 	struct MovePicData
 	{
 		int index;
@@ -62,7 +59,6 @@ public:
 	QString animGetTag(QString spritePath, int frameIndex);
 	QString animGetTags(QString spritePath, const QList<int>& frames, bool& different);
 	void animSetDuration(QString spritePath, const QList<int>& frames, int value);
-	//void animSetFrameTag(QString spritePath, int frameIndex, const QString& value);
 	void animSetTag(QString spritePath, const QList<int>& frames, QString value);
 
 	int animInsertFrame( QString spritePath, int row, bool before, bool copyContent );

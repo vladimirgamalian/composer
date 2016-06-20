@@ -877,9 +877,6 @@ void MainWindow::frameSelectChanged()
 
 void MainWindow::labelTagChanged()
 {
-// 	if (preventFrameDurationChange)
-// 		return;
-
 	QString value = lineEditFrameTag->text();
 	qDebug() << "MainWindow::labelTagChanged" << value;
 
