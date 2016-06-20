@@ -85,7 +85,6 @@ private:
 	void saveSprites( QDomElement& node );
 	void saveSprite( QDomElement& xmlNode, QStandardItem* spriteNode );
 	bool isLoadLastProjectAtStartup();
-	void setHistoryCheckpoint( QString description );
 	void updateSpriteAction();
 	void createSpriteView(SpriteModel* spriteModel);
 	void createAnimationView(AnimationModel* animationModel);
@@ -98,6 +97,7 @@ private:
 	void setConnections();
 	void onResetCurrentSprite();
 	void uiSetupUndoRedoAction();
+
 
 	Ui::composerClass ui;
 	Project project;

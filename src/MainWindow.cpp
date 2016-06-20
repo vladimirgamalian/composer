@@ -703,14 +703,8 @@ void MainWindow::actionAnimationCopyFrameAfter()
 	undoStack->push(undoCommand);
 }
 
-void MainWindow::setHistoryCheckpoint( QString description )
-{
-//	historyModel->checkpoint( description );
-}
-
 void MainWindow::modified( QString description )
 {
-	setHistoryCheckpoint( description );
 	listViewHistory->reset();
 	setProjectModified( true );
 }
@@ -718,14 +712,11 @@ void MainWindow::modified( QString description )
 void MainWindow::actionUndo()
 {
 	qDebug() << "actionUndo";
-//	historyModel->undo();
-//	undoAction();
 }
 
 void MainWindow::actionRedo()
 {
 	qDebug() << "actionRedo";
-//	historyModel->redo();
 }
 
 void MainWindow::graphicsSceneSelectionChanged()
