@@ -302,6 +302,36 @@ int Project::animGetDuration(QString spritePath, int frameIndex)
 	return getFrame(spritePath, frameIndex )->getDuration();
 }
 
+int Project::animGetDurations(QString spritePath, const QList<int>& frames, bool& different)
+{
+	Sprite* s = getSprite(spritePath);
+	int frameCount = s->frames.size();
+	Q_ASSERT(frameCount > 0);
+
+	bool durationFound = false;
+	different = false;
+	int duration = 0;
+
+	for (int i: frames)
+	{
+		Q_ASSERT((i >= 0) && (i < frameCount));
+		Frame* f = s->frames[i];
+		Q_ASSERT(f);
+
+		int d = f->getDuration();
+		if ((durationFound) && (duration != d))
+		{
+			different = true;
+			break;
+		}
+
+		duration = d;
+		durationFound = true;
+	}
+
+	return duration;
+}
+
 int Project::animGetTotalDuration(QString spritePath)
 {
 	int ret = 0;

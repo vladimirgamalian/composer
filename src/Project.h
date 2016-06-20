@@ -57,6 +57,7 @@ public:
 
 	int animGetRowCount(QString spritePath);
 	int animGetDuration(QString spritePath, int frameIndex);
+	int animGetDurations(QString spritePath, const QList<int>& frames, bool& different);
 	int animGetTotalDuration(QString spritePath);
 	QString animGetTag(QString spritePath, int frameIndex);
 	void animSetDuration(QString spritePath, const QList<int>& frames, int value);
@@ -133,7 +134,7 @@ signals:
 	void setLineEditFrameTag( const QString & );
 
 private:
-QString rootPath;
+	QString rootPath;
 	void loadSpriteNodeRecursive( QDomElement& baseXmlNode, TreeNode* node );
 	void saveSpriteNodeRecursive( QDomElement& xmlNode, TreeNode* spriteNode );
 	void saveSprite( QDomElement& node, Sprite* sprite );

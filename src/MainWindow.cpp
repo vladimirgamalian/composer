@@ -786,7 +786,8 @@ void MainWindow::setConnections()
 	connect(graphicsScene, &GraphicsScene::movePictures, this, &MainWindow::sceneMovePictures);
 	connect(graphicsScene, &GraphicsScene::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
 
-	connect(animationView, &AnimationView::frameDuration, this, &MainWindow::frameDuration);
+	//connect(animationView, &AnimationView::frameDuration, this, &MainWindow::frameDuration);
+	connect(animationView, &AnimationView::selectChanged, this, &MainWindow::frameSelectChanged);
 
 	connect(spinBoxFrameDuration, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &MainWindow::frameDurationSpinnerChanged);
 }
@@ -795,8 +796,9 @@ void MainWindow::onResetCurrentSprite()
 {
 	animationModel->resetModel();
 	animationView->setCurrentFrame(0);
-	animationView->updateDurations();
+	
 	updateSpriteAction();
+	frameSelectChanged();
 }
 
 void MainWindow::uiSetupUndoRedoAction()
@@ -812,22 +814,6 @@ void MainWindow::uiSetupUndoRedoAction()
 	ui.menu_Edit->addAction(redoAction);
 }
 
-void MainWindow::frameDuration(bool enabled, bool different, int v)
-{
-	preventFrameDurationChange = true;
-	if (enabled)
-	{
-		spinBoxFrameDuration->setValue(different ? 0 : v);
-		spinBoxFrameDuration->setEnabled(true);
-	}
-	else
-	{
-		spinBoxFrameDuration->setValue(0);
-		spinBoxFrameDuration->setEnabled(false);
-	}
-	preventFrameDurationChange = false;
-}
-
 void MainWindow::frameDurationSpinnerChanged(int value)
 {
 	if (preventFrameDurationChange)
@@ -837,4 +823,26 @@ void MainWindow::frameDurationSpinnerChanged(int value)
 	QList<int> selected = animationView->getSelected();
 	AnimationChangeFrameDurationCommand *undoCommand = new AnimationChangeFrameDurationCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
 	undoStack->push(undoCommand);
+}
+
+void MainWindow::frameSelectChanged()
+{
+	QString path = spriteView->getCurrentNode();
+	QList<int> selected = animationView->getSelected();
+
+	preventFrameDurationChange = true;
+	if (selected.isEmpty())
+	{
+		spinBoxFrameDuration->setValue(0);
+		spinBoxFrameDuration->setEnabled(false);
+	}
+	else
+	{
+		bool different = false;
+		int duration = project.animGetDurations(path, selected, different);
+
+		spinBoxFrameDuration->setValue(different ? 0 : duration);
+		spinBoxFrameDuration->setEnabled(true);
+	}
+	preventFrameDurationChange = false;
 }

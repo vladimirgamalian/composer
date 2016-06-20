@@ -69,10 +69,34 @@ public slots:
 	void sceneMovePictures(QString spritePath, int frameIndex, QList<Project::MovePicData> moveData);
 	void sceneTogglePicsVisible(QString spritePath, int frameIndex, const QList<int>& pics);
 
-	void frameDuration(bool enabled, bool different, int v);
 	void frameDurationSpinnerChanged(int value);
 
+	void frameSelectChanged();
+
 private:
+	void loadSettings();
+	void saveSettings();
+	virtual void newProject() override;
+	virtual bool saveProject( QString fileName ) override;
+	virtual bool loadProject( QString fileName ) override;
+	virtual void onClose() override;
+	void saveSprites( QDomElement& node );
+	void saveSprite( QDomElement& xmlNode, QStandardItem* spriteNode );
+	bool isLoadLastProjectAtStartup();
+	void setHistoryCheckpoint( QString description );
+	void updateSpriteAction();
+	void createSpriteView(SpriteModel* spriteModel);
+	void createAnimationView(AnimationModel* animationModel);
+	void createCompositionView(CompositionModel* compositionModel);
+	void createScene();
+	void createRecentActions();
+	void createHistoryWidget();
+	void createAboutDialog();
+	void createUndoView();
+	void setConnections();
+	void onResetCurrentSprite();
+	void uiSetupUndoRedoAction();
+
 	Ui::composerClass ui;
 	Project project;
 	OptionsDialog* optionsDialog = nullptr;
@@ -99,30 +123,4 @@ private:
 	CommandEnvFabric* commandEnvFabric = nullptr;
 	bool graphicsScenePreventUpdateSelection = false;
 	bool preventFrameDurationChange = false;
-
-	void loadSettings();
-	void saveSettings();
-
-	virtual void newProject();
-	virtual bool saveProject( QString fileName );
-	virtual bool loadProject( QString fileName );
-
-
-	virtual void onClose();
-	void saveSprites( QDomElement& node );
-	void saveSprite( QDomElement& xmlNode, QStandardItem* spriteNode );
-	bool isLoadLastProjectAtStartup();
-	void setHistoryCheckpoint( QString description );
-	void updateSpriteAction();
-	void createSpriteView(SpriteModel* spriteModel);
-	void createAnimationView(AnimationModel* animationModel);
-	void createCompositionView(CompositionModel* compositionModel);
-	void createScene();
-	void createRecentActions();
-	void createHistoryWidget();
-	void createAboutDialog();
-	void createUndoView();
-	void setConnections();
-	void onResetCurrentSprite();
-	void uiSetupUndoRedoAction();
 };

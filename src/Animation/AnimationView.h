@@ -11,10 +11,9 @@ public:
 	void setCurrentFrame(int i);
 	void setSelected(const QList< int >& selected);
 	void setCurrent(int row);
-	void updateDurations();
 
 signals:
-	void frameDuration( bool enabled, bool different, int v );
+	void selectChanged();
 	void deleteSelectedItem();
 	void resetCurrentFrame();
 
