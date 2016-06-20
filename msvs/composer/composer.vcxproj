@@ -97,6 +97,7 @@
     <ClCompile Include="..\..\src\Animation\AnimationViewDelegate.cpp" />
     <ClCompile Include="..\..\src\Commands\Animation\AnimationBaseCommand.cpp" />
     <ClCompile Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.cpp" />
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationChangeTagCommand.cpp" />
     <ClCompile Include="..\..\src\Commands\Animation\AnimationCompressCommand.cpp" />
     <ClCompile Include="..\..\src\Commands\Animation\AnimationDelFramesCommand.cpp" />
     <ClCompile Include="..\..\src\Commands\Animation\AnimationDragDropCommand.cpp" />
@@ -771,6 +772,7 @@
     </CustomBuild>
     <ClInclude Include="..\..\src\Commands\Animation\AnimationBaseCommand.h" />
     <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.h" />
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeTagCommand.h" />
     <ClInclude Include="..\..\src\Commands\Animation\AnimationCompressCommand.h" />
     <ClInclude Include="..\..\src\Commands\Animation\AnimationDelFramesCommand.h" />
     <ClInclude Include="..\..\src\Commands\Animation\AnimationDragDropCommand.h" />

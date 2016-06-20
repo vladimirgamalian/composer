@@ -332,6 +332,36 @@ int Project::animGetDurations(QString spritePath, const QList<int>& frames, bool
 	return duration;
 }
 
+QString Project::animGetTags(QString spritePath, const QList<int>& frames, bool& different)
+{
+	Sprite* s = getSprite(spritePath);
+	int frameCount = s->frames.size();
+	Q_ASSERT(frameCount > 0);
+
+	bool tagFound = false;
+	different = false;
+	QString tag;
+
+	for (int i : frames)
+	{
+		Q_ASSERT((i >= 0) && (i < frameCount));
+		Frame* f = s->frames[i];
+		Q_ASSERT(f);
+
+		QString t = f->getTag();
+		if ((tagFound) && (tag != t))
+		{
+			different = true;
+			break;
+		}
+
+		tag = t;
+		tagFound = true;
+	}
+
+	return tag;
+}
+
 int Project::animGetTotalDuration(QString spritePath)
 {
 	int ret = 0;
@@ -353,10 +383,19 @@ void Project::animSetDuration(QString spritePath, const QList<int>& frames, int 
 		getFrame(spritePath, i)->setDuration(value);
 }
 
-void Project::animSetFrameTag(QString spritePath, int frameIndex, const QString& value)
+void Project::animSetTag(QString spritePath, const QList<int>& frames, QString value)
 {
-	getFrame(spritePath, frameIndex )->setTag(value);
+	for (int i : frames)
+	{
+		qDebug() << "Project::animSetTag " << i << value;
+		getFrame(spritePath, i)->setTag(value);
+	}
 }
+
+// void Project::animSetFrameTag(QString spritePath, int frameIndex, const QString& value)
+// {
+// 	getFrame(spritePath, frameIndex )->setTag(value);
+// }
 
 Sprite* Project::getSprite(QString spritePath)
 {

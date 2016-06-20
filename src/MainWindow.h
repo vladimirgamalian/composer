@@ -73,6 +73,8 @@ public slots:
 
 	void frameSelectChanged();
 
+	void labelTagChanged();
+
 private:
 	void loadSettings();
 	void saveSettings();

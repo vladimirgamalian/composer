@@ -296,6 +296,9 @@
     <ClCompile Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.cpp">
       <Filter>Commands\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationChangeTagCommand.cpp">
+      <Filter>Commands\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\src\FormFiles\DialogAbout.ui">
@@ -484,6 +487,9 @@
       <Filter>Commands\Composition</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.h">
+      <Filter>Commands\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeTagCommand.h">
       <Filter>Commands\Animation</Filter>
     </ClInclude>
   </ItemGroup>

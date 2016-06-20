@@ -13,6 +13,7 @@
 #include "Commands/Animation/AnimationDragDropCommand.h"
 #include "Commands/Animation/AnimationReverseCommand.h"
 #include "Commands/Animation/AnimationChangeFrameDurationCommand.h"
+#include "Commands/Animation/AnimationChangeTagCommand.h"
 #include "Commands/Composition/CompositionDropPicturesCommand.h"
 #include "Commands/Composition/CompositionDeletePicturesCommand.h"
 #include "Commands/Composition/CompositionDragDropCommand.h"
@@ -790,6 +791,8 @@ void MainWindow::setConnections()
 	connect(animationView, &AnimationView::selectChanged, this, &MainWindow::frameSelectChanged);
 
 	connect(spinBoxFrameDuration, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &MainWindow::frameDurationSpinnerChanged);
+
+	connect(lineEditFrameTag, &QLineEdit::editingFinished, this, &MainWindow::labelTagChanged);
 }
 
 void MainWindow::onResetCurrentSprite()
@@ -821,6 +824,9 @@ void MainWindow::frameDurationSpinnerChanged(int value)
 
 	QString path = spriteView->getCurrentNode();
 	QList<int> selected = animationView->getSelected();
+	if (selected.isEmpty())
+		return;
+
 	AnimationChangeFrameDurationCommand *undoCommand = new AnimationChangeFrameDurationCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
 	undoStack->push(undoCommand);
 }
@@ -845,4 +851,46 @@ void MainWindow::frameSelectChanged()
 		spinBoxFrameDuration->setEnabled(true);
 	}
 	preventFrameDurationChange = false;
+
+
+	if (selected.isEmpty())
+	{
+		lineEditFrameTag->clear();;
+		lineEditFrameTag->setEnabled(false);
+	}
+	else
+	{
+		bool different = false;
+		QString tag = project.animGetTags(path, selected, different);
+
+		if (different)
+			lineEditFrameTag->clear();
+		else
+		{
+			qDebug() << "lineEditFrameTag->setText" << tag;
+			lineEditFrameTag->setText(tag);
+		}
+
+		lineEditFrameTag->setEnabled(true);
+	}
+}
+
+void MainWindow::labelTagChanged()
+{
+// 	if (preventFrameDurationChange)
+// 		return;
+
+	QString value = lineEditFrameTag->text();
+	qDebug() << "MainWindow::labelTagChanged" << value;
+
+	QString path = spriteView->getCurrentNode();
+	QList<int> selected = animationView->getSelected();
+	if (selected.isEmpty())
+		return;
+
+	AnimationChangeTagCommand *undoCommand = new AnimationChangeTagCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
+	undoStack->push(undoCommand);
+
+	//TODO: remove hack
+	frameSelectChanged();
 }

@@ -10,5 +10,6 @@ AnimationChangeFrameDurationCommand::AnimationChangeFrameDurationCommand(Command
 
 void AnimationChangeFrameDurationCommand::action()
 {
+	Q_ASSERT(!frames.isEmpty());
 	commandEnv->project->animSetDuration(spritePath, frames, value);
 }

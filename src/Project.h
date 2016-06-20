@@ -60,8 +60,10 @@ public:
 	int animGetDurations(QString spritePath, const QList<int>& frames, bool& different);
 	int animGetTotalDuration(QString spritePath);
 	QString animGetTag(QString spritePath, int frameIndex);
+	QString animGetTags(QString spritePath, const QList<int>& frames, bool& different);
 	void animSetDuration(QString spritePath, const QList<int>& frames, int value);
-	void animSetFrameTag(QString spritePath, int frameIndex, const QString& value);
+	//void animSetFrameTag(QString spritePath, int frameIndex, const QString& value);
+	void animSetTag(QString spritePath, const QList<int>& frames, QString value);
 
 	int animInsertFrame( QString spritePath, int row, bool before, bool copyContent );
 	void animRemoveFrames(QString spritePath, const QList<int>& frames);
