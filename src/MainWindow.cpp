@@ -787,7 +787,6 @@ void MainWindow::setConnections()
 	connect(graphicsScene, &GraphicsScene::movePictures, this, &MainWindow::sceneMovePictures);
 	connect(graphicsScene, &GraphicsScene::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
 
-	//connect(animationView, &AnimationView::frameDuration, this, &MainWindow::frameDuration);
 	connect(animationView, &AnimationView::selectChanged, this, &MainWindow::frameSelectChanged);
 
 	connect(spinBoxFrameDuration, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &MainWindow::frameDurationSpinnerChanged);
@@ -829,6 +828,9 @@ void MainWindow::frameDurationSpinnerChanged(int value)
 
 	AnimationChangeFrameDurationCommand *undoCommand = new AnimationChangeFrameDurationCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
 	undoStack->push(undoCommand);
+
+	//TODO: remove hack
+	frameSelectChanged();
 }
 
 void MainWindow::frameSelectChanged()
