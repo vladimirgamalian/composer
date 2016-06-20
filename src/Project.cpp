@@ -318,10 +318,10 @@ QString Project::animGetTag(QString spritePath, int frameIndex)
 	return frame->getTag();
 }
 
-void Project::animSetDuration(QString spritePath, int frameIndex, int value)
+void Project::animSetDuration(QString spritePath, const QList<int>& frames, int value)
 {
-	getFrame(spritePath, frameIndex)->setDuration(value);
-	emit animDataChanged( frameIndex );
+	for (int i: frames)
+		getFrame(spritePath, i)->setDuration(value);
 }
 
 void Project::animSetFrameTag(QString spritePath, int frameIndex, const QString& value)
@@ -756,48 +756,6 @@ QString Project::getAbsolutePath( QString path )
 	QDir dir( rootPath );
 	return QDir::cleanPath( dir.absoluteFilePath( path ) );
 }
-
-//TODO: restore functional
-void Project::frameDurationSpinnerChanged( int value )
-{
-
-}
-
-//TODO: restore functional
-//void Project::updateFrameDuration()
-//{
-//	int duration = 0;
-//	bool cathed = false;
-//	bool different = false;
-//
-//	foreach( int i, selection.animationSelect )
-//	{
-//		int newDuration = animGetDuration( i );
-//		if ( !cathed )
-//		{
-//			duration = newDuration;
-//			cathed = true;
-//		}
-//		else
-//		{
-//			if ( newDuration != duration )
-//				different = true;
-//		}
-//	}
-//
-//	if ( !cathed )
-//		different = true;
-//
-//	if ( different )
-//		duration = 0;
-//
-//	frameDurationSpinerInProgress = true;
-//	emit setFrameDurationSpinner( duration );
-//	frameDurationSpinerInProgress = false;
-//
-//
-//	emit setSpriteTotalDuration( animGetTotalDuration() );
-//}
 
 //TODO: restore functional
 //void Project::updateFrameTag()

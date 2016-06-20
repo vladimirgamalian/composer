@@ -70,6 +70,7 @@ public slots:
 	void sceneTogglePicsVisible(QString spritePath, int frameIndex, const QList<int>& pics);
 
 	void frameDuration(bool enabled, bool different, int v);
+	void frameDurationSpinnerChanged(int value);
 
 private:
 	Ui::composerClass ui;
@@ -97,6 +98,7 @@ private:
 	QAction *redoAction = nullptr;
 	CommandEnvFabric* commandEnvFabric = nullptr;
 	bool graphicsScenePreventUpdateSelection = false;
+	bool preventFrameDurationChange = false;
 
 	void loadSettings();
 	void saveSettings();

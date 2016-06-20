@@ -12,6 +12,7 @@
 #include "Commands/Animation/AnimationDelFramesCommand.h"
 #include "Commands/Animation/AnimationDragDropCommand.h"
 #include "Commands/Animation/AnimationReverseCommand.h"
+#include "Commands/Animation/AnimationChangeFrameDurationCommand.h"
 #include "Commands/Composition/CompositionDropPicturesCommand.h"
 #include "Commands/Composition/CompositionDeletePicturesCommand.h"
 #include "Commands/Composition/CompositionDragDropCommand.h"
@@ -373,9 +374,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	
 	connect( &project, SIGNAL( compositionSetSelect( const QList< int >& ) ), compositionView, SLOT( setSelect( const QList< int >& ) ) );
 
-	connect( &project, SIGNAL( setFrameDurationSpinner( int ) ), spinBoxFrameDuration, SLOT( setValue( int ) ) );
-	connect( spinBoxFrameDuration, SIGNAL( valueChanged( int ) ), &project, SLOT( frameDurationSpinnerChanged( int ) ) );
-	
+
 	connect( &project, SIGNAL( setSpriteTotalDuration( int ) ), labelTotalDurationValue, SLOT( setNum( int ) ) );
 
 
@@ -788,6 +787,8 @@ void MainWindow::setConnections()
 	connect(graphicsScene, &GraphicsScene::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
 
 	connect(animationView, &AnimationView::frameDuration, this, &MainWindow::frameDuration);
+
+	connect(spinBoxFrameDuration, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &MainWindow::frameDurationSpinnerChanged);
 }
 
 void MainWindow::onResetCurrentSprite()
@@ -813,6 +814,7 @@ void MainWindow::uiSetupUndoRedoAction()
 
 void MainWindow::frameDuration(bool enabled, bool different, int v)
 {
+	preventFrameDurationChange = true;
 	if (enabled)
 	{
 		spinBoxFrameDuration->setValue(different ? 0 : v);
@@ -823,4 +825,16 @@ void MainWindow::frameDuration(bool enabled, bool different, int v)
 		spinBoxFrameDuration->setValue(0);
 		spinBoxFrameDuration->setEnabled(false);
 	}
+	preventFrameDurationChange = false;
+}
+
+void MainWindow::frameDurationSpinnerChanged(int value)
+{
+	if (preventFrameDurationChange)
+		return;
+
+	QString path = spriteView->getCurrentNode();
+	QList<int> selected = animationView->getSelected();
+	AnimationChangeFrameDurationCommand *undoCommand = new AnimationChangeFrameDurationCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
+	undoStack->push(undoCommand);
 }

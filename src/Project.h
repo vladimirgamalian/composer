@@ -59,7 +59,7 @@ public:
 	int animGetDuration(QString spritePath, int frameIndex);
 	int animGetTotalDuration(QString spritePath);
 	QString animGetTag(QString spritePath, int frameIndex);
-	void animSetDuration(QString spritePath, int frameIndex, int value);
+	void animSetDuration(QString spritePath, const QList<int>& frames, int value);
 	void animSetFrameTag(QString spritePath, int frameIndex, const QString& value);
 
 	int animInsertFrame( QString spritePath, int row, bool before, bool copyContent );
@@ -103,7 +103,6 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 
 public slots:
-	void frameDurationSpinnerChanged( int value );
 	void lineEditFrameTagTextChanged( const QString& value );
 
 signals:
@@ -131,9 +130,6 @@ signals:
 
 	void animSetSelect( const QList< int >& selected );
 	void compositionSetSelect( const QList< int >& selected );
-
-	void setFrameDurationSpinner( int value );
-	void setSpriteTotalDuration( int value );
 	
 	void setLineEditFrameTag( const QString & );
 

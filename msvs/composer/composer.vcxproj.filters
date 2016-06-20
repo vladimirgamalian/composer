@@ -293,6 +293,9 @@
     <ClCompile Include="..\..\src\Commands\Composition\CompositionTriggerPicsVisible.cpp">
       <Filter>Commands\Composition</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.cpp">
+      <Filter>Commands\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\..\src\FormFiles\DialogAbout.ui">
@@ -479,6 +482,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Commands\Composition\CompositionTriggerPicsVisible.h">
       <Filter>Commands\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.h">
+      <Filter>Commands\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
