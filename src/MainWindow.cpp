@@ -885,6 +885,11 @@ void MainWindow::labelTagChanged()
 	if (selected.isEmpty())
 		return;
 
+	bool different = false;
+	QString oldTag = project.animGetTags(path, selected, different);
+	if ((!different) && (value == oldTag))
+		return;
+
 	AnimationChangeTagCommand *undoCommand = new AnimationChangeTagCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
 	undoStack->push(undoCommand);
 
