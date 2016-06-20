@@ -186,7 +186,7 @@ QString Project::spriteNodeRename(QString path, QString name)
 	QString oldName = node->text;
 	Q_ASSERT(name != oldName);
 	node->text = name;
-	//emit spriteNodeDataChanged( node );
+
 	return oldName;
 }
 
@@ -285,7 +285,6 @@ void Project::spriteLinkNode(QString path, TreeNode* node)
  	emit beginInsertSpriteNode(parentNode, row);
 	parentNode->insertChild(row, node);
  	emit endInsertSpriteNode();
-	//emit setActiveNode(node);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -326,8 +325,7 @@ void Project::animSetDuration(QString spritePath, const QList<int>& frames, int 
 
 void Project::animSetFrameTag(QString spritePath, int frameIndex, const QString& value)
 {
-	 getFrame(spritePath, frameIndex )->setTag(value);
-	emit animDataChanged( frameIndex );
+	getFrame(spritePath, frameIndex )->setTag(value);
 }
 
 Sprite* Project::getSprite(QString spritePath)
@@ -499,27 +497,6 @@ bool Project::animDragDrop(QString spritePath, const QList<int>& indexes, int ro
 
 	return true;
 }
-
-// bool Project::animRemoveRows( int row, int count )
-// {
-// 	if ( !getCurSprite() )
-// 		return false;
-// 
-// 	int rowCount = getCurSprite()->frames.size();
-// 
-// 	if ( ( row < 0 ) || ( row >= rowCount ) || ( count < 1 ) )
-// 		return false;
-// 
-// 	if ( row + count > rowCount )
-// 		count = rowCount - row;
-// 
-// 	emit animBeginRemoveRows( row, row + count - 1 );
-// 	while( count-- )
-// 		getCurSprite()->frames.removeAt( row );
-// 	emit animEndRemoveRows();
-// 
-// 	return true;
-// }
 
 void Project::animRemoveFrames(QString spritePath, const QList<int>& frames)
 {
@@ -717,7 +694,6 @@ void Project::newProject()
 {
 	projectData.spriteRoot->delChildren();
 	rootPath = "";
-//	resetModels();
 }
 
 bool Project::isNodeDeletable(QString nodePath)
@@ -876,9 +852,6 @@ void Project::replaceFrame(QString spritePath, int frameIndex, Frame* frame)
 	Q_ASSERT((frameIndex >= 0) && (frameIndex < sprite->frames.size()));
 	delete sprite->frames[frameIndex];
 	sprite->frames[frameIndex] = frame;
-
-	//emit sceneModelReset();
-	//emit compositionModelReset();
 }
 
 void Project::replaceSprite(QString spritePath, Sprite* sprite)
@@ -890,15 +863,9 @@ void Project::replaceSprite(QString spritePath, Sprite* sprite)
 
 	s->setFrom(sprite);
 
-
 	emit animModelReset();
-//	selection.animationSelect.clear();
-
 	emit compositionModelReset();
 	emit sceneModelReset();
-//	selection.compositionSelect.clear();
-
-//	emit setActiveNode(node);
 }
 
 void Project::animReverse(QString spritePath, const QList<int>& indexes)
@@ -927,13 +894,9 @@ void Project::animReverse(QString spritePath, const QList<int>& indexes)
 		sprite->frames[ selectedFramesIndexes[ i ] ] = reversedFrames[ i ];
 
 	emit animModelReset();
-//	selection.animationSelect.clear();
 	emit animSetSelect( selectedFramesIndexes );
-
-
 	emit compositionModelReset();
 	emit sceneModelReset();
-//	selection.compositionSelect.clear();
 }
 
 void Project::scenePictureMove(QString spritePath, int frameIndex, int index, QPoint pos)

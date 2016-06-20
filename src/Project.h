@@ -110,13 +110,12 @@ signals:
 	void endInsertSpriteNode();
 	void beginRemoveSpriteNode( TreeNode* node );
 	void endRemoveSpriteNode();
-	//void spriteNodeDataChanged( TreeNode* node );
 
 	void animBeginRemoveRows( int beg, int end );
 	void animEndRemoveRows();
 	void animBeginInsertRows( int beg, int end );
 	void animEndInsertRows();
-	void animDataChanged(int index);
+	//void animDataChanged(int index);
 
 	void compositionBeginRemoveRows( int beg, int end );
 	void compositionEndRemoveRows();
