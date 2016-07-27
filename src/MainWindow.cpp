@@ -678,8 +678,8 @@ void MainWindow::updateAnimationActions()
 	bool isSprite = project.isSprite(nodePath);
 	bool isSelected = animationView->getSelected().size();
 
-	ui.actionAnimationCopyFrameAfter->setEnabled(isSprite);
-	ui.actionAnimationCopyFrameBefore->setEnabled(isSprite);
+	ui.actionAnimationCopyFrameAfter->setEnabled(isSprite && isSelected);
+	ui.actionAnimationCopyFrameBefore->setEnabled(isSprite && isSelected);
 	ui.actionAnimationDeleteFrame->setEnabled(isSprite && isSelected);
 	ui.actionAnimationInsertAfter->setEnabled(isSprite);
 	ui.actionAnimationInsertBefore->setEnabled(isSprite);
