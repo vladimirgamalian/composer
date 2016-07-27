@@ -74,7 +74,7 @@ void MainWindow::createAnimationView(AnimationModel* animationModel)
 	bar->addWidget( lineEditFrameTag );
 	bar->addSeparator();
 
-	QLabel* labelTotalDuration = new QLabel( "   Total Duration: " );
+	labelTotalDuration = new QLabel( "   Total Duration: " );
 	bar->addWidget( labelTotalDuration );
 	labelTotalDurationValue = new QLabel( "" );
 	bar->addWidget( labelTotalDurationValue );
@@ -565,7 +565,7 @@ void MainWindow::animDragDrop(QString spritePath, const QList<int>& indexes, int
 	AnimationDragDropCommand *undoCommand = new AnimationDragDropCommand(commandEnvFabric->getCommandEnv(), path, indexes, row, copyAction);
 	undoStack->push(undoCommand);
 
-	updateFrameTotalDuration();
+	onFrameCountChanged();
 }
 
 void MainWindow::compositionDeleteSelectedItem()
@@ -607,7 +607,7 @@ void MainWindow::actionOptions()
 	optionsDialog->show();
 }
 
-void MainWindow::updateSpriteAction()
+void MainWindow::updateSpriteActions()
 {
 	QString nodePath = spriteView->getCurrentNodeOrRoot();
 
@@ -620,13 +620,70 @@ void MainWindow::updateSpriteAction()
 	ui.actionSpritesMoveSprite->setEnabled( isSprite );
 	ui.actionSpritesRemoveItem->setEnabled( isDeletable );
 	ui.actionSpritesCompress->setEnabled( isSprite );
+}
+
+void MainWindow::updateFrameDurationSpinBox()
+{
+	QString nodePath = spriteView->getCurrentNodeOrRoot();
+	QList<int> selected = animationView->getSelected();
+
+	ScopedBool scopedBool(preventFrameDurationChange);
+	if (selected.isEmpty())
+	{
+		spinBoxFrameDuration->setValue(0);
+		spinBoxFrameDuration->setEnabled(false);
+	}
+	else
+	{
+		bool different = false;
+		int duration = project.animGetDurations(nodePath, selected, different);
+
+		spinBoxFrameDuration->setValue(different ? 0 : duration);
+		spinBoxFrameDuration->setEnabled(true);
+	}
+}
+
+void MainWindow::updateFrameTagLineEdit()
+{
+	QString nodePath = spriteView->getCurrentNodeOrRoot();
+	QList<int> selected = animationView->getSelected();
+
+	if (selected.isEmpty())
+	{
+		lineEditFrameTag->clear();;
+		lineEditFrameTag->setEnabled(false);
+	}
+	else
+	{
+		bool different = false;
+		QString tag = project.animGetTags(nodePath, selected, different);
+
+		if (different)
+			lineEditFrameTag->clear();
+		else
+		{
+			//qDebug() << "lineEditFrameTag->setText" << tag;
+			lineEditFrameTag->setText(tag);
+		}
+
+		lineEditFrameTag->setEnabled(true);
+	}
+}
+
+void MainWindow::updateAnimationActions()
+{
+	QString nodePath = spriteView->getCurrentNodeOrRoot();
+	QList<int> selected = animationView->getSelected();
+
+	bool isSprite = project.isSprite(nodePath);
+	bool isSelected = animationView->getSelected().size();
 
 	ui.actionAnimationCopyFrameAfter->setEnabled(isSprite);
 	ui.actionAnimationCopyFrameBefore->setEnabled(isSprite);
-	ui.actionAnimationDeleteFrame->setEnabled(isSprite);
+	ui.actionAnimationDeleteFrame->setEnabled(isSprite && isSelected);
 	ui.actionAnimationInsertAfter->setEnabled(isSprite);
 	ui.actionAnimationInsertBefore->setEnabled(isSprite);
-	ui.actionAnimationReverseFrames->setEnabled(isSprite);
+	ui.actionAnimationReverseFrames->setEnabled(isSprite && isSelected);
 }
 
 void MainWindow::actionAnimationInsertFrameBefore()
@@ -636,7 +693,7 @@ void MainWindow::actionAnimationInsertFrameBefore()
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, true, false);
 	undoStack->push(undoCommand);
 
-	updateFrameTotalDuration();
+	onFrameCountChanged();
 }
 
 void MainWindow::actionAnimationInsertFrameAfter()
@@ -646,7 +703,7 @@ void MainWindow::actionAnimationInsertFrameAfter()
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, false, false);
 	undoStack->push(undoCommand);
 
-	updateFrameTotalDuration();
+	onFrameCountChanged();
 }
 
 void MainWindow::actionAnimationDeleteFrame()
@@ -656,7 +713,7 @@ void MainWindow::actionAnimationDeleteFrame()
 	AnimationDelFramesCommand *undoCommand = new AnimationDelFramesCommand(commandEnvFabric->getCommandEnv(), spritePath, frames);
 	undoStack->push(undoCommand);
 
-	updateFrameTotalDuration();
+	onFrameCountChanged();
 }
 
 void MainWindow::actionSpritesCompress()
@@ -667,7 +724,7 @@ void MainWindow::actionSpritesCompress()
 	AnimationCompressCommand *undoCommand = new AnimationCompressCommand(commandEnvFabric->getCommandEnv(), spritePath);
 	undoStack->push(undoCommand);
 
-	updateFrameTotalDuration();
+	onFrameCountChanged();
 }
 
 void MainWindow::actionAbout()
@@ -691,7 +748,7 @@ void MainWindow::actionAnimationCopyFrameBefore()
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, true, true);
 	undoStack->push(undoCommand);
 
-	updateFrameTotalDuration();
+	onFrameCountChanged();
 } 
 
 void MainWindow::actionAnimationCopyFrameAfter()
@@ -701,7 +758,7 @@ void MainWindow::actionAnimationCopyFrameAfter()
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, false, true);
 	undoStack->push(undoCommand);
 
-	updateFrameTotalDuration();
+	onFrameCountChanged();
 }
 
 void MainWindow::actionUndo()
@@ -737,6 +794,9 @@ void MainWindow::compositionViewSelectionChanged(const QList< int >& selectedInd
 
 void MainWindow::actionAnimationReverseFrames()
 {
+	if (animationView->getSelected().isEmpty())
+		return;
+
 	AnimationReverseCommand *undoCommand = new AnimationReverseCommand(commandEnvFabric->getCommandEnv(),
 		spriteView->getCurrentNode(), animationView->getSelected());
 	undoStack->push(undoCommand);
@@ -751,9 +811,7 @@ void MainWindow::setConnections()
 {
 	connect(spriteView, &SpriteView::resetCurrentNode, this, &MainWindow::onResetCurrentSprite);
 
-	connect(animationView, &AnimationView::resetCurrentFrame, compositionModel, &CompositionModel::resetModel);
-	connect(animationView, &AnimationView::resetCurrentFrame, graphicsScene, &GraphicsScene::resetModel);
-
+	connect(animationView, &AnimationView::selectChanged, this, &MainWindow::frameSelectChanged);
 
 	connect(animationModel, &AnimationModel::dragDrop, this, &MainWindow::animDragDrop);
 
@@ -770,7 +828,7 @@ void MainWindow::setConnections()
 	connect(graphicsScene, &GraphicsScene::movePictures, this, &MainWindow::sceneMovePictures);
 	connect(graphicsScene, &GraphicsScene::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
 
-	connect(animationView, &AnimationView::resetCurrentFrame, this, &MainWindow::frameSelectChanged);
+
 
 	connect(spinBoxFrameDuration, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &MainWindow::frameDurationSpinnerChanged);
 
@@ -779,13 +837,9 @@ void MainWindow::setConnections()
 
 void MainWindow::onResetCurrentSprite()
 {
+	updateSpriteActions();
 	animationModel->resetModel();
-	//animationView->setCurrentFrame(0);
 	animationView->setSelected(QList<int>({ 0 }));;
-	
-	updateSpriteAction();
-	//frameSelectChanged();
-	updateFrameTotalDuration();
 }
 
 void MainWindow::uiSetupUndoRedoAction()
@@ -814,58 +868,19 @@ void MainWindow::frameDurationSpinnerChanged(int value)
 	AnimationChangeFrameDurationCommand *undoCommand = new AnimationChangeFrameDurationCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
 	undoStack->push(undoCommand);
 
-	//TODO: remove hack
-	frameSelectChanged();
-
+	updateFrameDurationSpinBox();
 	updateFrameTotalDuration();
 }
 
 void MainWindow::frameSelectChanged()
 {
-	QString path = spriteView->getCurrentNode();
-	QList<int> selected = animationView->getSelected();
+	compositionModel->resetModel();
+	graphicsScene->resetModel();
 
-
-	// Update "Frame Duration" SpinBox
-	{
-		ScopedBool scopedBool(preventFrameDurationChange);
-		if (selected.isEmpty())
-		{
-			spinBoxFrameDuration->setValue(0);
-			spinBoxFrameDuration->setEnabled(false);
-		}
-		else
-		{
-			bool different = false;
-			int duration = project.animGetDurations(path, selected, different);
-
-			spinBoxFrameDuration->setValue(different ? 0 : duration);
-			spinBoxFrameDuration->setEnabled(true);
-		}
-	}
-
-
-	// Update "Frame Tag" LineEdit
-	if (selected.isEmpty())
-	{
-		lineEditFrameTag->clear();;
-		lineEditFrameTag->setEnabled(false);
-	}
-	else
-	{
-		bool different = false;
-		QString tag = project.animGetTags(path, selected, different);
-
-		if (different)
-			lineEditFrameTag->clear();
-		else
-		{
-			//qDebug() << "lineEditFrameTag->setText" << tag;
-			lineEditFrameTag->setText(tag);
-		}
-
-		lineEditFrameTag->setEnabled(true);
-	}
+	updateAnimationActions();
+	updateFrameDurationSpinBox();
+	updateFrameTagLineEdit();
+	updateFrameTotalDuration();
 }
 
 void MainWindow::labelTagChanged()
@@ -886,14 +901,28 @@ void MainWindow::labelTagChanged()
 	AnimationChangeTagCommand *undoCommand = new AnimationChangeTagCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
 	undoStack->push(undoCommand);
 
-	//TODO: remove hack
-	frameSelectChanged();
+	updateFrameTagLineEdit();
 }
 
-//TODO: automate call this function
 void MainWindow::updateFrameTotalDuration()
 {
-	QString path = spriteView->getCurrentNode();
-	int v = project.animGetTotalDuration(path);
-	labelTotalDurationValue->setNum(v);
+	QString nodePath = spriteView->getCurrentNode();
+	if (project.isSprite(nodePath))
+	{
+		int v = project.animGetTotalDuration(nodePath);
+		labelTotalDurationValue->setNum(v);
+		labelTotalDurationValue->setEnabled(true);
+		labelTotalDuration->setEnabled(true);
+	}
+	else
+	{
+		labelTotalDurationValue->setText("-");
+		labelTotalDurationValue->setEnabled(false);
+		labelTotalDuration->setEnabled(false);
+	}
+}
+
+void MainWindow::onFrameCountChanged()
+{
+	updateFrameTotalDuration();
 }

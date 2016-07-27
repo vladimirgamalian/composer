@@ -83,7 +83,10 @@ private:
 	void saveSprites( QDomElement& node );
 	void saveSprite( QDomElement& xmlNode, QStandardItem* spriteNode );
 	bool isLoadLastProjectAtStartup();
-	void updateSpriteAction();
+	void updateSpriteActions();
+	void updateAnimationActions();
+	void updateFrameDurationSpinBox();
+	void updateFrameTagLineEdit();
 	void createSpriteView(SpriteModel* spriteModel);
 	void createAnimationView(AnimationModel* animationModel);
 	void createCompositionView(CompositionModel* compositionModel);
@@ -95,6 +98,7 @@ private:
 	void onResetCurrentSprite();
 	void uiSetupUndoRedoAction();
 	void updateFrameTotalDuration();
+	void onFrameCountChanged();
 
 	Ui::composerClass ui;
 	Project project;
@@ -109,9 +113,9 @@ private:
 	WidgetRuler* widgetRulerH = nullptr;
 	WidgetRuler* widgetRulerV = nullptr;
 	SpinBox* spinBoxFrameDuration = nullptr;
+	QLabel* labelTotalDuration = nullptr;
 	QLabel* labelTotalDurationValue = nullptr;
 	QLineEdit* lineEditFrameTag = nullptr;
-	//QListView* listViewHistory = nullptr;
 	SpriteModel* spriteModel = nullptr;
 	AnimationModel* animationModel = nullptr;
 	CompositionModel* compositionModel = nullptr;

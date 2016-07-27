@@ -13,7 +13,7 @@ public:
 
 signals:
 	void deleteSelectedItem();
-	void resetCurrentFrame();
+	void selectChanged();
 
 protected:
 	virtual void keyPressEvent(QKeyEvent* event) override;

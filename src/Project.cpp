@@ -463,8 +463,9 @@ int Project::animInsertFrame(QString spritePath, int row, bool before, bool copy
 	Sprite* s = getSprite(spritePath);
 
 	int rowCount = s->frames.size();
-	if ( row >= rowCount )
-		return -1;
+	Q_ASSERT(row < rowCount);
+	//if ( row >= rowCount )
+	//	return -1;
 
 
 	Frame* srcFrame = 0;
@@ -948,8 +949,7 @@ void Project::animReverse(QString spritePath, const QList<int>& indexes)
 		}
 	}
 
-	if ( !selectedFrames.size() )
-		return;
+	Q_ASSERT(selectedFrames.size() > 0);
 
 	QList< Frame* > reversedFrames = reversedQList( selectedFrames );
 	Q_ASSERT( selectedFrames.size() == reversedFrames.size() );

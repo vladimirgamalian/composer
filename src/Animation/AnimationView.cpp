@@ -23,7 +23,7 @@ AnimationView::AnimationView( Project* project, QWidget *parent /*= 0 */ ) :
 void AnimationView::selectionChanged( const QItemSelection& selected, const QItemSelection& deselected )
 {
 	QListView::selectionChanged(selected, deselected);
-	emit resetCurrentFrame();
+	emit selectChanged();
 }
 
 void AnimationView::keyPressEvent(QKeyEvent* event)
@@ -60,5 +60,5 @@ void AnimationView::setSelected(const QList< int >& selected)
 	}
 
 	selectionModel()->select( selection, QItemSelectionModel::ClearAndSelect );
-	emit resetCurrentFrame();
+	emit selectChanged();
 }
