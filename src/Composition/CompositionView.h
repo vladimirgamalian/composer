@@ -8,8 +8,6 @@ public:
 	CompositionView(QWidget *parent = 0 );
 	QList<int> getSelected() const;
 	void setSelected( const QList<int>& list );
-	int getCurrent() const;
-	void setCurrent(int row);
 
 signals:
 	void deleteSelectedItem();

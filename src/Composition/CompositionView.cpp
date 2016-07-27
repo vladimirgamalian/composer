@@ -140,17 +140,6 @@ void CompositionView::setSelected(const QList<int>& list)
 	selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
-int CompositionView::getCurrent() const
-{
-	return currentIndex().row();
-}
-
-void CompositionView::setCurrent(int row)
-{
-	QModelIndex i = model()->index(row, 0);
-	setCurrentIndex(i);
-}
-
 void CompositionView::redrawAll()
 {
 	viewport()->update();

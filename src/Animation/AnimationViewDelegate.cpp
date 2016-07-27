@@ -22,8 +22,6 @@ void AnimationViewDelegate::paint( QPainter* painter, const QStyleOptionViewItem
 	//painter->setPen( QColor( "black" ) );
 	//painter->drawRect( x + 10, y + 10, 80, 80 );
 
-
-
 	//painter->setBrush( option.palette.foreground() );
 	
 	if ( selected )
