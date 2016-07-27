@@ -49,30 +49,6 @@ void CompositionView::keyPressEvent( QKeyEvent* event )
 	QListView::keyPressEvent( event );
 }
 
-// void CompositionView::delPressed()
-// {
-// 	emit deleteSelectedItem();
-// }
-
-// void CompositionView::delSelectedItems()
-// {
-// 	QModelIndexList indexes = selectionModel()->selectedIndexes();
-// 	if ( !indexes.size() )
-// 		return;
-// 
-// 	QList< int > rows;
-// 	foreach(QModelIndex i, indexes)
-// 		rows << i.row();
-// 
-// 	QString spritePath = spriteView->getCurrentNode();
-// 	int frameIndex = animationView->getCurrent();
-// 
-// 	//CompositionModel* modelComposition = static_cast< CompositionModel* >( model() );
-// 	//modelComposition->delItems( indexes );
-// 
-// 	emit 
-// }
-
 void CompositionView::dragEnterEvent( QDragEnterEvent *event )
 {
 	QListView::dragEnterEvent( event );
@@ -119,14 +95,6 @@ QList<int> CompositionView::getSelected() const
 		res << i.row();
 	return res;
 }
-
-//void CompositionView::setSelectedFrames( const QModelIndexList& selected )
-//{
-//	QItemSelection selection;
-//	foreach( QModelIndex i, selected )
-//		selection.select( i, i );
-//	selectionModel()->select( selection, QItemSelectionModel::ClearAndSelect );
-//}
 
 void CompositionView::setSelected(const QList<int>& list)
 {

@@ -21,7 +21,4 @@ protected:
 
 public slots:
 	void redrawAll();
-
-private:
-	//void delSelectedItems();
 };

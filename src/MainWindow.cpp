@@ -620,6 +620,13 @@ void MainWindow::updateSpriteAction()
 	ui.actionSpritesMoveSprite->setEnabled( isSprite );
 	ui.actionSpritesRemoveItem->setEnabled( isDeletable );
 	ui.actionSpritesCompress->setEnabled( isSprite );
+
+	ui.actionAnimationCopyFrameAfter->setEnabled(isSprite);
+	ui.actionAnimationCopyFrameBefore->setEnabled(isSprite);
+	ui.actionAnimationDeleteFrame->setEnabled(isSprite);
+	ui.actionAnimationInsertAfter->setEnabled(isSprite);
+	ui.actionAnimationInsertBefore->setEnabled(isSprite);
+	ui.actionAnimationReverseFrames->setEnabled(isSprite);
 }
 
 void MainWindow::actionAnimationInsertFrameBefore()
