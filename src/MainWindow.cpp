@@ -2,6 +2,7 @@
 #include "MainWindow.h"
 #include "Scene/GraphicsItemPic.h"
 #include "gitver.h"
+#include "Utils/ScopedBool.h"
 #include "Commands/Sprite/SpriteAddNodeCommand.h"
 #include "Commands/Sprite/SpritesDeleteNodeCommand.h"
 #include "Commands/Sprite/SpriteRenameCommand.h"
@@ -197,25 +198,6 @@ void MainWindow::createRecentActions()
 	}
 }
 
-void MainWindow::createHistoryWidget()
-{
-	QMainWindow* window = new QMainWindow;
-
-	QToolBar* bar = new QToolBar( window );
-	bar->addAction( ui.actionCompositionOpenPicture );
-	bar->setMovable( false );
-
-	window->addToolBar( bar );
-	//window->setParent( ui.dockWidgetHistory );
-
-	listViewHistory = new QListView;
-	listViewHistory->addAction( ui.actionCompositionOpenPicture );
-	listViewHistory->setContextMenuPolicy( Qt::ActionsContextMenu );
-
-	window->setCentralWidget( listViewHistory );
-	//ui.dockWidgetHistory->setWidget( window );
-}
-
 void MainWindow::createAboutDialog()
 {
 	dialogAbout = new DialogAbout( this );
@@ -235,13 +217,11 @@ void MainWindow::createUndoView()
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	: QMainWindowEx( parent, flags )
 {
-	QCoreApplication::setOrganizationName( "dell" );
-	QCoreApplication::setOrganizationDomain( "dell.com" );
-	QCoreApplication::setApplicationName( "dell" );
+	QCoreApplication::setOrganizationName( "Horns and Hooves" );
+	QCoreApplication::setOrganizationDomain( "hornsnhooves.com" );
+	QCoreApplication::setApplicationName( "composer" );
 
 	ui.setupUi(this);
-
-	
 
 	connect( ui.actionSaveProject, SIGNAL( triggered() ), this, SLOT( actionProjectSave() ) );
 	connect( ui.actionSaveProjectAs, SIGNAL( triggered() ), this, SLOT( actionProjectSaveAs() ) );
@@ -260,7 +240,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	uiSetupUndoRedoAction();
 
 
-	createHistoryWidget();
+	//createHistoryWidget();
 	createAboutDialog();
 	
 
@@ -571,7 +551,7 @@ void MainWindow::dragDropSpriteNode(QString oldPath, QString newPath, bool copy)
 void MainWindow::dropPictures(int compositionIndex, QPoint pos, QStringList fileList)
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	
 	CompositionDropPicturesCommand* compositionDropPicturesCommand
 		= new CompositionDropPicturesCommand(commandEnvFabric->getCommandEnv(),
@@ -591,7 +571,7 @@ void MainWindow::animDragDrop(QString spritePath, const QList<int>& indexes, int
 void MainWindow::compositionDeleteSelectedItem()
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	QList<int> pictures = compositionView->getSelected();
 
 	CompositionDeletePicturesCommand *undoCommand = new CompositionDeletePicturesCommand(commandEnvFabric->getCommandEnv(),
@@ -601,7 +581,7 @@ void MainWindow::compositionDeleteSelectedItem()
 
 void MainWindow::compositionDragDrop(const QList<int>& indexes, int row, bool copyAction)
 {
-	int index = animationView->getCurrent();
+	int index = animationView->getCurrentFrame();
 	QString path = spriteView->getCurrentNode();
 	CompositionDragDropCommand *undoCommand = new CompositionDragDropCommand(commandEnvFabric->getCommandEnv(),
 		path, index, indexes, row, copyAction);
@@ -644,7 +624,7 @@ void MainWindow::updateSpriteAction()
 
 void MainWindow::actionAnimationInsertFrameBefore()
 {
-	int index = animationView->getCurrent();
+	int index = animationView->getCurrentFrame();
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, true, false);
 	undoStack->push(undoCommand);
@@ -654,7 +634,7 @@ void MainWindow::actionAnimationInsertFrameBefore()
 
 void MainWindow::actionAnimationInsertFrameAfter()
 {
-	int index = animationView->getCurrent();
+	int index = animationView->getCurrentFrame();
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, false, false);
 	undoStack->push(undoCommand);
@@ -699,7 +679,7 @@ void MainWindow::actionCompositionOpenPicture()
 
 void MainWindow::actionAnimationCopyFrameBefore()
 {
-	int index = animationView->getCurrent();
+	int index = animationView->getCurrentFrame();
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, true, true);
 	undoStack->push(undoCommand);
@@ -709,18 +689,12 @@ void MainWindow::actionAnimationCopyFrameBefore()
 
 void MainWindow::actionAnimationCopyFrameAfter()
 {
-	int index = animationView->getCurrent();
+	int index = animationView->getCurrentFrame();
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, false, true);
 	undoStack->push(undoCommand);
 
 	updateFrameTotalDuration();
-}
-
-void MainWindow::modified( QString description )
-{
-	listViewHistory->reset();
-	setProjectModified( true );
 }
 
 void MainWindow::actionUndo()
@@ -768,9 +742,6 @@ void MainWindow::actionRemoveRulers()
 
 void MainWindow::setConnections()
 {
-	//connect(spriteView, &SpriteView::resetCurrentNode, animationModel, &AnimationModel::resetModel);
-	//connect(spriteView, &SpriteView::resetCurrentNode, compositionModel, &CompositionModel::resetModel);
-	//connect(spriteView, &SpriteView::resetCurrentNode, graphicsScene, &GraphicsScene::resetModel);
 	connect(spriteView, &SpriteView::resetCurrentNode, this, &MainWindow::onResetCurrentSprite);
 
 	connect(animationView, &AnimationView::resetCurrentFrame, compositionModel, &CompositionModel::resetModel);
@@ -792,7 +763,7 @@ void MainWindow::setConnections()
 	connect(graphicsScene, &GraphicsScene::movePictures, this, &MainWindow::sceneMovePictures);
 	connect(graphicsScene, &GraphicsScene::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
 
-	connect(animationView, &AnimationView::selectChanged, this, &MainWindow::frameSelectChanged);
+	connect(animationView, &AnimationView::resetCurrentFrame, this, &MainWindow::frameSelectChanged);
 
 	connect(spinBoxFrameDuration, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &MainWindow::frameDurationSpinnerChanged);
 
@@ -802,10 +773,11 @@ void MainWindow::setConnections()
 void MainWindow::onResetCurrentSprite()
 {
 	animationModel->resetModel();
-	animationView->setCurrentFrame(0);
+	//animationView->setCurrentFrame(0);
+	animationView->setSelected(QList<int>({ 0 }));;
 	
 	updateSpriteAction();
-	frameSelectChanged();
+	//frameSelectChanged();
 	updateFrameTotalDuration();
 }
 
@@ -846,23 +818,27 @@ void MainWindow::frameSelectChanged()
 	QString path = spriteView->getCurrentNode();
 	QList<int> selected = animationView->getSelected();
 
-	preventFrameDurationChange = true;
-	if (selected.isEmpty())
+
+	// Update "Frame Duration" SpinBox
 	{
-		spinBoxFrameDuration->setValue(0);
-		spinBoxFrameDuration->setEnabled(false);
+		ScopedBool scopedBool(preventFrameDurationChange);
+		if (selected.isEmpty())
+		{
+			spinBoxFrameDuration->setValue(0);
+			spinBoxFrameDuration->setEnabled(false);
+		}
+		else
+		{
+			bool different = false;
+			int duration = project.animGetDurations(path, selected, different);
+
+			spinBoxFrameDuration->setValue(different ? 0 : duration);
+			spinBoxFrameDuration->setEnabled(true);
+		}
 	}
-	else
-	{
-		bool different = false;
-		int duration = project.animGetDurations(path, selected, different);
-
-		spinBoxFrameDuration->setValue(different ? 0 : duration);
-		spinBoxFrameDuration->setEnabled(true);
-	}
-	preventFrameDurationChange = false;
 
 
+	// Update "Frame Tag" LineEdit
 	if (selected.isEmpty())
 	{
 		lineEditFrameTag->clear();;
@@ -877,7 +853,7 @@ void MainWindow::frameSelectChanged()
 			lineEditFrameTag->clear();
 		else
 		{
-			qDebug() << "lineEditFrameTag->setText" << tag;
+			//qDebug() << "lineEditFrameTag->setText" << tag;
 			lineEditFrameTag->setText(tag);
 		}
 
@@ -907,6 +883,7 @@ void MainWindow::labelTagChanged()
 	frameSelectChanged();
 }
 
+//TODO: automate call this function
 void MainWindow::updateFrameTotalDuration()
 {
 	QString path = spriteView->getCurrentNode();

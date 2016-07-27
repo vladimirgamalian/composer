@@ -736,6 +736,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\CommandEnv.h" />
+    <ClInclude Include="..\..\src\Utils\ScopedBool.h" />
     <CustomBuild Include="..\..\src\CommandEnvFabric.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </Message>

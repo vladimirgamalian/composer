@@ -14,7 +14,7 @@ int CompositionModel::rowCount( const QModelIndex &parent /*= QModelIndex() */ )
 	if (spritePath.isEmpty())
 		return 0;
 
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	if (frameIndex < 0)
 		return 0;
 
@@ -27,7 +27,7 @@ QVariant CompositionModel::data( const QModelIndex &index, int role /*= Qt::Disp
 		return QVariant();
 
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	int row = index.row();
 
@@ -75,7 +75,7 @@ bool CompositionModel::setData( const QModelIndex& index, const QVariant& value,
 		return false;
 
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	int row = index.row();
 
@@ -222,7 +222,7 @@ void CompositionModel::compositionEndInsertRows()
 bool CompositionModel::checkDragEventForImage(const QMimeData *mimeData)
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	return project->checkDragEventForImage(spritePath, frameIndex, mimeData);
 }
@@ -230,7 +230,7 @@ bool CompositionModel::checkDragEventForImage(const QMimeData *mimeData)
 void CompositionModel::toggleVisible(const QList<int>& pics)
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	emit togglePicsVisible(spritePath, frameIndex, pics);
 }
 

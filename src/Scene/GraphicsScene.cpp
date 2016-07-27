@@ -17,7 +17,7 @@ GraphicsScene::~GraphicsScene()
 void GraphicsScene::resetModel()
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	clear();
 
@@ -62,7 +62,7 @@ QPoint GraphicsScene::stickItem( const QRect& rect, QGraphicsItem* item )
 	int h = rect.height();
 
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	if ( snapToBorder )
 	{
@@ -212,7 +212,7 @@ void GraphicsScene::dragEnterEvent( QGraphicsSceneDragDropEvent* event )
 		return;
 
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	const QMimeData *mimeData = event->mimeData();
 	if ( project->checkDragEventForImage(spritePath, frameIndex, mimeData ) )
@@ -231,7 +231,7 @@ void GraphicsScene::dragMoveEvent( QGraphicsSceneDragDropEvent* event )
 		return;
 
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	const QMimeData *mime = event->mimeData();
 	if (project->checkDragEventForImage(spritePath, frameIndex, mime))
@@ -246,7 +246,7 @@ void GraphicsScene::dropEvent( QGraphicsSceneDragDropEvent* event )
 	QGraphicsScene::dropEvent( event );
 
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	if ( event->dropAction() != Qt::CopyAction )
 		return;
@@ -277,21 +277,21 @@ void GraphicsScene::dragLeaveEvent( QGraphicsSceneDragDropEvent* event )
 bool GraphicsScene::getPictureVisible( int index )
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	return project->compositionGetVisible(spritePath, frameIndex, index);
 }
 
 void GraphicsScene::setPicturePos( int index, const QPoint& pos )
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	project->scenePictureMove(spritePath, frameIndex, index, pos );
 }
 
 void GraphicsScene::picturesShift(int shiftX, int shiftY)
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	QList<int> pics = getSelectedItemsIndexes();
 
 	project->compositionPicturesShift(spritePath, frameIndex, pics, shiftX, shiftY);
@@ -306,7 +306,7 @@ void GraphicsScene::picturesToggleVisible()
 		return;
 
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 
 	emit togglePicsVisible(spritePath, frameIndex, pics);
 
@@ -316,7 +316,7 @@ void GraphicsScene::picturesToggleVisible()
 void GraphicsScene::startMoving()
 {
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	delete frameBackup;
 	frameBackup = project->cloneFrame(spritePath, frameIndex);
 }
@@ -328,7 +328,7 @@ void GraphicsScene::finishMoving()
 		return;
 
 	QString spritePath = spriteView->getCurrentNode();
-	int frameIndex = animationView->getCurrent();
+	int frameIndex = animationView->getCurrentFrame();
 	Frame* newFrame = project->getFrame(spritePath, frameIndex);
 	Q_ASSERT(frameBackup->pictures.size() == newFrame->pictures.size());
 	QList<Project::MovePicData> moveData;

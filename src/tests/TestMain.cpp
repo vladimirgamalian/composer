@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TestTreeNode.h"
 #include "TestIntervalSolver.h"
+#include "TestScopedBool.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +10,9 @@ int main(int argc, char *argv[])
 
 	TestIntervalSolver testIntervalSolver;
 	QTest::qExec(&testIntervalSolver);
+
+	TestScopedBool testScopedBool;
+	QTest::qExec(&testScopedBool);
 	
 	return 0;
 }

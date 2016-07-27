@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "AnimationView.h"
-#include "AnimationViewDelegate.h"
 #include "AnimationModel.h"
 
 AnimationView::AnimationView( Project* project, QWidget *parent /*= 0 */ ) :
@@ -9,7 +8,7 @@ AnimationView::AnimationView( Project* project, QWidget *parent /*= 0 */ ) :
 	this->project = project;
 
 	setFlow( QListView::LeftToRight );
-	setItemDelegate( new AnimationViewDelegate );
+	setItemDelegate(new AnimationViewDelegate);
 
 	setDragEnabled( true );
 	setAcceptDrops( true );
@@ -24,19 +23,12 @@ AnimationView::AnimationView( Project* project, QWidget *parent /*= 0 */ ) :
 void AnimationView::selectionChanged( const QItemSelection& selected, const QItemSelection& deselected )
 {
 	QListView::selectionChanged(selected, deselected);
-	emit selectChanged();
-}
-
-void AnimationView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
-{
 	emit resetCurrentFrame();
-	emit selectChanged();
 }
 
 void AnimationView::keyPressEvent(QKeyEvent* event)
 {
 	QListView::keyPressEvent( event );
-
 	if ( event->key() == Qt::Key_Delete )
 		emit deleteSelectedItem();
 }
@@ -50,15 +42,12 @@ QList<int> AnimationView::getSelected() const
 	return res;
 }
 
-int AnimationView::getCurrent() const
+int AnimationView::getCurrentFrame() const
 {
-	return currentIndex().row();
-}
-
-void AnimationView::setCurrentFrame(int i)
-{
-	setCurrentIndex(model()->index(i, 0));
-	emit resetCurrentFrame();
+	QModelIndexList selected = selectedIndexes();
+	if (selected.size() == 1)
+		return selected.at(0).row();
+	return -1;
 }
 
 void AnimationView::setSelected(const QList< int >& selected)
@@ -71,10 +60,5 @@ void AnimationView::setSelected(const QList< int >& selected)
 	}
 
 	selectionModel()->select( selection, QItemSelectionModel::ClearAndSelect );
-}
-
-void AnimationView::setCurrent( int row )
-{
-	QModelIndex i = model()->index( row, 0 );
-	setCurrentIndex( i );
+	emit resetCurrentFrame();
 }

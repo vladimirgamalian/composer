@@ -14,3 +14,7 @@
 /msvs/composer/Debug
 /msvs/composer/Release
 /TODO.txt
+/CHECK_LIST.txt
+/media
+/msvs/*.sdf
+/msvs/*.suo

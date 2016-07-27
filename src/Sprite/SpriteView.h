@@ -18,8 +18,11 @@ signals:
 	void resetCurrentNode();
 
 protected:
-	//virtual void mousePressEvent( QMouseEvent* event );
 	virtual void currentChanged(const QModelIndex& current, const QModelIndex& previous);
+	void paintEvent(QPaintEvent *event)
+	{
+		QTreeView::paintEvent(event);
+	}
 
 private:
 	void recursiveScan(QModelIndex node, QList<QModelIndex>& result, bool onlyWithChildren) const;

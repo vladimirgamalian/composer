@@ -44,8 +44,6 @@ public slots:
 	void actionRedo();
 	void actionRemoveRulers();
 
-	void modified( QString description );
-
 	void graphicsSceneSelectionChanged();
 	void compositionViewSelectionChanged(const QList< int >& selectedIndexes);
 
@@ -91,7 +89,6 @@ private:
 	void createCompositionView(CompositionModel* compositionModel);
 	void createScene();
 	void createRecentActions();
-	void createHistoryWidget();
 	void createAboutDialog();
 	void createUndoView();
 	void setConnections();
@@ -114,7 +111,7 @@ private:
 	SpinBox* spinBoxFrameDuration = nullptr;
 	QLabel* labelTotalDurationValue = nullptr;
 	QLineEdit* lineEditFrameTag = nullptr;
-	QListView* listViewHistory = nullptr;
+	//QListView* listViewHistory = nullptr;
 	SpriteModel* spriteModel = nullptr;
 	AnimationModel* animationModel = nullptr;
 	CompositionModel* compositionModel = nullptr;

@@ -4,18 +4,17 @@
 void AnimationViewDelegate::paint( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
 	bool selected = option.state & QStyle::State_Selected;
-	QBrush highlightBrush( option.palette.highlight() );
+	QBrush highlightBrush(option.palette.highlight());
+	QBrush cuurentHighlightBrush(option.palette.shadow());
 	QBrush darkBrush( option.palette.dark() );
-
 
 	painter->drawRect( option.rect );
 
-	if ( selected )
-		painter->fillRect( option.rect, highlightBrush );
+	if (selected)
+		painter->fillRect( option.rect, highlightBrush);
 
 	int x = option.rect.left();
 	int y = option.rect.top();
-
 
 	painter->drawPixmap( x, y, framePixmap );
 

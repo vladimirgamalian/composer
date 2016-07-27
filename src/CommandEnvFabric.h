@@ -29,7 +29,7 @@ public:
 		commandEnv->spriteCurrent = spriteView->getCurrentNode();
 
 		commandEnv->animationSelection = animationView->getSelected();
-		commandEnv->animationCurrent = animationView->getCurrent();
+//		commandEnv->animationCurrent = animationView->getCurrent();
 
 		commandEnv->compositionSelection = compositionView->getSelected();
 		commandEnv->compositionCurrent = compositionView->getCurrent();

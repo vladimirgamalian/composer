@@ -60,6 +60,9 @@
     <Filter Include="Commands\Sprite">
       <UniqueIdentifier>{f672ff1b-7359-4050-9792-8b5af8168409}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{c0f3ebbc-efab-4e5d-a84e-adc0ebb55a4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_composer.cpp">
@@ -482,6 +485,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeTagCommand.h">
       <Filter>Commands\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Utils\ScopedBool.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

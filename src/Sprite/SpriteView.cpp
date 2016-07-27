@@ -159,11 +159,3 @@ void SpriteView::load(QDomElement& node)
 	QString path = currentNode.attribute("path");
 	setCurrentNode(path);
 }
-
-//void SpriteView::mousePressEvent(QMouseEvent* event)
-//{
-//	//setCurrentIndex( QModelIndex() );
-//	//clearSelection();
-//	
-//	QTreeView::mousePressEvent( event );
-//}

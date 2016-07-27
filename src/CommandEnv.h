@@ -16,7 +16,7 @@ struct CommandEnv
 	QString spriteCurrent;
 
 	QList<int> animationSelection;
-	int animationCurrent = -1;
+	//int animationCurrent = -1;
 
 	QList<int> compositionSelection;
 	int compositionCurrent = -1;
@@ -26,7 +26,7 @@ struct CommandEnv
 		spriteView->setExpandedNodeList(spriteExpanded);
 		spriteView->setCurrentNode(spriteCurrent);
 
-		animationView->setCurrent(animationCurrent);
+//		animationView->setCurrent(animationCurrent);
 		animationView->setSelected(animationSelection);
 
 		compositionView->setCurrent(compositionCurrent);
