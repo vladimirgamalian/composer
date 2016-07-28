@@ -10,7 +10,7 @@ public:
 	  {
 		  ui.setupUi( this );
 		  setModal( true );
-		  QString gitVer = "GIT Version: ";
+		  QString gitVer = "GIT: ";
 		  gitVer += GIT_VER;
 		  ui.labelGitVersion->setText( gitVer );
 		  ui.labelGitVersion->adjustSize();
