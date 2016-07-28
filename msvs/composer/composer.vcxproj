@@ -752,7 +752,20 @@
       </Command>
     </CustomBuild>
     <ClInclude Include="..\..\src\Commands\Animation\AnimationBaseCommand.h" />
-    <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.h" />
+    <CustomBuild Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+    </CustomBuild>
     <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeTagCommand.h" />
     <ClInclude Include="..\..\src\Commands\Animation\AnimationCompressCommand.h" />
     <ClInclude Include="..\..\src\Commands\Animation\AnimationDelFramesCommand.h" />

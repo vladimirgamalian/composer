@@ -98,7 +98,6 @@ private:
 	void onResetCurrentSprite();
 	void uiSetupUndoRedoAction();
 	void updateFrameTotalDuration();
-	void onFrameCountChanged();
 
 	Ui::composerClass ui;
 	Project project;

@@ -152,10 +152,7 @@ void MainWindow::createScene()
 	widgetRulerH = new WidgetRuler( this, graphicsView, false );
 	widgetRulerV = new WidgetRuler( this, graphicsView, true );
 
-
-	//graphicsView->setViewport( new QGLWidget );
-	//centralWidget()->addWidget();
-	QGridLayout* layout = new QGridLayout( this );
+	QGridLayout* layout = new QGridLayout();
 	layout->setSpacing( 0 );
 	layout->setMargin( 0 );
 	QWidget* fake = new QWidget();
@@ -328,8 +325,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 	//TODO: check and move to setConnection()
 
-	connect( &project, SIGNAL( animModelReset() ), animationModel, SLOT( animModelReset() ) );
-	connect( &project, SIGNAL( animSetSelect( const QList< int >& ) ), animationView, SLOT( animSetSelect( const QList< int >& ) ) );
+	//connect( &project, SIGNAL( animModelReset() ), animationModel, SLOT( animModelReset() ) );
+	//connect( &project, SIGNAL( animSetSelect( const QList< int >& ) ), animationView, SLOT( animSetSelect( const QList< int >& ) ) );
 
 	connect( &project, SIGNAL( compositionModelReset() ), compositionModel, SLOT( resetModel() ) );
 	connect( &project, SIGNAL( sceneModelReset() ), graphicsScene, SLOT( resetModel() ) );
@@ -350,26 +347,26 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	connect( &project, SIGNAL( compositionEndInsertRows() ), compositionModel, SLOT( compositionEndInsertRows() ) );
 
 
-	connect( &project, SIGNAL( spriteModelReset() ), spriteModel, SLOT( resetModel() ) );
+	//connect( &project, SIGNAL( spriteModelReset() ), spriteModel, SLOT( resetModel() ) );
 
-	connect( &project, SIGNAL( sceneSetSelect( const QList< int >& ) ), graphicsScene, SLOT( setSelectedIndexes( const QList< int >& ) ) );
+	//connect( &project, SIGNAL( sceneSetSelect( const QList< int >& ) ), graphicsScene, SLOT( setSelectedIndexes( const QList< int >& ) ) );
 
 	
-	connect( &project, SIGNAL( compositionSetSelect( const QList< int >& ) ), compositionView, SLOT( setSelect( const QList< int >& ) ) );
+	//connect( &project, SIGNAL( compositionSetSelect( const QList< int >& ) ), compositionView, SLOT( setSelect( const QList< int >& ) ) );
 
 
-	connect( &project, SIGNAL( setSpriteTotalDuration( int ) ), labelTotalDurationValue, SLOT( setNum( int ) ) );
+	//connect( &project, SIGNAL( setSpriteTotalDuration( int ) ), labelTotalDurationValue, SLOT( setNum( int ) ) );
 
 
 	connect( &project, SIGNAL( setLineEditFrameTag( const QString & ) ), lineEditFrameTag, SLOT( setText( const QString & ) ) );
 	connect( lineEditFrameTag, SIGNAL( textChanged( const QString & ) ), &project, SLOT( lineEditFrameTagTextChanged( const QString & ) ) );
 	
 
-	connect( &project, SIGNAL( animDataChanged( int ) ), animationModel, SLOT( animDataChanged( int ) ) );
+	//connect( &project, SIGNAL( animDataChanged( int ) ), animationModel, SLOT( animDataChanged( int ) ) );
 
-	connect( &project, SIGNAL( sceneModelRedraw() ), graphicsView, SLOT( redrawAll() ) );
+	//connect( &project, SIGNAL( sceneModelRedraw() ), graphicsView, SLOT( redrawAll() ) );
 
-	connect( &project, SIGNAL( compositionModelRedraw() ), compositionView, SLOT( redrawAll() ) );
+	//connect( &project, SIGNAL( compositionModelRedraw() ), compositionView, SLOT( redrawAll() ) );
 
 	
 	connect(spriteModel, &SpriteModel::renameNode, this, &MainWindow::renameSpriteNode);
@@ -515,7 +512,6 @@ void MainWindow::actionSpritesRemoveItem()
 {
 	QString spritePath = spriteView->getCurrentNode();
 	SpritesDeleteNodeCommand *undoCommand = new SpritesDeleteNodeCommand(commandEnvFabric->getCommandEnv(), spritePath);
-
 	undoStack->push(undoCommand);
 }
 
@@ -566,8 +562,6 @@ void MainWindow::animDragDrop(QString spritePath, const QList<int>& indexes, int
 	QString path = spriteView->getCurrentNode();
 	AnimationDragDropCommand *undoCommand = new AnimationDragDropCommand(commandEnvFabric->getCommandEnv(), path, indexes, row, copyAction);
 	undoStack->push(undoCommand);
-
-	onFrameCountChanged();
 }
 
 void MainWindow::compositionDeleteSelectedItem()
@@ -694,8 +688,6 @@ void MainWindow::actionAnimationInsertFrameBefore()
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, true, false);
 	undoStack->push(undoCommand);
-
-	onFrameCountChanged();
 }
 
 void MainWindow::actionAnimationInsertFrameAfter()
@@ -704,8 +696,6 @@ void MainWindow::actionAnimationInsertFrameAfter()
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, false, false);
 	undoStack->push(undoCommand);
-
-	onFrameCountChanged();
 }
 
 void MainWindow::actionAnimationDeleteFrame()
@@ -716,8 +706,6 @@ void MainWindow::actionAnimationDeleteFrame()
 
 	AnimationDelFramesCommand *undoCommand = new AnimationDelFramesCommand(commandEnvFabric->getCommandEnv(), spritePath, frames);
 	undoStack->push(undoCommand);
-
-	onFrameCountChanged();
 }
 
 void MainWindow::actionSpritesCompress()
@@ -727,8 +715,6 @@ void MainWindow::actionSpritesCompress()
 	QString spritePath = spriteView->getCurrentNode();
 	AnimationCompressCommand *undoCommand = new AnimationCompressCommand(commandEnvFabric->getCommandEnv(), spritePath);
 	undoStack->push(undoCommand);
-
-	onFrameCountChanged();
 }
 
 void MainWindow::actionAbout()
@@ -751,8 +737,6 @@ void MainWindow::actionAnimationCopyFrameBefore()
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, true, true);
 	undoStack->push(undoCommand);
-
-	onFrameCountChanged();
 } 
 
 void MainWindow::actionAnimationCopyFrameAfter()
@@ -761,8 +745,6 @@ void MainWindow::actionAnimationCopyFrameAfter()
 	QString path = spriteView->getCurrentNode();
 	AnimationInsertFrameCommand *undoCommand = new AnimationInsertFrameCommand(commandEnvFabric->getCommandEnv(), path, index, false, true);
 	undoStack->push(undoCommand);
-
-	onFrameCountChanged();
 }
 
 void MainWindow::actionUndo()
@@ -833,11 +815,13 @@ void MainWindow::setConnections()
 	connect(graphicsScene, &GraphicsScene::movePictures, this, &MainWindow::sceneMovePictures);
 	connect(graphicsScene, &GraphicsScene::togglePicsVisible, this, &MainWindow::sceneTogglePicsVisible);
 
-
-
 	connect(spinBoxFrameDuration, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &MainWindow::frameDurationSpinnerChanged);
 
 	connect(lineEditFrameTag, &QLineEdit::editingFinished, this, &MainWindow::labelTagChanged);
+
+	connect(&project, &Project::animDataChanged, this, &MainWindow::updateFrameDurationSpinBox);
+	connect(&project, &Project::animDataChanged, this, &MainWindow::updateFrameTotalDuration);
+	connect(&project, &Project::animDataChanged, this, &MainWindow::updateFrameTagLineEdit);
 }
 
 void MainWindow::onResetCurrentSprite()
@@ -872,9 +856,6 @@ void MainWindow::frameDurationSpinnerChanged(int value)
 
 	AnimationChangeFrameDurationCommand *undoCommand = new AnimationChangeFrameDurationCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
 	undoStack->push(undoCommand);
-
-	updateFrameDurationSpinBox();
-	updateFrameTotalDuration();
 }
 
 void MainWindow::frameSelectChanged()
@@ -905,14 +886,12 @@ void MainWindow::labelTagChanged()
 
 	AnimationChangeTagCommand *undoCommand = new AnimationChangeTagCommand(commandEnvFabric->getCommandEnv(), path, selected, value);
 	undoStack->push(undoCommand);
-
-	updateFrameTagLineEdit();
 }
 
 void MainWindow::updateFrameTotalDuration()
 {
 	QString nodePath = spriteView->getCurrentNode();
-	if (project.isSprite(nodePath))
+	if (project.isValidFrame(nodePath, 0))
 	{
 		int v = project.animGetTotalDuration(nodePath);
 		labelTotalDurationValue->setNum(v);
@@ -925,9 +904,4 @@ void MainWindow::updateFrameTotalDuration()
 		labelTotalDurationValue->setEnabled(false);
 		labelTotalDuration->setEnabled(false);
 	}
-}
-
-void MainWindow::onFrameCountChanged()
-{
-	updateFrameTotalDuration();
 }

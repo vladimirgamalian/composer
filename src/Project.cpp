@@ -381,6 +381,7 @@ void Project::animSetDuration(QString spritePath, const QList<int>& frames, int 
 {
 	for (int i: frames)
 		getFrame(spritePath, i)->setDuration(value);
+	emit animDataChanged();
 }
 
 void Project::animSetTag(QString spritePath, const QList<int>& frames, QString value)
@@ -390,6 +391,7 @@ void Project::animSetTag(QString spritePath, const QList<int>& frames, QString v
 		qDebug() << "Project::animSetTag " << i << value;
 		getFrame(spritePath, i)->setTag(value);
 	}
+	emit animDataChanged();
 }
 
 Sprite* Project::getSprite(QString spritePath)

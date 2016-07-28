@@ -115,7 +115,7 @@ signals:
 	void animEndRemoveRows();
 	void animBeginInsertRows( int beg, int end );
 	void animEndInsertRows();
-	//void animDataChanged(int index);
+	void animDataChanged();
 
 	void compositionBeginRemoveRows( int beg, int end );
 	void compositionEndRemoveRows();
