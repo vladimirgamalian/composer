@@ -724,11 +724,12 @@ void MainWindow::actionAbout()
 
 void MainWindow::actionCompositionOpenPicture()
 {
-	QString fileName = QFileDialog::getOpenFileName( this, tr( "Add picture" ), "", tr( "PNG pictures (*.png);;JPG pictures (*.jpg);;BMP pictures (*.bmp)" ) );
-	if ( fileName.isNull() )
+	QStringList fileNames = QFileDialog::getOpenFileNames( this, tr( "Add picture" ), "",
+		tr( "PNG pictures (*.png);;JPG pictures (*.jpg);;BMP pictures (*.bmp)" ) );
+	if ( fileNames.isEmpty() )
 		return;
-	//TODO: add picture
-	//compositionModel->addPicture( fileName );
+
+	dropPictures(0, QPoint(), fileNames);
 }
 
 void MainWindow::actionAnimationCopyFrameBefore()
