@@ -87,7 +87,9 @@ QVariant SpriteModel::data( const QModelIndex& index, int role /*= Qt::DisplayRo
 
 Qt::ItemFlags SpriteModel::flags( const QModelIndex& index ) const
 {
-	Qt::ItemFlags r = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsDragEnabled;
+	Qt::ItemFlags r = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+	if (!itemIsRootNode(index))
+		r |= Qt::ItemIsEditable | Qt::ItemIsDragEnabled;
 	if ( itemIsDropEnabled( index ) )
 		r |= Qt::ItemIsDropEnabled;
 	return r;
@@ -157,7 +159,6 @@ bool SpriteModel::dropMimeData( const QMimeData* data, Qt::DropAction action, in
 	if ( !data || !( action == Qt::CopyAction || action == Qt::MoveAction ) )
 		return false;
 
-	//Q_ASSERT(parent.isValid());
 	if (!parent.isValid())
 		return false;
 
@@ -206,11 +207,18 @@ bool SpriteModel::dropMimeData( const QMimeData* data, Qt::DropAction action, in
 	return true;
 }
 
-bool SpriteModel::itemIsDropEnabled( const QModelIndex& index ) const
+bool SpriteModel::itemIsDropEnabled(const QModelIndex& index) const
 {
 	if (!index.isValid())
 		return false;
 	return getNodeFromModelIndex(index)->isFolder();
+}
+
+bool SpriteModel::itemIsRootNode(const QModelIndex& index) const
+{
+	if (!index.isValid())
+		return false;
+	return getNodeFromModelIndex(index)->isRoot();
 }
 
 void SpriteModel::beginInsertSpriteNode( TreeNode* parent, int row )
