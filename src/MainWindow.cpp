@@ -717,17 +717,6 @@ void MainWindow::actionAnimationDeleteFrame()
 	AnimationDelFramesCommand *undoCommand = new AnimationDelFramesCommand(commandEnvFabric->getCommandEnv(), spritePath, frames);
 	undoStack->push(undoCommand);
 
-	int newFrameCount = project.animGetRowCount(spritePath);
-	if ((!newFrameCount ) || (frames.size() != 1))
-		animationView->setSelected(QList<int>());
-	else
-	{
-		int frame = frames[0];
-		if (frame >= newFrameCount)
-			frame--;
-		animationView->setSelected(QList<int>{frame});
-	}
-
 	onFrameCountChanged();
 }
 

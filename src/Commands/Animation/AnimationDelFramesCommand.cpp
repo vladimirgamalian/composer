@@ -11,4 +11,16 @@ AnimationDelFramesCommand::AnimationDelFramesCommand(CommandEnv* commandEnv, QSt
 void AnimationDelFramesCommand::action()
 {
 	commandEnv->project->animRemoveFrames(spritePath, frames);
+
+	int newFrameCount = commandEnv->project->animGetRowCount(spritePath);
+
+	if ((!newFrameCount) || (frames.size() != 1))
+		commandEnv->animationView->setSelected(QList<int>());
+	else
+	{
+		int frame = frames[0];
+		if (frame >= newFrameCount)
+			frame--;
+		commandEnv->animationView->setSelected(QList<int>{frame});
+	}
 }

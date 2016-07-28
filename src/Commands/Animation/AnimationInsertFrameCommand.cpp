@@ -11,5 +11,6 @@ AnimationInsertFrameCommand::AnimationInsertFrameCommand(CommandEnv* commandEnv,
 
 void AnimationInsertFrameCommand::action()
 {
-	newIndex = commandEnv->project->animInsertFrame(spritePath, index, before, copyContent);
+	int newIndex = commandEnv->project->animInsertFrame(spritePath, index, before, copyContent);
+	commandEnv->animationView->setSelected(QList<int>({ newIndex }));
 }
