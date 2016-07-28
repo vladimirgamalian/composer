@@ -1,12 +1,10 @@
 #pragma once
-
 #include "ui_DialogAbout.h"
 #include "gitver.h"
 
 class DialogAbout : public QDialog
 {
 public:
-
 	DialogAbout( QWidget* parent ) :
 	  QDialog( parent )
 	  {
@@ -18,9 +16,6 @@ public:
 		  ui.labelGitVersion->adjustSize();
 	  }
 
-
-
 private:
-
 	Ui::DialogAbout ui;
 };

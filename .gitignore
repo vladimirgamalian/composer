@@ -18,3 +18,5 @@
 /media
 /msvs/*.sdf
 /msvs/*.suo
+/src/gitver.h
+/dist
