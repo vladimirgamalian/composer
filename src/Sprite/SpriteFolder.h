@@ -5,7 +5,6 @@
 class SpriteFolder : public TreeNode
 {
 public:
-
 	SpriteFolder( QString name )
 	{
 		text = name;

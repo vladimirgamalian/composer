@@ -12,7 +12,8 @@ SpriteAddNodeCommand::SpriteAddNodeCommand(CommandEnv* commandEnv,
 void SpriteAddNodeCommand::redo()
 {
 	commandEnv->restore();
-	nodePath = commandEnv->project->spriteAddNode(parentPath, "sprite", nodeType);
+	QString name = (nodeType == TreeNode::NodeType::Folder) ? "group" : "sprite";
+	nodePath = commandEnv->project->spriteAddNode(parentPath, name, nodeType);
 	commandEnv->spriteView->setCurrentNode(nodePath);
 }
 
