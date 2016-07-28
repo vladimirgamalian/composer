@@ -142,5 +142,4 @@ private:
 	void loadFrame( QDomElement& node, Frame* sprite );
 	QString getRelativePath( QString path );
 	QString getAbsolutePath( QString path );
-	void updateFrameParams();
 };

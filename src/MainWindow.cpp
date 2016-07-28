@@ -293,14 +293,11 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 	setConnections();
 
-
 	spriteView->setCurrentIndex(spriteModel->getRootIndex());
 	onResetCurrentSprite();
 
-
 	if ( isLoadLastProjectAtStartup() )
 		loadLastProject();
-	
 }
 
 MainWindow::~MainWindow()
@@ -317,6 +314,8 @@ bool MainWindow::isLoadLastProjectAtStartup()
 void MainWindow::newProject()
 {
 	project.newProject();
+	spriteModel->resetModel();
+	spriteView->setCurrentIndex(spriteModel->getRootIndex());
 	graphicsView->newProject(); // reset guide lines
 }
 

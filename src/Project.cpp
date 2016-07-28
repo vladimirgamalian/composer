@@ -805,45 +805,6 @@ QString Project::getAbsolutePath( QString path )
 	return QDir::cleanPath( dir.absoluteFilePath( path ) );
 }
 
-//TODO: restore functional
-//void Project::updateFrameTag()
-//{
-//	QString tag = "";
-//	bool cathed = false;
-//	bool different = false;
-//
-//	foreach( int i, selection.animationSelect )
-//	{
-//		QString newTag = animGetTag( i );
-//		if ( !cathed )
-//		{
-//			tag = newTag;
-//			cathed = true;
-//		}
-//		else
-//		{
-//			if ( newTag != tag )
-//				different = true;
-//		}
-//	}
-//
-//	if ( !cathed )
-//		different = true;
-//
-//	if ( different )
-//		tag = "";
-//
-//	frameTagChangeInProgress = true;
-//	emit setLineEditFrameTag( tag );
-//	frameTagChangeInProgress = false;
-//}
-
-//TODO: remove
-void Project::updateFrameParams()
-{
-
-}
-
 void Project::compositionPicturesShift(QString spritePath, int frameIndex, const QList<int>& pics, int shiftX, int shiftY)
 {
 	foreach(int row, pics)
