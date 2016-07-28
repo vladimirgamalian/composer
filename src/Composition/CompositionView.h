@@ -9,6 +9,9 @@ public:
 	QList<int> getSelected() const;
 	void setSelected( const QList<int>& list );
 
+public slots:
+	void redrawAll();
+
 signals:
 	void deleteSelectedItem();
 	void selectChanged(const QList< int >& selectedIndexes);
@@ -18,7 +21,4 @@ protected:
 	virtual void keyPressEvent( QKeyEvent* event );
 	virtual void dragEnterEvent( QDragEnterEvent *event );
 	virtual void dragMoveEvent( QDragMoveEvent* event );
-
-public slots:
-	void redrawAll();
 };

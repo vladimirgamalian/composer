@@ -318,7 +318,8 @@ void GraphicsScene::startMoving()
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrentFrame();
 	delete frameBackup;
-	frameBackup = project->cloneFrame(spritePath, frameIndex);
+	if (project->isValidFrame(spritePath, frameIndex))
+		frameBackup = project->cloneFrame(spritePath, frameIndex);
 }
 
 void GraphicsScene::finishMoving()

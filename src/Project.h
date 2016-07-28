@@ -69,6 +69,7 @@ public:
 	Sprite* animCloneNode(QString spritePath);
 	void replaceSprite(QString spritePath, Sprite* sprite);
 
+	bool isValidFrame(QString spritePath, int frameIndex);
 	Frame* cloneFrame(QString spritePath, int frameIndex);
 	Frame* getFrame(QString spritePath, int frameIndex);
 	void replaceFrame(QString spritePath, int frameIndex, Frame* frame);

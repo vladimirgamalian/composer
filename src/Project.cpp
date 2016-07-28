@@ -621,6 +621,9 @@ QPoint Project::compositionGetPos(QString spritePath, int frameIndex, int row)
 
 int Project::compositionGetRowCount(QString spritePath, int frameIndex)
 {
+	if (!isValidFrame(spritePath, frameIndex))
+		return 0;
+
 	Frame* frame = getFrame(spritePath, frameIndex);
 	return frame->pictures.size();
 }
@@ -933,6 +936,21 @@ void Project::replaceSprite(QString spritePath, Sprite* sprite)
 	emit animModelReset();
 	emit compositionModelReset();
 	emit sceneModelReset();
+}
+
+bool Project::isValidFrame(QString spritePath, int frameIndex)
+{
+	if (frameIndex < 0)
+		return false;
+	if (spritePath.isEmpty())
+		return false;
+	TreeNode* node = getRootNode()->getNodeByPath(spritePath);
+	if (node->getType() != TreeNode::NodeType::Sprite)
+		return false;
+	Sprite* s = reinterpret_cast<Sprite*>(node);
+	if (frameIndex >= s->frames.size())
+		return false;
+	return true;
 }
 
 void Project::animReverse(QString spritePath, const QList<int>& indexes)
