@@ -575,12 +575,14 @@ void Project::animRemoveFrames(QString spritePath, const QList<int>& frames)
 	Q_ASSERT(max < sprite->frames.size());
 
 	QList<IntervalSorter::Item> intervals = IntervalSorter::sort(frames);
-	for (auto interval: intervals)
+	QList<IntervalSorter::Item>::const_iterator i = intervals.constEnd();
+	while (i != intervals.constBegin())
 	{
-		emit animBeginRemoveRows(interval.first, interval.last);
-		int count = intervals.size();
+		--i;
+		emit animBeginRemoveRows(i->first, i->last);
+		int count = i->size();
 		while (count--)
-			sprite->frames.removeAt(interval.first);
+			sprite->frames.removeAt(i->first);
 		emit animEndRemoveRows();
 	}
 }

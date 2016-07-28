@@ -326,6 +326,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 	//connect(&project, &Project::setActiveNode, this, &MainWindow::setActiveNode);
 
+	//TODO: check and move to setConnection()
+
 	connect( &project, SIGNAL( animModelReset() ), animationModel, SLOT( animModelReset() ) );
 	connect( &project, SIGNAL( animSetSelect( const QList< int >& ) ), animationView, SLOT( animSetSelect( const QList< int >& ) ) );
 
@@ -374,7 +376,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	connect(spriteModel, &SpriteModel::dragDropNode, this, &MainWindow::dragDropSpriteNode);
 	
 
-	connect(animationView, &AnimationView::deleteSelectedItem, this, &MainWindow::actionAnimationDeleteFrame);
+
 	
 	connect(compositionModel, &CompositionModel::dropPictures, this, &MainWindow::dropPictures);
 	connect(graphicsScene, &GraphicsScene::dropPictures, this, &MainWindow::dropPictures);
@@ -812,6 +814,7 @@ void MainWindow::setConnections()
 	connect(spriteView, &SpriteView::resetCurrentNode, this, &MainWindow::onResetCurrentSprite);
 
 	connect(animationView, &AnimationView::selectChanged, this, &MainWindow::frameSelectChanged);
+	connect(animationView, &AnimationView::deleteSelectedItem, this, &MainWindow::actionAnimationDeleteFrame);
 
 	connect(animationModel, &AnimationModel::dragDrop, this, &MainWindow::animDragDrop);
 
