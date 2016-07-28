@@ -10,6 +10,7 @@ SpriteView::SpriteView( QWidget *parent /*= 0 */ ) :
 	setDefaultDropAction( Qt::MoveAction );
 	setAutoExpandDelay( 1000 );
 	setDropIndicatorShown( true );
+	//setRootIsDecorated(false);
 
 	header()->setSectionResizeMode( QHeaderView::ResizeToContents );
 	header()->setStretchLastSection( false );
@@ -18,13 +19,13 @@ SpriteView::SpriteView( QWidget *parent /*= 0 */ ) :
 
 void SpriteView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
-	//qDebug() << "currentChanged " << current << ", " << previous;
+	qDebug() << "currentChanged " << current << ", " << previous;
 	emit resetCurrentNode();
 }
 
 void SpriteView::recursiveScan(QModelIndex node, QList<QModelIndex>& result, bool onlyWithChildren) const
 {
-	Q_ASSERT(node.isValid());
+	//Q_ASSERT(node.isValid());
 
 	int row = 0;
 	for (;;)
@@ -43,7 +44,7 @@ void SpriteView::recursiveScan(QModelIndex node, QList<QModelIndex>& result, boo
 QModelIndex SpriteView::getNodeFromPath(QString path) const
 {
 	QList<QModelIndex> nodeList;
-	QModelIndex root = rootIndex();
+	QModelIndex root = model()->index(0, 0);
 	recursiveScan(root, nodeList, false);
 
 	for (auto node : nodeList)
@@ -57,7 +58,7 @@ void SpriteView::setCurrentNode(QString nodePath)
 	//qDebug() << "setCurrentNode  " << nodePath;
 
 	QModelIndex node = getNodeFromPath(nodePath);
-	Q_ASSERT(node.isValid());
+	//Q_ASSERT(node.isValid());
 
 	if (node != currentIndex())
 		setCurrentIndex(node);
@@ -70,7 +71,7 @@ void SpriteView::setCurrentNode(QString nodePath)
 QStringList SpriteView::getExpandedNodeList() const
 {
 	QList<QModelIndex> nodeList;
-	QModelIndex root = rootIndex();
+	QModelIndex root = model()->index(0, 0);
 	recursiveScan(root, nodeList, true);
 
 	QStringList result;
@@ -85,10 +86,10 @@ QStringList SpriteView::getExpandedNodeList() const
 
 void SpriteView::setExpandedNodeList(const QStringList& expandedNodeList)
 {
-	collapseAll();
+	//collapseAll();
 
 	QList<QModelIndex> nodeList;
-	QModelIndex root = rootIndex();
+	QModelIndex root = model()->index(0, 0);
 	recursiveScan(root, nodeList, true);
 
 	for (auto node : nodeList)

@@ -121,8 +121,6 @@ void MainWindow::createSpriteView(SpriteModel* spriteModel)
 
 	spriteView = new SpriteView( this );
 	spriteView->setModel(spriteModel);
-	spriteView->setRootIndex(spriteModel->getRootIndex());
-
 	spriteView->addAction( ui.actionSpritesNewFolder );
 	spriteView->addAction( ui.actionSpritesNewSprite );
 	spriteView->addAction( ui.actionSpritesMoveSprite );
@@ -295,8 +293,14 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 	setConnections();
 
+
+	spriteView->setCurrentIndex(spriteModel->getRootIndex());
+	onResetCurrentSprite();
+
+
 	if ( isLoadLastProjectAtStartup() )
 		loadLastProject();
+	
 }
 
 MainWindow::~MainWindow()
@@ -312,9 +316,8 @@ bool MainWindow::isLoadLastProjectAtStartup()
 
 void MainWindow::newProject()
 {
-//	spriteModel->clear();
 	project.newProject();
-//	graphicsView->newProject();
+	graphicsView->newProject(); // reset guide lines
 }
 
 void MainWindow::loadSettings()

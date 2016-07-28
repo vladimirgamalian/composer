@@ -41,6 +41,5 @@ private:
 	Project* project;
 	QModelIndex createModelIndexFromNode(const TreeNode* node) const;
 	TreeNode* getNodeFromModelIndex(const QModelIndex& index) const;
-	TreeNode* getNodeFromModelIndexOrRootNode(const QModelIndex& index) const;
 	bool itemIsDropEnabled( const QModelIndex& index ) const;
 };

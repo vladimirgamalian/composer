@@ -9,8 +9,6 @@ SpriteModel::SpriteModel( Project* project, QObject *parent /*= 0 */ )
 
 	connect( project, SIGNAL( beginRemoveSpriteNode( TreeNode* ) ), this, SLOT( beginRemoveSpriteNode( TreeNode* ) ) );
 	connect( project, SIGNAL( endRemoveSpriteNode() ), this, SLOT( endRemoveSpriteNode() ) );
-
-	//connect( project, SIGNAL( spriteNodeDataChanged( TreeNode* ) ), this, SLOT( spriteNodeDataChanged( TreeNode* ) ) );
 }
 
 SpriteModel::~SpriteModel()
@@ -49,14 +47,7 @@ TreeNode* SpriteModel::getNodeFromModelIndex(const QModelIndex& index) const
 	return reinterpret_cast< TreeNode* >( index.internalPointer() );
 }
 
-TreeNode* SpriteModel::getNodeFromModelIndexOrRootNode(const QModelIndex& index) const
-{
-	if (index.isValid())
-		return getNodeFromModelIndex(index);
-	return project->projectData.spriteRoot;
-}
-
-QModelIndex SpriteModel::parent( const QModelIndex & index ) const
+QModelIndex SpriteModel::parent( const QModelIndex& index ) const
 {
 	Q_ASSERT(index.isValid());
 	const TreeNode* parentNode = getNodeFromModelIndex(index)->getParent();
@@ -65,7 +56,7 @@ QModelIndex SpriteModel::parent( const QModelIndex & index ) const
 	return createModelIndexFromNode(parentNode);
 }
 
-int SpriteModel::rowCount( const QModelIndex & parent ) const
+int SpriteModel::rowCount( const QModelIndex& parent ) const
 {
 	return parent.isValid() ? getNodeFromModelIndex(parent)->childCount() : 1;
 }
@@ -75,9 +66,9 @@ int SpriteModel::columnCount( const QModelIndex& parent ) const
 	return 1;
 }
 
-QVariant SpriteModel::data( const QModelIndex & index, int role /*= Qt::DisplayRole */ ) const
+QVariant SpriteModel::data( const QModelIndex& index, int role /*= Qt::DisplayRole */ ) const
 {
-	if ( !index.isValid() )
+	if (!index.isValid())
 		return QVariant();
 
 	TreeNode* item = getNodeFromModelIndex( index );
@@ -94,7 +85,7 @@ QVariant SpriteModel::data( const QModelIndex & index, int role /*= Qt::DisplayR
 	return QVariant();
 }
 
-Qt::ItemFlags SpriteModel::flags( const QModelIndex & index ) const
+Qt::ItemFlags SpriteModel::flags( const QModelIndex& index ) const
 {
 	Qt::ItemFlags r = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsDragEnabled;
 	if ( itemIsDropEnabled( index ) )

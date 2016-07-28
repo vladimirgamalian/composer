@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "TreeNode.h"
 
-TreeNode::TreeNode() 
-	: parent( 0 ) 
+TreeNode::TreeNode()
 {
 
 }

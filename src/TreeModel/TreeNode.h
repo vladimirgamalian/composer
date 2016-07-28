@@ -59,7 +59,7 @@ protected:
 
 private:
 	bool parentLock = false;
-	TreeNode* parent;
+	TreeNode* parent = nullptr;
 	QList< TreeNode* > children;
 	QRegularExpression re{ R"(^((\/\d{1,10})+|\/)$)" };
 };
