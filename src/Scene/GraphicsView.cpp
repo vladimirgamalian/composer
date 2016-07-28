@@ -29,7 +29,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene, QWidget* parent /*= 0 */ ) : Q
 	//setCacheMode(QGraphicsView::CacheBackground);
 
 	comboBoxZoom = 0;
-	zoomPreset = {100, 200, 300, 400, 500, 600, 800, 1000, 1200, 1600, 3200};
+	zoomPreset = {100, 200, 300, 400, 500, 600, 800, 1000, 1200};
 
 	rulerState = RulerState::Still;
 	handScrolling = false;
