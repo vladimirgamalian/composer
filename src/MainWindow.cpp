@@ -224,9 +224,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	connect( ui.actionSaveProjectAs, SIGNAL( triggered() ), this, SLOT( actionProjectSaveAs() ) );
 	connect( ui.actionOpenProject, SIGNAL( triggered() ), this, SLOT( actionProjectOpen() ) );
 	connect( ui.actionNewProject, SIGNAL( triggered() ), this, SLOT( actionProjectNew() ) );
-
 	connect( ui.actionRemoveRulers, SIGNAL( triggered() ), this, SLOT( actionRemoveRulers() ) );
-	
 
 	undoStack = new QUndoStack(this);
 	createUndoView();
@@ -236,10 +234,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	redoAction->setShortcuts(QKeySequence::Redo);
 	uiSetupUndoRedoAction();
 
-
-	//createHistoryWidget();
 	createAboutDialog();
-	
 
 	spriteModel = new SpriteModel( &project, this );
 	createSpriteView(spriteModel);
@@ -259,24 +254,10 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 	spriteMoveDialog = new SpriteMoveDialog( this );
 
-
 	connect( spriteMoveDialog, SIGNAL( accepted() ), this, SLOT( moveSpriteDialogAccepted() ) );
-
-
-	
 
 	createRecentActions();
 	readRecentFileList();
-
-
-
-
-
-
-
-
-//	connect( compositionModel, SIGNAL( dataChanged( const QModelIndex&, const QModelIndex& ) ), this, SLOT( modelCompositionDataChanged( const QModelIndex&, const QModelIndex& ) ) );
-	
 
 	loadSettings();
 
@@ -288,8 +269,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	connect( ui.actionSnapToPictures, SIGNAL( triggered( bool ) ), graphicsScene, SLOT( triggerStickToPictures( bool ) ) );
 	connect( ui.actionSnapToGuides, SIGNAL( triggered( bool ) ), graphicsScene, SLOT( triggerStickToGuides( bool ) ) );
 
-
-
 	QComboBox* comboBoxZoom = new QComboBox;
 	ui.mainToolBar->addSeparator();
 	ui.mainToolBar->addWidget( new QLabel( "    " ) );
@@ -297,95 +276,27 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	ui.mainToolBar->addWidget( new QLabel( "   " ) );
 	graphicsView->setComboBoxZoom( comboBoxZoom );
 
-
-	//QLabel* spinBoxPicXLabel = new QLabel( "    X: " );
-	//QLabel* spinBoxPicYLabel = new QLabel( "    Y: " );
-	//QSpinBox* spinBoxPicX = new QSpinBox;
-	//QSpinBox* spinBoxPicY = new QSpinBox;
-	//ui.mainToolBar->addSeparator();
-	//ui.mainToolBar->addWidget( spinBoxPicXLabel );
-	//ui.mainToolBar->addWidget( spinBoxPicX );
-	//ui.mainToolBar->addWidget( spinBoxPicYLabel );
-	//ui.mainToolBar->addWidget( spinBoxPicY );
-
-
-	
-	//compositionView->setGraphicsScene( &project, graphicsScene );
-
-	//connect( graphicsView, SIGNAL( delPressed() ), compositionView, SLOT( delPressed() ) );
-
-
-
-
-	
-	//connect( ui.actionUndo, SIGNAL( triggered() ), this, SLOT( actionUndo() ) );
-	//connect( ui.actionRedo, SIGNAL( triggered() ), this, SLOT( actionRedo() ) );
-
-	//connect(&project, &Project::setActiveNode, this, &MainWindow::setActiveNode);
-
-	//TODO: check and move to setConnection()
-
-	//connect( &project, SIGNAL( animModelReset() ), animationModel, SLOT( animModelReset() ) );
-	//connect( &project, SIGNAL( animSetSelect( const QList< int >& ) ), animationView, SLOT( animSetSelect( const QList< int >& ) ) );
-
 	connect( &project, SIGNAL( compositionModelReset() ), compositionModel, SLOT( resetModel() ) );
 	connect( &project, SIGNAL( sceneModelReset() ), graphicsScene, SLOT( resetModel() ) );
-	
-
 	connect( &project, SIGNAL( animBeginRemoveRows( int, int ) ), animationModel, SLOT( animBeginRemoveRows( int, int ) ) );
 	connect( &project, SIGNAL( animEndRemoveRows() ), animationModel, SLOT( animEndRemoveRows() ) );
-
 	connect( &project, SIGNAL( animBeginInsertRows( int, int ) ), animationModel, SLOT( animBeginInsertRows( int, int ) ) );
 	connect( &project, SIGNAL( animEndInsertRows() ), animationModel, SLOT( animEndInsertRows() ) );
-
-
-
 	connect( &project, SIGNAL( compositionBeginRemoveRows( int, int ) ), compositionModel, SLOT( compositionBeginRemoveRows( int, int )  ) );
 	connect( &project, SIGNAL( compositionEndRemoveRows() ), compositionModel, SLOT( compositionEndRemoveRows() ) );
-
 	connect( &project, SIGNAL( compositionBeginInsertRows( int, int ) ), compositionModel, SLOT( compositionBeginInsertRows( int, int )  ) );
 	connect( &project, SIGNAL( compositionEndInsertRows() ), compositionModel, SLOT( compositionEndInsertRows() ) );
-
-
-	//connect( &project, SIGNAL( spriteModelReset() ), spriteModel, SLOT( resetModel() ) );
-
-	//connect( &project, SIGNAL( sceneSetSelect( const QList< int >& ) ), graphicsScene, SLOT( setSelectedIndexes( const QList< int >& ) ) );
-
-	
-	//connect( &project, SIGNAL( compositionSetSelect( const QList< int >& ) ), compositionView, SLOT( setSelect( const QList< int >& ) ) );
-
-
-	//connect( &project, SIGNAL( setSpriteTotalDuration( int ) ), labelTotalDurationValue, SLOT( setNum( int ) ) );
-
-
 	connect( &project, SIGNAL( setLineEditFrameTag( const QString & ) ), lineEditFrameTag, SLOT( setText( const QString & ) ) );
 	connect( lineEditFrameTag, SIGNAL( textChanged( const QString & ) ), &project, SLOT( lineEditFrameTagTextChanged( const QString & ) ) );
-	
-
-	//connect( &project, SIGNAL( animDataChanged( int ) ), animationModel, SLOT( animDataChanged( int ) ) );
-
-	//connect( &project, SIGNAL( sceneModelRedraw() ), graphicsView, SLOT( redrawAll() ) );
-
-	//connect( &project, SIGNAL( compositionModelRedraw() ), compositionView, SLOT( redrawAll() ) );
-
-	
 	connect(spriteModel, &SpriteModel::renameNode, this, &MainWindow::renameSpriteNode);
 	connect(spriteModel, &SpriteModel::dragDropNode, this, &MainWindow::dragDropSpriteNode);
-	
-
-
-	
 	connect(compositionModel, &CompositionModel::dropPictures, this, &MainWindow::dropPictures);
 	connect(graphicsScene, &GraphicsScene::dropPictures, this, &MainWindow::dropPictures);
 
-
 	setConnections();
-
 
 	if ( isLoadLastProjectAtStartup() )
 		loadLastProject();
-
-	//updateSpriteAction();
 }
 
 MainWindow::~MainWindow()
