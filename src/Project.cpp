@@ -12,18 +12,18 @@ Project::~Project()
 	//delete projectData.spriteRoot;
 }
 
-void Project::load( QDomElement& node, const QString& rootPath )
+void Project::load( QDomElement& node, const QString& path )
 {
-	this->rootPath = rootPath;
+	rootPath = path;
 	projectData.spriteRoot->delChildren();
 	QDomElement sprites = node.firstChildElement( "sprites" );
 	loadSpriteNodeRecursive( sprites, projectData.spriteRoot );
 }
 
-void Project::save(QDomElement& node, const QString& rootPath)
+void Project::save(QDomElement& node, const QString& path)
 {
 	//TODO: probably remove rootPath from Prokect
-	this->rootPath = rootPath;
+	rootPath = path;
 
 	QDomElement sprites = node.ownerDocument().createElement("sprites");
 	saveSpriteNodeRecursive(sprites, projectData.spriteRoot);
@@ -207,7 +207,7 @@ QString Project::spriteAddNode(QString path, QString name, TreeNode::NodeType no
 	Q_ASSERT(node->isInheritable());
 
 	int row = node->childCount();
-	TreeNode* newNode;
+	TreeNode* newNode = nullptr;
 	switch (nodeType)
 	{
 	case TreeNode::NodeType::Folder:
@@ -814,15 +814,22 @@ QList<T> reversedQList( const QList<T> & in )
 
 bool Project::spritesCompress(QString spritePath, const QList<int>& selected, bool testOnly)
 {
-	Sprite* sprite = getSprite(spritePath);
+	int size = selected.size();
+	if (size < 2)
+		return false;
+	if (IntervalSorter::sort(selected).size() != 1)
+		return false;
+
+	QList<int> l(selected);
+	std::sort(l.begin(), l.end());
+	int begin = l.first();
 	
+	Sprite* sprite = getSprite(spritePath);
 	bool spriteChanged = false;
 	for (;;)
 	{
 		bool changes = false;
-
-		int size = sprite->frames.size();
-		for ( int i = 1; i < size; ++i )
+		for ( int i = begin + 1; i < begin + size; ++i )
 		{
 			if ( sprite->frames[ i - 1 ]->isEqual( sprite->frames[ i ] ) )
 			{
@@ -838,6 +845,7 @@ bool Project::spritesCompress(QString spritePath, const QList<int>& selected, bo
 
 				spriteChanged = true;
 				changes = true;
+				size--;
 				break;
 			}
 		}
@@ -937,16 +945,4 @@ void Project::scenePicturesMove(QString spritePath, int frameIndex, const QList<
 
 	for (auto i: moveData)
 		compostionGetPicture(spritePath, frameIndex, i.index)->setPos(newPos ? i.newPos : i.oldPos);
-}
-
-void Project::lineEditFrameTagTextChanged(const QString& value)
-{
-	//TODO: restore functional
-// 	if ( frameTagChangeInProgress )
-// 		return;
-// 
-// 	foreach( int i, selection.animationSelect )
-// 	{
-// 		animSetFrameTag( i, value );
-// 	}
 }
