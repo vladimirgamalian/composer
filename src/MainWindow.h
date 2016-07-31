@@ -20,12 +20,11 @@
 class MainWindow : public QMainWindowEx
 {
 	Q_OBJECT
-
 public:
 	MainWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 	virtual ~MainWindow();
 
-public slots:
+	public slots:
 	void actionSpritesNewFolder();
 	void actionSpritesNewSprite();
 	void actionSpritesRemoveItem();
@@ -41,46 +40,31 @@ public slots:
 	void actionAbout();
 	void actionCompositionOpenPicture();
 	void actionRemoveRulers();
-
 	void graphicsSceneSelectionChanged();
 	void compositionViewSelectionChanged(const QList< int >& selectedIndexes);
-
 	void moveSpriteDialogAccepted();
-
 	void renameSpriteNode(QString path, QString newName);
-
 	void dragDropSpriteNode(QString oldPath, QString newPath, bool copy);
-
 	void dropPictures(int compositionIndex, QPoint pos, QStringList fileList);
-
-	// animation view drag-n-drop
-	//TODO: remove QString spritePath
+	//TODO: remove spritePath
 	void animDragDrop(QString spritePath, const QList<int>& indexes, int row, bool copyAction);
-
-
 	void compositionDeleteSelectedItem();
-
 	void compositionDragDrop(const QList<int>& indexes, int row, bool copyAction);
-
 	void sceneMovePictures(QString spritePath, int frameIndex, QList<Project::MovePicData> moveData);
 	void sceneTogglePicsVisible(QString spritePath, int frameIndex, const QList<int>& pics);
-
 	void frameDurationSpinnerChanged(int value);
-
 	void frameSelectChanged();
-
 	void labelTagChanged();
+	void invalidateAll();
 
 private:
 	void loadSettings();
 	void saveSettings();
 	virtual void newProject() override;
-	virtual bool saveProject( QString fileName ) override;
-	virtual bool loadProject( QString fileName ) override;
+	virtual bool saveProject(QString fileName) override;
+	virtual bool loadProject(QString fileName) override;
 	virtual void onClose() override;
 	virtual void setProjectModified(bool changed = true) override;
-	void saveSprites( QDomElement& node );
-	void saveSprite( QDomElement& xmlNode, QStandardItem* spriteNode );
 	bool isLoadLastProjectAtStartup();
 	void updateSpriteActions();
 	void updateAnimationActions();
@@ -98,6 +82,7 @@ private:
 	void uiSetupUndoRedoAction();
 	void updateFrameTotalDuration();
 	void undoStackCleanChanged(bool clean);
+	void clearUndoHistory();
 
 	Ui::composerClass ui;
 	Project project;

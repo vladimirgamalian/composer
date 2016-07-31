@@ -317,8 +317,9 @@ bool MainWindow::isLoadLastProjectAtStartup()
 
 void MainWindow::newProject()
 {
+	clearUndoHistory();
 	project.newProject();
-	spriteModel->resetModel();
+	invalidateAll();
 	spriteView->setCurrentIndex(spriteModel->getRootIndex());
 	graphicsView->newProject(); // reset guide lines
 }
@@ -337,7 +338,7 @@ void MainWindow::loadSettings()
 void MainWindow::onClose()
 {
 	saveSettings();
-	undoStack->clear();
+	//clearUndoHistory();
 }
 
 void MainWindow::saveSettings()
@@ -379,13 +380,12 @@ bool MainWindow::saveProject( QString fileName )
 		QTextStream stream( &outFile );
 		stream << doc.toString();
 
-		undoStack->clear();
+		clearUndoHistory();
 	}
 	catch ( ... )
 	{
 		return false;
 	}
-
 
 	return true;
 }
@@ -409,8 +409,9 @@ bool MainWindow::loadProject( QString fileName )
 		if ( root.tagName() != "project" )
 			throw std::runtime_error( "invalid project format" );
 
+		clearUndoHistory();
 		project.load( root, projectDir );
-		spriteModel->resetModel();
+		invalidateAll();
 
 		spriteView->load(root);
 		graphicsView->load( root );
@@ -819,6 +820,14 @@ void MainWindow::labelTagChanged()
 	undoStack->push(undoCommand);
 }
 
+void MainWindow::invalidateAll()
+{
+	spriteModel->resetModel();
+	animationModel->resetModel();
+	compositionModel->resetModel();
+	graphicsScene->resetModel();
+}
+
 void MainWindow::updateFrameTotalDuration()
 {
 	QString nodePath = spriteView->getCurrentNode();
@@ -840,6 +849,11 @@ void MainWindow::updateFrameTotalDuration()
 void MainWindow::undoStackCleanChanged(bool clean)
 {
 	setProjectModified(!clean);
+}
+
+void MainWindow::clearUndoHistory()
+{
+	undoStack->clear();
 }
 
 void MainWindow::setProjectModified(bool changed /*= true*/)
