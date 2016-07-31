@@ -39,6 +39,11 @@ bool Frame::isEqual( const Frame* frame ) const
 {
 	int s = pictures.size();
 
+	if (!tag.isEmpty())
+		return false;
+	if (!frame->tag.isEmpty())
+		return false;
+
 	if ( s != frame->pictures.size() )
 		return false;
 
