@@ -10,4 +10,5 @@ AnimationCompressCommand::AnimationCompressCommand(CommandEnv* commandEnv, QStri
 void AnimationCompressCommand::action()
 {
 	commandEnv->project->spritesCompress(spritePath, indexes, false);
+	commandEnv->animationView->setSelected(QList<int>());
 }
