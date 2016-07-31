@@ -220,6 +220,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 	ui.setupUi(this);
 
+	ui.actionSaveProject->setEnabled(false);
+
 	connect( ui.actionSaveProject, SIGNAL( triggered() ), this, SLOT( actionProjectSave() ) );
 	connect( ui.actionSaveProjectAs, SIGNAL( triggered() ), this, SLOT( actionProjectSaveAs() ) );
 	connect( ui.actionOpenProject, SIGNAL( triggered() ), this, SLOT( actionProjectOpen() ) );
@@ -335,6 +337,7 @@ void MainWindow::loadSettings()
 void MainWindow::onClose()
 {
 	saveSettings();
+	undoStack->clear();
 }
 
 void MainWindow::saveSettings()
@@ -375,6 +378,8 @@ bool MainWindow::saveProject( QString fileName )
 
 		QTextStream stream( &outFile );
 		stream << doc.toString();
+
+		undoStack->clear();
 	}
 	catch ( ... )
 	{
@@ -405,6 +410,8 @@ bool MainWindow::loadProject( QString fileName )
 			throw std::runtime_error( "invalid project format" );
 
 		project.load( root, projectDir );
+		spriteModel->resetModel();
+
 		spriteView->load(root);
 		graphicsView->load( root );
 	}
@@ -677,16 +684,6 @@ void MainWindow::actionAnimationCopyFrameAfter()
 	undoStack->push(undoCommand);
 }
 
-void MainWindow::actionUndo()
-{
-	qDebug() << "actionUndo";
-}
-
-void MainWindow::actionRedo()
-{
-	qDebug() << "actionRedo";
-}
-
 void MainWindow::graphicsSceneSelectionChanged()
 {
 	if (graphicsScenePreventUpdateSelection)
@@ -754,6 +751,8 @@ void MainWindow::setConnections()
 	connect(&project, &Project::animDataChanged, this, &MainWindow::updateFrameDurationSpinBox);
 	connect(&project, &Project::animDataChanged, this, &MainWindow::updateFrameTotalDuration);
 	connect(&project, &Project::animDataChanged, this, &MainWindow::updateFrameTagLineEdit);
+
+	connect(undoStack, &QUndoStack::cleanChanged, this, &MainWindow::undoStackCleanChanged);
 }
 
 void MainWindow::onResetCurrentSprite()
@@ -836,4 +835,15 @@ void MainWindow::updateFrameTotalDuration()
 		labelTotalDurationValue->setEnabled(false);
 		labelTotalDuration->setEnabled(false);
 	}
+}
+
+void MainWindow::undoStackCleanChanged(bool clean)
+{
+	setProjectModified(!clean);
+}
+
+void MainWindow::setProjectModified(bool changed /*= true*/)
+{
+	QMainWindowEx::setProjectModified(changed);
+	ui.actionSaveProject->setEnabled(changed);
 }

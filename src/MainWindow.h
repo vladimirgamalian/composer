@@ -40,8 +40,6 @@ public slots:
 	void actionAnimationCompress();
 	void actionAbout();
 	void actionCompositionOpenPicture();
-	void actionUndo();
-	void actionRedo();
 	void actionRemoveRulers();
 
 	void graphicsSceneSelectionChanged();
@@ -80,6 +78,7 @@ private:
 	virtual bool saveProject( QString fileName ) override;
 	virtual bool loadProject( QString fileName ) override;
 	virtual void onClose() override;
+	virtual void setProjectModified(bool changed = true) override;
 	void saveSprites( QDomElement& node );
 	void saveSprite( QDomElement& xmlNode, QStandardItem* spriteNode );
 	bool isLoadLastProjectAtStartup();
@@ -98,6 +97,7 @@ private:
 	void onResetCurrentSprite();
 	void uiSetupUndoRedoAction();
 	void updateFrameTotalDuration();
+	void undoStackCleanChanged(bool clean);
 
 	Ui::composerClass ui;
 	Project project;

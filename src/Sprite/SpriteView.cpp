@@ -26,14 +26,11 @@ void SpriteView::keyPressEvent(QKeyEvent* event)
 
 void SpriteView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
-	qDebug() << "currentChanged " << current << ", " << previous;
 	emit resetCurrentNode();
 }
 
 void SpriteView::recursiveScan(QModelIndex node, QList<QModelIndex>& result, bool onlyWithChildren) const
 {
-	//Q_ASSERT(node.isValid());
-
 	int row = 0;
 	for (;;)
 	{

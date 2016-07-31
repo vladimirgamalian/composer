@@ -14,15 +14,13 @@ public slots:
 	void actionProjectOpenRecent();
 	
 protected:
-
 	enum { MaxRecentFiles = 9 };
-	QAction *recentFileActs[ MaxRecentFiles ];
 
 	void loadLastProject();
 	void readRecentFileList();
 
 	// TODO: remake after undo/redo completed
-	void setProjectModified( bool changed = true );
+	virtual void setProjectModified( bool changed = true );
 
 	virtual void newProject() = 0;
 	virtual bool saveProject( QString fileName ) = 0;
@@ -33,6 +31,7 @@ protected:
 
 	void openProjectInt( QString fileName );
 
+	QAction *recentFileActs[MaxRecentFiles];
 private:
 
 	QString projectFileName;
