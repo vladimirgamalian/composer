@@ -489,5 +489,8 @@
     <ClInclude Include="..\..\src\Utils\ScopedBool.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Sprite\SpriteRoot.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,8 +4,7 @@
 
 Project::Project()
 {
-	projectData.spriteRoot = new SpriteFolder( "root" );
-	projectData.spriteRoot->lockParent();
+	projectData.spriteRoot = new SpriteRoot();
 }
 
 Project::~Project()
@@ -59,6 +58,8 @@ void Project::saveSpriteNodeRecursive( QDomElement& xmlNode, TreeNode* spriteNod
 	for ( int row = 0; row < spriteNode->childCount(); ++row )
 	{
 		TreeNode* item = spriteNode->child( row );
+
+		Q_ASSERT(!item->isRoot());
 
 		if ( item->isFolder())
 		{
@@ -142,30 +143,6 @@ void Project::loadFrame( QDomElement& node, Frame* sprite )
 	}
 }
 
-//TreeNode* Project::getChild( TreeNode* parent, int row ) const
-//{
-//	if ( !parent )
-//		parent = spriteRoot;
-//
-//	return parent->child( row );
-//}
-//
-//TreeNode* Project::getParent( TreeNode* node ) const
-//{
-//	if ( !node )
-//		return 0;
-//
-//	return node->getParent();
-//}
-//
-//int Project::getChildrenCount( TreeNode* node ) const
-//{
-//	if ( !node )
-//		node = spriteRoot;
-//
-//	return node->childCount();
-//}
-
 bool Project::isValidNodeName( QString nodeName ) const
 {
 	QRegExp rx( "([a-zA-Z_][a-zA-Z0-9_]*)" );
@@ -227,7 +204,7 @@ QString Project::spriteAddNode(QString path, QString name, TreeNode::NodeType no
 {
 	TreeNode* node = projectData.spriteRoot->getNodeByPath(path);
 	Q_ASSERT(node);
-	Q_ASSERT(node->isFolder());
+	Q_ASSERT(node->isInheritable());
 
 	int row = node->childCount();
 	TreeNode* newNode;
@@ -775,7 +752,7 @@ bool Project::isNodeDeletable(QString nodePath)
 
 bool Project::isNodeInheritable(QString nodePath)
 {
-	return getNodeByPath(nodePath)->isFolder();
+	return getNodeByPath(nodePath)->isInheritable();
 }
 
 TreeNode* Project::getNodeByPath(QString nodePath)

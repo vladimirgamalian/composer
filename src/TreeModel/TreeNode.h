@@ -5,6 +5,7 @@ class TreeNode
 public:
 	enum class NodeType
 	{
+		Root,
 		Folder,
 		Sprite
 	};
@@ -23,8 +24,6 @@ public:
 	void unlinkFromParent();
 	void delChildren();
 	void delChild( int row );
-
-	void lockParent();
 
 	QString text;
 	QIcon icon;
@@ -50,11 +49,15 @@ public:
 		return getType() == NodeType::Sprite;
 	}
 
+	bool isInheritable() const
+	{
+		return isRoot() || isFolder();
+	}
+
 protected:
 	void cloneChild( TreeNode* node );
 
 private:
-	bool parentLock = false;
 	TreeNode* parent = nullptr;
 	QList< TreeNode* > children;
 	QRegularExpression re{ R"(^((\/\d{1,10})+|\/)$)" };

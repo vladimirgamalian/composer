@@ -44,14 +44,12 @@ int TreeNode::childCount() const
 
 void TreeNode::insertChild( int pos, TreeNode* child )
 {
-	Q_ASSERT(!child->parentLock);
 	child->parent = this;
 	children.insert( pos, child );
 }
 
 void TreeNode::appendChild( TreeNode* child )
 {
-	Q_ASSERT(!child->parentLock);
 	child->parent = this;
 	children.append( child );
 }
@@ -63,13 +61,9 @@ const TreeNode* TreeNode::getParent() const
 
 void TreeNode::unlinkFromParent()
 {
-	Q_ASSERT(!parentLock);
 	Q_ASSERT(parent);
-	//if ( parent )
-	{
-		parent->children.removeOne( this );
-		parent = nullptr;
-	}
+	parent->children.removeOne( this );
+	parent = nullptr;
 }
 
 void TreeNode::delChild( int row )
@@ -79,11 +73,6 @@ void TreeNode::delChild( int row )
 		return;
 	children.removeOne( node );
 	delete node;
-}
-
-void TreeNode::lockParent()
-{
-	parentLock = true;
 }
 
 QString TreeNode::toString() const

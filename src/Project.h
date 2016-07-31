@@ -1,6 +1,7 @@
 #pragma once
-#include "Sprite/Sprite.h"
+#include "Sprite/SpriteRoot.h"
 #include "Sprite/SpriteFolder.h"
+#include "Sprite/Sprite.h"
 #include "ProjectData.h"
 
 class Project : public QObject

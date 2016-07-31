@@ -211,7 +211,7 @@ bool SpriteModel::itemIsDropEnabled(const QModelIndex& index) const
 {
 	if (!index.isValid())
 		return false;
-	return getNodeFromModelIndex(index)->isFolder();
+	return getNodeFromModelIndex(index)->isInheritable();
 }
 
 bool SpriteModel::itemIsRootNode(const QModelIndex& index) const

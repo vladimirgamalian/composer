@@ -1,5 +1,4 @@
 #pragma once
-
 #include "TreeModel/TreeNode.h"
 
 class SpriteFolder : public TreeNode
@@ -11,7 +10,7 @@ public:
 		icon = QIcon( ":/composer/Resources/icons/folderClose" );
 	}
 
-	virtual SpriteFolder* clone()
+	virtual SpriteFolder* clone() override
 	{
 		SpriteFolder* newNode = new SpriteFolder( text );
 		cloneChild( newNode );
