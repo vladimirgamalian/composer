@@ -19,5 +19,5 @@ public:
 		}
 	};
 
-	static QList<Item> sort(QList<int> l);
+	static QList<Item> sort(const QList<int>& src);
 };

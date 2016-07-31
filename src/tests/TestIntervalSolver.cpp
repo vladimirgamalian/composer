@@ -40,3 +40,11 @@ void TestIntervalSolver::basicTest3()
 	QList<IntervalSorter::Item> res = IntervalSorter::sort(src);
 	QCOMPARE(res, expectedResult);
 }
+
+void TestIntervalSolver::basicTest4()
+{
+	QList<int> src({ 5, 6, 2, 3, 7, 8, 10, 12, 15, 20, 16 });
+	QList<IntervalSorter::Item> expectedResult({ { 2,3 },{ 5,8 },{ 10,10 },{ 12,12 },{ 15,16 },{ 20,20 } });
+	QList<IntervalSorter::Item> res = IntervalSorter::sort(src);
+	QCOMPARE(res, expectedResult);
+}

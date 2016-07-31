@@ -3,6 +3,7 @@
 #include "Scene/GraphicsItemPic.h"
 #include "gitver.h"
 #include "Utils/ScopedBool.h"
+#include "IntervalSorter.h"
 #include "Commands/Sprite/SpriteAddNodeCommand.h"
 #include "Commands/Sprite/SpritesDeleteNodeCommand.h"
 #include "Commands/Sprite/SpriteRenameCommand.h"
@@ -585,11 +586,17 @@ void MainWindow::updateFrameTagLineEdit()
 void MainWindow::updateAnimationActions()
 {
 	QString nodePath = spriteView->getCurrentNodeOrRoot();
-	int selected = animationView->getSelected().size();
+	const QList<int> selected = animationView->getSelected();
+	int selectedSize = selected.size();
 
 	bool isSprite = project.isSprite(nodePath);
-	bool isSelected = (selected > 0);
-	bool isSelectedMany = (selected > 1);
+	bool isSelected = (selectedSize > 0);
+	bool isSelectedMany = (selectedSize > 1);
+	bool isOneContiguousSelection = (IntervalSorter::sort(selected).size() == 1);
+	bool isCompressAvailable = isSprite && isSelectedMany && isOneContiguousSelection;
+
+	if (isCompressAvailable)
+		isCompressAvailable = project.spritesCompress(nodePath, selected, true);
 
 	ui.actionAnimationCopyFrameAfter->setEnabled(isSprite && isSelected);
 	ui.actionAnimationCopyFrameBefore->setEnabled(isSprite && isSelected);
@@ -597,7 +604,7 @@ void MainWindow::updateAnimationActions()
 	ui.actionAnimationInsertAfter->setEnabled(isSprite);
 	ui.actionAnimationInsertBefore->setEnabled(isSprite);
 	ui.actionAnimationReverseFrames->setEnabled(isSprite && isSelectedMany);
-	ui.actionAnimationCompress->setEnabled(isSprite && isSelectedMany);
+	ui.actionAnimationCompress->setEnabled(isCompressAvailable);
 }
 
 void MainWindow::actionAnimationInsertFrameBefore()
@@ -628,10 +635,14 @@ void MainWindow::actionAnimationDeleteFrame()
 
 void MainWindow::actionAnimationCompress()
 {
-	//TODO: test if nothing will be changed, do not create undo history point
-
+	const QList<int> selected = animationView->getSelected();
+	if (selected.isEmpty())
+		return;
 	QString spritePath = spriteView->getCurrentNode();
-	AnimationCompressCommand *undoCommand = new AnimationCompressCommand(commandEnvFabric->getCommandEnv(), spritePath);
+	if (!project.spritesCompress(spritePath, selected, true))
+		return;
+	AnimationCompressCommand *undoCommand = new AnimationCompressCommand(commandEnvFabric->getCommandEnv(),
+		spritePath, selected);
 	undoStack->push(undoCommand);
 }
 
@@ -699,11 +710,12 @@ void MainWindow::compositionViewSelectionChanged(const QList< int >& selectedInd
 
 void MainWindow::actionAnimationReverseFrames()
 {
-	if (animationView->getSelected().isEmpty())
+	const QList<int> selected = animationView->getSelected();
+	if (selected.isEmpty())
 		return;
-
+	QString spritePath = spriteView->getCurrentNode();
 	AnimationReverseCommand *undoCommand = new AnimationReverseCommand(commandEnvFabric->getCommandEnv(),
-		spriteView->getCurrentNode(), animationView->getSelected());
+		spritePath, selected);
 	undoStack->push(undoCommand);
 }
 

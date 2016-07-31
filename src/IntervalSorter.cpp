@@ -1,9 +1,12 @@
 #include "stdafx.h"
 #include "IntervalSorter.h"
 
-QList<IntervalSorter::Item> IntervalSorter::sort(QList<int> l)
+QList<IntervalSorter::Item> IntervalSorter::sort(const QList<int>& src)
 {
 	QList<Item> result;
+
+	QList<int> l(src);
+	std::sort(l.begin(), l.end());
 
 	if (l.empty())
 		return result;

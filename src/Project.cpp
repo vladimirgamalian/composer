@@ -812,7 +812,7 @@ QList<T> reversedQList( const QList<T> & in )
 	return result;
 }
 
-bool Project::spritesCompress(QString spritePath)
+bool Project::spritesCompress(QString spritePath, const QList<int>& selected, bool testOnly)
 {
 	Sprite* sprite = getSprite(spritePath);
 	
@@ -826,6 +826,9 @@ bool Project::spritesCompress(QString spritePath)
 		{
 			if ( sprite->frames[ i - 1 ]->isEqual( sprite->frames[ i ] ) )
 			{
+				if (testOnly)
+					return true;
+
 				int totalDuration = sprite->frames[ i - 1 ]->getDuration() + sprite->frames[ i ]->getDuration();
 				sprite->frames[ i - 1 ]->setDuration( totalDuration );
 

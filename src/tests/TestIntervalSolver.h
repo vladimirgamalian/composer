@@ -9,4 +9,5 @@ private slots:
 	void basicTest1();
 	void basicTest2();
 	void basicTest3();
+	void basicTest4();
 };

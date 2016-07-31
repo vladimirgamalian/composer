@@ -75,7 +75,7 @@ public:
 	Frame* getFrame(QString spritePath, int frameIndex);
 	void replaceFrame(QString spritePath, int frameIndex, Frame* frame);
 
-	bool spritesCompress(QString spritePath);
+	bool spritesCompress(QString spritePath, const QList<int>& selected, bool testOnly);
 
 	//////////////////////////////////////////////////////////////////////////
 	// composition model
