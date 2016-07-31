@@ -585,19 +585,19 @@ void MainWindow::updateFrameTagLineEdit()
 void MainWindow::updateAnimationActions()
 {
 	QString nodePath = spriteView->getCurrentNodeOrRoot();
-	QList<int> selected = animationView->getSelected();
+	int selected = animationView->getSelected().size();
 
 	bool isSprite = project.isSprite(nodePath);
-	bool isSelected = animationView->getSelected().size();
+	bool isSelected = (selected > 0);
+	bool isSelectedMany = (selected > 1);
 
 	ui.actionAnimationCopyFrameAfter->setEnabled(isSprite && isSelected);
 	ui.actionAnimationCopyFrameBefore->setEnabled(isSprite && isSelected);
 	ui.actionAnimationDeleteFrame->setEnabled(isSprite && isSelected);
 	ui.actionAnimationInsertAfter->setEnabled(isSprite);
 	ui.actionAnimationInsertBefore->setEnabled(isSprite);
-	ui.actionAnimationReverseFrames->setEnabled(isSprite && isSelected);
-
-	ui.actionAnimationCompress->setEnabled(isSprite && isSelected);
+	ui.actionAnimationReverseFrames->setEnabled(isSprite && isSelectedMany);
+	ui.actionAnimationCompress->setEnabled(isSprite && isSelectedMany);
 }
 
 void MainWindow::actionAnimationInsertFrameBefore()
