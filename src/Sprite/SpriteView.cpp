@@ -17,6 +17,13 @@ SpriteView::SpriteView( QWidget *parent /*= 0 */ ) :
 	header()->hide();
 }
 
+void SpriteView::keyPressEvent(QKeyEvent* event)
+{
+	QTreeView::keyPressEvent(event);
+	if (event->key() == Qt::Key_Delete)
+		emit deleteSelectedItem();
+}
+
 void SpriteView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
 {
 	qDebug() << "currentChanged " << current << ", " << previous;

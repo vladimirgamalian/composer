@@ -424,6 +424,9 @@ void MainWindow::actionSpritesNewFolder()
 void MainWindow::actionSpritesRemoveItem()
 {
 	QString spritePath = spriteView->getCurrentNode();
+	if (!project.isNodeDeletable(spritePath))
+		return;
+
 	SpritesDeleteNodeCommand *undoCommand = new SpritesDeleteNodeCommand(commandEnvFabric->getCommandEnv(), spritePath);
 	undoStack->push(undoCommand);
 }
@@ -710,6 +713,7 @@ void MainWindow::actionRemoveRulers()
 void MainWindow::setConnections()
 {
 	connect(spriteView, &SpriteView::resetCurrentNode, this, &MainWindow::onResetCurrentSprite);
+	connect(spriteView, &SpriteView::deleteSelectedItem, this, &MainWindow::actionSpritesRemoveItem);
 
 	connect(animationView, &AnimationView::selectChanged, this, &MainWindow::frameSelectChanged);
 	connect(animationView, &AnimationView::deleteSelectedItem, this, &MainWindow::actionAnimationDeleteFrame);

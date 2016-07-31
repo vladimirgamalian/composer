@@ -16,8 +16,10 @@ public:
 
 signals:
 	void resetCurrentNode();
+	void deleteSelectedItem();
 
 protected:
+	virtual void keyPressEvent(QKeyEvent* event) override;
 	virtual void currentChanged(const QModelIndex& current, const QModelIndex& previous);
 
 private:
