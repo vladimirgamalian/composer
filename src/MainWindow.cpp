@@ -305,6 +305,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 MainWindow::~MainWindow()
 {
+
 	delete commandEnvFabric;
 }
 
@@ -849,6 +850,7 @@ void MainWindow::updateFrameTotalDuration()
 
 void MainWindow::undoStackCleanChanged(bool clean)
 {
+	disconnect(undoStack, &QUndoStack::cleanChanged, this, &MainWindow::undoStackCleanChanged);
 	setProjectModified(!clean);
 }
 
