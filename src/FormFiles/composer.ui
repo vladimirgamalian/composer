@@ -60,7 +60,7 @@
     <addaction name="actionSpritesNewFolder"/>
     <addaction name="actionSpritesNewSprite"/>
     <addaction name="actionSpritesMoveSprite"/>
-    <addaction name="actionSpritesCompress"/>
+    <addaction name="actionAnimationCompress"/>
     <addaction name="actionSpritesRemoveItem"/>
    </widget>
    <widget class="QMenu" name="menu_Animations">
@@ -450,7 +450,7 @@
     <string>&amp;Move Sprite</string>
    </property>
   </action>
-  <action name="actionSpritesCompress">
+  <action name="actionAnimationCompress">
    <property name="icon">
     <iconset resource="composer.qrc">
      <normaloff>:/composer/Resources/icons/compress.png</normaloff>:/composer/Resources/icons/compress.png</iconset>

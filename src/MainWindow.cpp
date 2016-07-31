@@ -53,7 +53,8 @@ void MainWindow::createAnimationView(AnimationModel* animationModel)
 	bar->addAction( ui.actionAnimationCopyFrameAfter );
 	bar->addAction( ui.actionAnimationInsertAfter );
 	bar->addAction( ui.actionAnimationDeleteFrame );
-	bar->addAction( ui.actionAnimationReverseFrames );
+	bar->addAction(ui.actionAnimationReverseFrames);
+	bar->addAction(ui.actionAnimationCompress);
 	bar->setMovable( false );
 
 	QLabel* spinBoxFrameDurationLabel = new QLabel( "    D: " );
@@ -90,7 +91,9 @@ void MainWindow::createAnimationView(AnimationModel* animationModel)
 	animationView->addAction( ui.actionAnimationCopyFrameAfter );
 	animationView->addAction( ui.actionAnimationInsertAfter );
 	animationView->addAction( ui.actionAnimationDeleteFrame );
-	animationView->addAction( ui.actionAnimationReverseFrames );
+	animationView->addAction(ui.actionAnimationReverseFrames);
+	animationView->addAction(ui.actionAnimationCompress);
+	
 	animationView->setContextMenuPolicy( Qt::ActionsContextMenu );
 
 	window->setCentralWidget( animationView );
@@ -102,6 +105,7 @@ void MainWindow::createAnimationView(AnimationModel* animationModel)
 	connect( ui.actionAnimationInsertAfter, SIGNAL( triggered() ), this, SLOT( actionAnimationInsertFrameAfter() ) );
 	connect( ui.actionAnimationDeleteFrame, SIGNAL( triggered() ), this, SLOT( actionAnimationDeleteFrame() ) );
 	connect( ui.actionAnimationReverseFrames, SIGNAL( triggered() ), this, SLOT( actionAnimationReverseFrames() ) );
+	connect(ui.actionAnimationCompress, SIGNAL(triggered()), this, SLOT(actionAnimationCompress()));
 }
 
 void MainWindow::createSpriteView(SpriteModel* spriteModel)
@@ -112,7 +116,6 @@ void MainWindow::createSpriteView(SpriteModel* spriteModel)
 	bar->addAction( ui.actionSpritesNewFolder );
 	bar->addAction( ui.actionSpritesNewSprite );
 	bar->addAction( ui.actionSpritesMoveSprite );
-	bar->addAction( ui.actionSpritesCompress );
 	bar->addAction( ui.actionSpritesRemoveItem );
 	bar->setMovable( false );
 
@@ -125,7 +128,6 @@ void MainWindow::createSpriteView(SpriteModel* spriteModel)
 	spriteView->addAction( ui.actionSpritesNewSprite );
 	spriteView->addAction( ui.actionSpritesMoveSprite );
 	spriteView->addAction( ui.actionSpritesRemoveItem );
-	spriteView->addAction( ui.actionSpritesCompress );
 	spriteView->setContextMenuPolicy( Qt::ActionsContextMenu );
 
 	window->setCentralWidget( spriteView );
@@ -135,7 +137,6 @@ void MainWindow::createSpriteView(SpriteModel* spriteModel)
 	connect( ui.actionSpritesNewSprite, SIGNAL( triggered() ), this, SLOT( actionSpritesNewSprite() ) );
 	connect( ui.actionSpritesMoveSprite, SIGNAL( triggered() ), this, SLOT( actionSpritesMoveSprite() ) );
 	connect( ui.actionSpritesRemoveItem, SIGNAL( triggered() ), this, SLOT( actionSpritesRemoveItem() ) );
-	connect( ui.actionSpritesCompress, SIGNAL( triggered() ), this, SLOT( actionSpritesCompress() ) );
 }
 
 void MainWindow::createScene()
@@ -531,7 +532,6 @@ void MainWindow::updateSpriteActions()
 	ui.actionSpritesNewSprite->setEnabled( isInheritable );
 	ui.actionSpritesMoveSprite->setEnabled( isSprite );
 	ui.actionSpritesRemoveItem->setEnabled( isDeletable );
-	ui.actionSpritesCompress->setEnabled( isSprite );
 }
 
 void MainWindow::updateFrameDurationSpinBox()
@@ -596,6 +596,8 @@ void MainWindow::updateAnimationActions()
 	ui.actionAnimationInsertAfter->setEnabled(isSprite);
 	ui.actionAnimationInsertBefore->setEnabled(isSprite);
 	ui.actionAnimationReverseFrames->setEnabled(isSprite && isSelected);
+
+	ui.actionAnimationCompress->setEnabled(isSprite && isSelected);
 }
 
 void MainWindow::actionAnimationInsertFrameBefore()
@@ -624,7 +626,7 @@ void MainWindow::actionAnimationDeleteFrame()
 	undoStack->push(undoCommand);
 }
 
-void MainWindow::actionSpritesCompress()
+void MainWindow::actionAnimationCompress()
 {
 	//TODO: test if nothing will be changed, do not create undo history point
 

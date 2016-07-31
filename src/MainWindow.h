@@ -37,7 +37,7 @@ public slots:
 	void actionAnimationCopyFrameAfter();
 	void actionAnimationDeleteFrame();
 	void actionAnimationReverseFrames();
-	void actionSpritesCompress();
+	void actionAnimationCompress();
 	void actionAbout();
 	void actionCompositionOpenPicture();
 	void actionUndo();
