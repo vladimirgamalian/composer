@@ -22,7 +22,7 @@
 #include "Commands/Composition/CompositionMovePictures.h"
 #include "Commands/Composition/CompositionTriggerPicsVisible.h"
 
-void MainWindow::createCompositionView(CompositionModel* compositionModel)
+void MainWindow::createCompositionView(CompositionModel* model)
 {
 	QMainWindow* window = new QMainWindow;
 
@@ -34,7 +34,7 @@ void MainWindow::createCompositionView(CompositionModel* compositionModel)
 	window->setParent( ui.dockWidgetComposition );
 
 	compositionView = new CompositionView( this );
-	compositionView->setModel(compositionModel);
+	compositionView->setModel(model);
 	compositionView->addAction( ui.actionCompositionOpenPicture );
 	compositionView->setContextMenuPolicy( Qt::ActionsContextMenu );
 
@@ -44,7 +44,7 @@ void MainWindow::createCompositionView(CompositionModel* compositionModel)
 	connect( ui.actionCompositionOpenPicture, SIGNAL( triggered() ), this, SLOT( actionCompositionOpenPicture() ) );
 }
 
-void MainWindow::createAnimationView(AnimationModel* animationModel)
+void MainWindow::createAnimationView(AnimationModel* model)
 {
 	QMainWindow* window = new QMainWindow;
 
@@ -85,7 +85,7 @@ void MainWindow::createAnimationView(AnimationModel* animationModel)
 	window->setParent( ui.dockWidgetAnimation );
 
 	animationView = new AnimationView( &project, this );
-	animationView->setModel(animationModel);
+	animationView->setModel(model);
 
 	animationView->addAction( ui.actionAnimationInsertBefore );
 	animationView->addAction( ui.actionAnimationCopyFrameBefore );
@@ -109,7 +109,7 @@ void MainWindow::createAnimationView(AnimationModel* animationModel)
 	connect(ui.actionAnimationCompress, SIGNAL(triggered()), this, SLOT(actionAnimationCompress()));
 }
 
-void MainWindow::createSpriteView(SpriteModel* spriteModel)
+void MainWindow::createSpriteView(SpriteModel* model)
 {
 	QMainWindow* window = new QMainWindow;
 
@@ -124,7 +124,7 @@ void MainWindow::createSpriteView(SpriteModel* spriteModel)
 	window->setParent( ui.dockWidgetComposition );
 
 	spriteView = new SpriteView( this );
-	spriteView->setModel(spriteModel);
+	spriteView->setModel(model);
 	spriteView->addAction( ui.actionSpritesNewFolder );
 	spriteView->addAction( ui.actionSpritesNewSprite );
 	spriteView->addAction( ui.actionSpritesMoveSprite );
@@ -289,7 +289,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 	connect( &project, SIGNAL( compositionBeginInsertRows( int, int ) ), compositionModel, SLOT( compositionBeginInsertRows( int, int )  ) );
 	connect( &project, SIGNAL( compositionEndInsertRows() ), compositionModel, SLOT( compositionEndInsertRows() ) );
 	connect( &project, SIGNAL( setLineEditFrameTag( const QString & ) ), lineEditFrameTag, SLOT( setText( const QString & ) ) );
-	connect( lineEditFrameTag, SIGNAL( textChanged( const QString & ) ), &project, SLOT( lineEditFrameTagTextChanged( const QString & ) ) );
 	connect(spriteModel, &SpriteModel::renameNode, this, &MainWindow::renameSpriteNode);
 	connect(spriteModel, &SpriteModel::dragDropNode, this, &MainWindow::dragDropSpriteNode);
 	connect(compositionModel, &CompositionModel::dropPictures, this, &MainWindow::dropPictures);
@@ -644,7 +643,9 @@ void MainWindow::actionAnimationDeleteFrame()
 void MainWindow::actionAnimationCompress()
 {
 	const QList<int> selected = animationView->getSelected();
-	if (selected.isEmpty())
+	if (selected.size() < 2)
+		return;
+	if (IntervalSorter::sort(selected).size() != 1)
 		return;
 	QString spritePath = spriteView->getCurrentNode();
 	if (!project.spritesCompress(spritePath, selected, true))

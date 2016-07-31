@@ -61,7 +61,7 @@ void GraphicsView::wheelEvent( QWheelEvent* event )
 	curZoomIndex = newZoomIndex;
 
 	QPointF scenePointBefore = mapToScene( event->pos() );
-	zoom( newZoomIndex );
+	zoom();
 
 	QPoint scenePointAfter = mapFromScene( scenePointBefore );
 	QPoint delta = event->pos() - scenePointAfter;
@@ -154,20 +154,19 @@ void GraphicsView::drawForeground( QPainter* painter, const QRectF& rect )
 			qreal w = i->outlineRect().width();
 			qreal h = i->outlineRect().height();
 
-			QPen whitePen( Qt::white );
 			QPen blackPen( Qt::black );
 			blackPen.setStyle( Qt::DashLine );
 
 			QRectF objectRect = rect;
 			QRectF mappedRect = painter->transform().mapRect( objectRect );
 			qreal widthRatio = objectRect.width() / mappedRect.width();
-			QRectF r( x, y, ( double ) w - widthRatio, ( double ) h - widthRatio );
+			QRectF selectionRec( x, y, ( double ) w - widthRatio, ( double ) h - widthRatio );
 
 			painter->setPen( whitePen );
-			painter->drawRect( r );
+			painter->drawRect(selectionRec);
 
 			painter->setPen( blackPen );
-			painter->drawRect( r );
+			painter->drawRect(selectionRec);
 		}
 
 	}
@@ -517,10 +516,10 @@ void GraphicsView::zoomIndexChanged( int index )
 		return;
 
 	curZoomIndex = index;
-	zoom( curZoomIndex );
+	zoom();
 }
 
-void GraphicsView::zoom( int zoomIndex )
+void GraphicsView::zoom()
 {
 	qreal zoomPercent = zoomPreset.at( curZoomIndex );
 	setTransform( QTransform::fromScale( zoomPercent / 100.0, zoomPercent / 100.0 ) );

@@ -81,7 +81,7 @@ void CompositionViewDelegate::paint( QPainter* painter, const QStyleOptionViewIt
 
 }
 
-QSize CompositionViewDelegate::sizeHint( const QStyleOptionViewItem& option, const QModelIndex& index ) const
+QSize CompositionViewDelegate::sizeHint( const QStyleOptionViewItem& /*option*/, const QModelIndex& /*index*/ ) const
 {
 	return QSize( 64, 34 );
 }
@@ -90,10 +90,10 @@ bool CompositionViewDelegate::editorEvent( QEvent* event, QAbstractItemModel* mo
 	const QStyleOptionViewItem& option, const QModelIndex& index )
 {
 	int l = option.rect.left();
-	int r = option.rect.right();
+	//int r = option.rect.right();
 	int t = option.rect.top();
-	int b = option.rect.bottom();
-	int w = option.rect.width();
+	//int b = option.rect.bottom();
+	//int w = option.rect.width();
 	int h = option.rect.height();
 	int eyeWidth = 24;
 

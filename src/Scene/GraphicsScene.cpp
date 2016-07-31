@@ -152,9 +152,9 @@ QPoint GraphicsScene::stickItem( const QRect& rect, QGraphicsItem* item )
 	return QPoint( x, y );
 }
 
-void GraphicsScene::setGraphicsView( GraphicsView* graphicsView )
+void GraphicsScene::setGraphicsView( GraphicsView* view )
 {
-	this->graphicsView = graphicsView;
+	this->graphicsView = view;
 }
 
 void GraphicsScene::triggerStickToBorder( bool state )

@@ -46,7 +46,7 @@ void AnimationViewDelegate::paint( QPainter* painter, const QStyleOptionViewItem
 	painter->drawText( x + 15, y + 135, tag );
 }
 
-QSize AnimationViewDelegate::sizeHint( const QStyleOptionViewItem& option, const QModelIndex& index ) const
+QSize AnimationViewDelegate::sizeHint( const QStyleOptionViewItem& /*option*/, const QModelIndex& /*index*/ ) const
 {
 	return QSize( 100, 150 );
 }

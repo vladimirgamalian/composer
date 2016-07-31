@@ -42,18 +42,18 @@ QModelIndex TreeItemModel::parent( const QModelIndex & index ) const
 	return createIndex( parentNode->row(), 0, const_cast<TreeNode*>(parentNode) );
 }
 
-int TreeItemModel::rowCount( const QModelIndex & parent /*= QModelIndex() */ ) const
+int TreeItemModel::rowCount( const QModelIndex& parent /*= QModelIndex() */ ) const
 {
 	TreeNode* parentItem = nodeFromIndex( parent );
 	return parentItem->childCount();
 }
 
-int TreeItemModel::columnCount( const QModelIndex & parent /*= QModelIndex() */ ) const
+int TreeItemModel::columnCount( const QModelIndex& /*parent*/ /*= QModelIndex() */ ) const
 {
 	return 1;
 }
 
-QVariant TreeItemModel::data( const QModelIndex & index, int role /*= Qt::DisplayRole */ ) const
+QVariant TreeItemModel::data( const QModelIndex& index, int role /*= Qt::DisplayRole */ ) const
 {
 	if ( index.isValid() && ( role == Qt::DisplayRole ) )
 		return "Foo";
@@ -82,7 +82,7 @@ Qt::ItemFlags TreeItemModel::flags( const QModelIndex & index ) const
 	return r;
 }
 
-bool TreeItemModel::itemIsDropEnabled( const QModelIndex& index ) const
+bool TreeItemModel::itemIsDropEnabled( const QModelIndex& /*index*/ ) const
 {
 	return false;
 }

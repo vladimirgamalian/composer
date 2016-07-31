@@ -22,12 +22,11 @@ GraphicsItemPic::~GraphicsItemPic()
 QRectF GraphicsItemPic::boundingRect() const
 {
 	return outlineRect();
-
-	const int margin = 1;
-	return outlineRect().adjusted( -margin, -margin, margin, margin );
+	//const int margin = 1;
+	//return outlineRect().adjusted( -margin, -margin, margin, margin );
 }
 
-void GraphicsItemPic::paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget /* = 0 */ )
+void GraphicsItemPic::paint( QPainter *painter, const QStyleOptionGraphicsItem* /*option*/, QWidget* /*widget*/ /* = 0 */ )
 {
 	bool visible = static_cast< GraphicsScene* >( scene() )->getPictureVisible( index );
 

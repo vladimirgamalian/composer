@@ -10,7 +10,7 @@ class GraphicsScene : public QGraphicsScene
 public:
 	GraphicsScene( Project* project, SpriteView* spriteView, AnimationView* animationView, qreal x, qreal y, qreal width, qreal height, QObject *parent = 0 );
 	virtual ~GraphicsScene();
-	void setGraphicsView( GraphicsView* graphicsView );
+	void setGraphicsView( GraphicsView* view);
 	QPoint stickItem( const QRect& rect, QGraphicsItem* item );
 	//TODO: probably need to move to View
 	QList< int > getSelectedItemsIndexes() const;

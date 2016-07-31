@@ -8,7 +8,7 @@ CompositionModel::CompositionModel( Project* project, SpriteView* spriteView, An
 	this->project = project;
 }
 
-int CompositionModel::rowCount( const QModelIndex &parent /*= QModelIndex() */ ) const
+int CompositionModel::rowCount( const QModelIndex& /*parent*/ /*= QModelIndex() */ ) const
 {
 	QString spritePath = spriteView->getCurrentNode();
 	if (spritePath.isEmpty())
@@ -147,7 +147,7 @@ QMimeData* CompositionModel::mimeData( const QModelIndexList& indexes ) const
 	return data;
 }
 
-bool CompositionModel::dropMimeData( const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent )
+bool CompositionModel::dropMimeData( const QMimeData* data, Qt::DropAction action, int row, int /*column*/, const QModelIndex& parent )
 {
 	if ( !data || !( action == Qt::CopyAction || action == Qt::MoveAction ) )
 		return false;

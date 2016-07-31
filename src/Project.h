@@ -103,9 +103,6 @@ public:
 
 	//////////////////////////////////////////////////////////////////////////
 
-public slots:
-	void lineEditFrameTagTextChanged( const QString& value );
-
 signals:
 	void beginInsertSpriteNode( TreeNode* parent, int row );
 	void endInsertSpriteNode();

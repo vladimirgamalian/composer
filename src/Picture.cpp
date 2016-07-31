@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Picture.h"
 
-void Picture::setFileName( QString fileName )
+void Picture::setFileName(QString value)
 {
-	this->fileName = fileName;
+	this->fileName = value;
 }
 
 QString Picture::getFileName() const

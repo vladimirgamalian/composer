@@ -57,7 +57,7 @@ private:
 	int getVerGuideIndex( int x );
 	void updateDragGuidePos( QPoint p );
 	void removeOutsidedGuide( QPoint p );
-	void zoom( int zoomIndex );
+	void zoom();
 	int getCurZoom() const;
 
 	int lastMovingKey = -1;

@@ -24,7 +24,7 @@ void SpriteView::keyPressEvent(QKeyEvent* event)
 		emit deleteSelectedItem();
 }
 
-void SpriteView::currentChanged(const QModelIndex& current, const QModelIndex& previous)
+void SpriteView::currentChanged(const QModelIndex& /*current*/, const QModelIndex& /*previous*/)
 {
 	emit resetCurrentNode();
 }

@@ -61,7 +61,7 @@ int SpriteModel::rowCount( const QModelIndex& parent ) const
 	return parent.isValid() ? getNodeFromModelIndex(parent)->childCount() : 1;
 }
 
-int SpriteModel::columnCount( const QModelIndex& parent ) const
+int SpriteModel::columnCount( const QModelIndex& /*parent*/ ) const
 {
 	return 1;
 }
@@ -154,7 +154,7 @@ QMimeData* SpriteModel::mimeData( const QModelIndexList& indexes ) const
 	return data;
 }
 
-bool SpriteModel::dropMimeData( const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent )
+bool SpriteModel::dropMimeData( const QMimeData* data, Qt::DropAction action, int row, int /*column*/, const QModelIndex& parent )
 {
 	if ( !data || !( action == Qt::CopyAction || action == Qt::MoveAction ) )
 		return false;

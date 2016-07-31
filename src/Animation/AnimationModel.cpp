@@ -46,7 +46,7 @@ Qt::ItemFlags AnimationModel::flags( const QModelIndex & index ) const
 	return flags;
 }
 
-bool AnimationModel::setData( const QModelIndex& index, const QVariant& value, int role /*= Qt::EditRole */ )
+bool AnimationModel::setData( const QModelIndex& index, const QVariant& /*value*/, int /*role*/ /*= Qt::EditRole */ )
 {
 	if ( !index.isValid() )
 		return false;
@@ -101,7 +101,7 @@ QMimeData* AnimationModel::mimeData( const QModelIndexList& indexes ) const
 	return data;
 }
 
-bool AnimationModel::dropMimeData( const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent )
+bool AnimationModel::dropMimeData( const QMimeData* data, Qt::DropAction action, int row, int /*column*/, const QModelIndex& parent )
 {
 	if ( !data || !( action == Qt::CopyAction || action == Qt::MoveAction ) )
 		return false;

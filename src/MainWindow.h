@@ -70,9 +70,9 @@ private:
 	void updateAnimationActions();
 	void updateFrameDurationSpinBox();
 	void updateFrameTagLineEdit();
-	void createSpriteView(SpriteModel* spriteModel);
-	void createAnimationView(AnimationModel* animationModel);
-	void createCompositionView(CompositionModel* compositionModel);
+	void createSpriteView(SpriteModel* model);
+	void createAnimationView(AnimationModel* model);
+	void createCompositionView(CompositionModel* model);
 	void createScene();
 	void createRecentActions();
 	void createAboutDialog();
