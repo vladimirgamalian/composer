@@ -108,9 +108,6 @@ void GraphicsView::drawForeground( QPainter* painter, const QRectF& rect )
 		painter->drawLine( x, top, x, bottom );
 	}
 
-
-	
-
 	if ( rulerState == RulerState::IntroduceHor )
 	{
 		qreal guidePos = mapToScene( 0, introduceGuideCoord ).y();
@@ -170,28 +167,31 @@ void GraphicsView::drawForeground( QPainter* painter, const QRectF& rect )
 		}
 
 	}
+}
 
+void GraphicsView::drawBack()
+{
+	QPainter* backPainter = new QPainter(viewport());
+
+	backPainter->fillRect(viewport()->rect(), Qt::gray);
+
+	if (!reinterpret_cast<GraphicsScene*>(scene())->isSceneValid())
+		return;
+
+	QPoint sceneTopLeft = mapFromScene(QPoint());
+	QPoint sceneBottomRight = mapFromScene(QPoint(640, 480));
+	QPoint sceneSize = sceneBottomRight - sceneTopLeft;
+
+	QBrush backBrush(chessboardPixmap);
+	backPainter->fillRect(sceneTopLeft.x(), sceneTopLeft.y(), sceneSize.x(), sceneSize.y(), backBrush);
+
+	delete backPainter;
 }
 
 void GraphicsView::paintEvent( QPaintEvent *event )
 {
-	{
-		QPainter* backPainter = new QPainter( viewport() );
-
-		backPainter->fillRect( viewport()->rect(), Qt::gray );
-		QPoint sceneTopLeft = mapFromScene( QPoint() );
-		QPoint sceneBottomRight = mapFromScene( QPoint( 640, 480 ) );
-		QPoint sceneSize = sceneBottomRight - sceneTopLeft;
-
-
-		QBrush backBrush( chessboardPixmap );
-		backPainter->fillRect( sceneTopLeft.x(), sceneTopLeft.y(), sceneSize.x(), sceneSize.y(), backBrush );
-
-		delete backPainter;
-	}
-
+	drawBack();
 	QGraphicsView::paintEvent( event );
-
 	emit repaintRulers();
 }
 

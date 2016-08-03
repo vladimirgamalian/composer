@@ -59,6 +59,7 @@ private:
 	void removeOutsidedGuide( QPoint p );
 	void zoom();
 	int getCurZoom() const;
+	void drawBack();
 
 	int lastMovingKey = -1;
 	int curZoomIndex;

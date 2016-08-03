@@ -15,11 +15,12 @@ public:
 	//TODO: probably need to move to View
 	QList< int > getSelectedItemsIndexes() const;
 	bool getPictureVisible( int index );
-	void  setPicturePos( int index, const QPoint& pos );
+	void setPicturePos( int index, const QPoint& pos );
 	void picturesShift(int shiftX, int shiftY);
 	void picturesToggleVisible();
 	void startMoving();
 	void finishMoving();
+	bool isSceneValid() const;
 
 signals:
 	void dropPictures(int compositionIndex, QPoint pos, QStringList fileList);
@@ -57,4 +58,5 @@ private:
 	bool snapToGuides = false;
 	GraphicsView* graphicsView = nullptr;
 	Frame* frameBackup = nullptr;
+	bool sceneValid = false;
 };
