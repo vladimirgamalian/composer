@@ -801,6 +801,7 @@ void MainWindow::frameSelectChanged()
 	updateFrameDurationSpinBox();
 	updateFrameTagLineEdit();
 	updateFrameTotalDuration();
+	updateCompositionActions();
 }
 
 void MainWindow::labelTagChanged()
@@ -857,6 +858,20 @@ void MainWindow::undoStackCleanChanged(bool clean)
 void MainWindow::clearUndoHistory()
 {
 	undoStack->clear();
+}
+
+void MainWindow::updateCompositionActions()
+{
+	QString nodePath = spriteView->getCurrentNodeOrRoot();
+	const QList<int> selected = animationView->getSelected();
+	int selectedSize = selected.size();
+
+	bool isSprite = project.isSprite(nodePath);
+	bool isSelectedOne = (selectedSize == 1);
+
+	bool validScene = (isSprite && isSelectedOne);
+
+	ui.actionCompositionOpenPicture->setEnabled(validScene);
 }
 
 void MainWindow::setProjectModified(bool changed /*= true*/)

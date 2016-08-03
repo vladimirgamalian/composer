@@ -83,7 +83,7 @@ private:
 	void updateFrameTotalDuration();
 	void undoStackCleanChanged(bool clean);
 	void clearUndoHistory();
-
+	void updateCompositionActions();
 	Ui::composerClass ui;
 	Project project;
 	OptionsDialog* optionsDialog = nullptr;
