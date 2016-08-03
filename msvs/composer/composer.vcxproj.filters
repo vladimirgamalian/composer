@@ -409,12 +409,6 @@
     <CustomBuild Include="GeneratedFiles\ui_SpriteMoveDialog.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\src\CommandEnvFabric.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.h">
-      <Filter>Commands\Animation</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="composer.rc" />
@@ -491,6 +485,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Sprite\SpriteRoot.h">
       <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Commands\Animation\AnimationChangeFrameDurationCommand.h">
+      <Filter>Commands\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\CommandEnvFabric.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

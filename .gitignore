@@ -20,3 +20,6 @@
 /msvs/*.suo
 /src/gitver.h
 /dist
+/msvs/Debug
+/msvs/DWrite.pdb
+/msvs/Release
