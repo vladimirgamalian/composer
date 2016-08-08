@@ -29,7 +29,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene, QWidget* parent /*= 0 */ ) : Q
 	//setCacheMode(QGraphicsView::CacheBackground);
 
 	comboBoxZoom = 0;
-	zoomPreset = {100, 200, 300, 400, 500, 600, 800, 1000, 1200};
+	zoomPreset = {100, 200, 300, 400, 500, 600, 800, 1000, 1200, 1600, 3200};
 
 	rulerState = RulerState::Still;
 	handScrolling = false;
@@ -78,13 +78,18 @@ void GraphicsView::drawForeground( QPainter* painter, const QRectF& rect )
 {
 	QPen redPen( Qt::red );
 	redPen.setStyle( Qt::DashLine );
+	redPen.setWidth(0);
+
 	QPen whitePen( Qt::white );
+	whitePen.setWidth(0);
+
 	QPen bluePen( Qt::blue );
 	bluePen.setStyle( Qt::DashLine );
+	bluePen.setWidth(0);
 
 	QPen gridPen( QColor( 128, 128, 128, 255 ) );
 	gridPen.setStyle( Qt::DotLine );
-
+	gridPen.setWidth(0);
 
 	QRect r = rect.toRect();
 	int left = r.left() - 1;
@@ -153,6 +158,7 @@ void GraphicsView::drawForeground( QPainter* painter, const QRectF& rect )
 
 			QPen blackPen( Qt::black );
 			blackPen.setStyle( Qt::DashLine );
+			blackPen.setWidth(0);
 
 			QRectF objectRect = rect;
 			QRectF mappedRect = painter->transform().mapRect( objectRect );
