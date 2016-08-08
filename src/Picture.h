@@ -3,10 +3,8 @@
 class Picture
 {
 public:
-
 	Picture();
 	virtual ~Picture();
-	//Picture( const Picture& );
 
 	void setFileName( QString fileName );
 	QString getFileName() const;
@@ -15,6 +13,7 @@ public:
 	QPoint getPos() const;
 	void shiftPos(int x, int y);
 	void shiftPos(QPoint shift);
+	QRect getRect() const;
 
 	bool getVisible() const;
 	void setVisible( bool value );
@@ -22,9 +21,7 @@ public:
 	bool isEqual( Picture* picture ) const;
 
 private:
-
 	Picture& operator= ( Picture const & );
-
 	QString fileName;
 	QPoint pos;
 	bool visible;

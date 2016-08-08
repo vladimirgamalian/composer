@@ -305,7 +305,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
 
 MainWindow::~MainWindow()
 {
-
+	disconnect(undoStack, &QUndoStack::cleanChanged, this, &MainWindow::undoStackCleanChanged);
 	delete commandEnvFabric;
 }
 
@@ -698,13 +698,13 @@ void MainWindow::graphicsSceneSelectionChanged()
 	graphicsScenePreventUpdateSelection = false;
 }
 
-void MainWindow::compositionViewSelectionChanged(const QList< int >& selectedIndexes)
+void MainWindow::compositionViewSelectionChanged()
 {
 	if (graphicsScenePreventUpdateSelection)
 		return;
 
 	graphicsScenePreventUpdateSelection = true;
-	graphicsScene->setSelectedIndexes(selectedIndexes);
+	graphicsScene->setSelectedIndexes(compositionView->getSelected());
 	graphicsScenePreventUpdateSelection = false;
 }
 
@@ -756,6 +756,14 @@ void MainWindow::setConnections()
 	connect(&project, &Project::animDataChanged, this, &MainWindow::updateFrameTagLineEdit);
 
 	connect(undoStack, &QUndoStack::cleanChanged, this, &MainWindow::undoStackCleanChanged);
+
+
+	connect(compositionView, &CompositionView::selectChanged, this, &MainWindow::updatePictureInfo);
+	connect(animationView, &AnimationView::selectChanged, this, &MainWindow::updatePictureInfo);
+	connect(graphicsScene, &GraphicsScene::picturePosChanged, this, &MainWindow::updatePictureInfo);
+
+	//connect(this, &MainWindow::clearStatusBarMessage, ui.statusBar, &QStatusBar::clearMessage);
+	//connect(this, &MainWindow::setStatusBarMessage, ui.statusBar, &QStatusBar::showMessage);
 }
 
 void MainWindow::onResetCurrentSprite()
@@ -831,6 +839,43 @@ void MainWindow::invalidateAll()
 	graphicsScene->resetModel();
 }
 
+void MainWindow::updatePictureInfo()
+{
+	QString nodePath = spriteView->getCurrentNodeOrRoot();
+	const QList<int> selected = animationView->getSelected();
+	int selectedSize = selected.size();
+
+	bool isSprite = project.isSprite(nodePath);
+	bool isSelectedOne = (selectedSize == 1);
+	bool validScene = (isSprite && isSelectedOne);
+
+	QList<QRect> rects;
+
+	if (validScene)
+	{
+		int frameIndex = selected.first();
+		QList<int> pictures = compositionView->getSelected();
+		for (int s : pictures)
+			rects << project.compostionGetPicture(nodePath, frameIndex, s)->getRect();
+	}
+
+	if (rects.isEmpty())
+	{
+		ui.statusBar->clearMessage();
+	}
+	else
+	{
+		QRect totalRect;
+		for (QRect r : rects)
+			totalRect = totalRect.united(r);
+
+		QString text = QString::number(totalRect.x()) + ":" + QString::number(totalRect.y())
+			+ "  " + QString::number(totalRect.width()) + "x" + QString::number(totalRect.height());
+
+		//ui.statusBar->showMessage(text);
+	}
+}
+
 void MainWindow::updateFrameTotalDuration()
 {
 	QString nodePath = spriteView->getCurrentNode();
@@ -851,7 +896,6 @@ void MainWindow::updateFrameTotalDuration()
 
 void MainWindow::undoStackCleanChanged(bool clean)
 {
-	disconnect(undoStack, &QUndoStack::cleanChanged, this, &MainWindow::undoStackCleanChanged);
 	setProjectModified(!clean);
 }
 

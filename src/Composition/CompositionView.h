@@ -14,7 +14,7 @@ public slots:
 
 signals:
 	void deleteSelectedItem();
-	void selectChanged(const QList< int >& selectedIndexes);
+	void selectChanged();
 
 protected:
 	virtual void selectionChanged( const QItemSelection& selected, const QItemSelection& deselected );

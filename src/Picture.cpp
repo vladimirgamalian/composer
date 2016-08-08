@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Picture.h"
+#include "Scene/PicturePool.h"
 
 void Picture::setFileName(QString value)
 {
@@ -49,6 +50,12 @@ void Picture::shiftPos( int x, int y )
 void Picture::shiftPos(QPoint shift)
 {
 	pos += shift;
+}
+
+QRect Picture::getRect() const
+{
+	QPixmap* pixmap = globalPicturePool.get(getFileName());
+	return QRect(pos.x(), pos.y(), pixmap->width(), pixmap->height());
 }
 
 bool Picture::isEqual(Picture* picture) const

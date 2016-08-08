@@ -263,7 +263,6 @@ void GraphicsScene::dropEvent(QGraphicsSceneDragDropEvent* event)
 			if (url.isLocalFile())
 				fileList << url.toLocalFile();
 
-
 		emit dropPictures(0, pos, fileList);
 	}
 }
@@ -285,6 +284,7 @@ void GraphicsScene::setPicturePos(int index, const QPoint& pos)
 	QString spritePath = spriteView->getCurrentNode();
 	int frameIndex = animationView->getCurrentFrame();
 	project->scenePictureMove(spritePath, frameIndex, index, pos);
+	emit picturePosChanged();
 }
 
 void GraphicsScene::picturesShift(int shiftX, int shiftY)

@@ -23,12 +23,7 @@ CompositionView::CompositionView(QWidget *parent /*= 0 */)
 void CompositionView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
 	QListView::selectionChanged(selected, deselected);
-
-	QList< int > selectedList;
-	for(auto index: selectedIndexes())
-		selectedList.append(index.row());
-
-	emit selectChanged(selectedList);
+	emit selectChanged();
 }
 
 void CompositionView::keyPressEvent( QKeyEvent* event )

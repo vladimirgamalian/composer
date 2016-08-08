@@ -24,7 +24,7 @@ public:
 	MainWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 	virtual ~MainWindow();
 
-	public slots:
+public slots:
 	void actionSpritesNewFolder();
 	void actionSpritesNewSprite();
 	void actionSpritesRemoveItem();
@@ -41,7 +41,7 @@ public:
 	void actionCompositionOpenPicture();
 	void actionRemoveRulers();
 	void graphicsSceneSelectionChanged();
-	void compositionViewSelectionChanged(const QList< int >& selectedIndexes);
+	void compositionViewSelectionChanged();
 	void moveSpriteDialogAccepted();
 	void renameSpriteNode(QString path, QString newName);
 	void dragDropSpriteNode(QString oldPath, QString newPath, bool copy);
@@ -56,6 +56,7 @@ public:
 	void frameSelectChanged();
 	void labelTagChanged();
 	void invalidateAll();
+	void updatePictureInfo();
 
 private:
 	void loadSettings();
